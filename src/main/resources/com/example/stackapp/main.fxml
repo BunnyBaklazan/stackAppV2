@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.MainController">
+   <center>
+      <AnchorPane fx:id="anchorPane" cache="true" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #505762;" BorderPane.alignment="CENTER">
+         <Label fx:id="nameID" layoutX="297.0" layoutY="276.0" prefHeight="149.0" prefWidth="307.0" text="STACK APP" textFill="#dddddd">
+            <font>
+               <Font name="Silom" size="56.0" />
+            </font>
+         </Label>
+         <Label fx:id="secretTxtLabel" alignment="TOP_CENTER" layoutX="117.0" layoutY="382.0" prefHeight="32.0" prefWidth="668.0" text="Storage Solutions">
+            <font>
+               <Font name="System Bold Italic" size="20.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="375.0" layoutY="174.0">
+            <children>
+               <ImageView fx:id="myBox" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#openLoginPage" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@IMG/box-png-icon-yellow.png" />
+               </ImageView>
+            </children>
+         </AnchorPane>
+         <ImageView fx:id="myBox2" fitHeight="150.0" fitWidth="200.0" layoutX="375.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@IMG/box-png-icon-5.png" />
+            </image></ImageView>
+      </AnchorPane>
+   </center>
+</BorderPane>

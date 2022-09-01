@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.stackapp.controller.SampleController">
+   <top>
+      <Pane prefHeight="55.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="11.0" text="Dashboard">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="842.0" layoutY="14.0" />
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="865.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutY="27.0" prefHeight="494.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="b1" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="B1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="b2" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="B2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d1" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d2" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d3" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d4" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D4">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d5" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d6" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D6">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d7" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D7">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="d8" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D8">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="search" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="SEARCH">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="EXIT">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

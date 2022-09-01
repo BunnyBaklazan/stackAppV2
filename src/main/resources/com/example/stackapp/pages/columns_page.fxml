@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.CPController">
+   <children>
+      <ImageView fx:id="imageViewCells" fitHeight="718.0" fitWidth="900.0" layoutY="-18.0">
+         <image>
+            <Image url="@../IMG/IMG_3584.jpg" />
+         </image>
+      </ImageView>
+      <ChoiceBox fx:id="myChoiceBox" accessibleText="Hi, Im Box" layoutX="371.0" layoutY="395.0" prefHeight="27.0" prefWidth="79.0" />
+   </children>
+</AnchorPane>
