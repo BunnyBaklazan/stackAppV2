@@ -31,11 +31,11 @@ public class LoginController {
     private Label l_errorText;
 
     public void backToLoginPage() throws IOException {
-        window.backToLoginPage(MAIN_PAGE);
+        window.changePage(MAIN_PAGE);
     }
 
     public void openSignUpPage() throws IOException {
-        window.openSignUpPage(SIGNUP_PAGE);
+        window.changePage(SIGNUP_PAGE);
     }
 
 }

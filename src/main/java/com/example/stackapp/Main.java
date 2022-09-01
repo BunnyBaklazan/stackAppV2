@@ -28,17 +28,7 @@ public class Main extends Application {
         launch();
     }
 
-    public void openLoginPage(String pageName) throws IOException {
-        Parent parent = FXMLLoader.load(requireNonNull(getClass().getResource(pageName)));
-        window.getScene().setRoot(parent);
-    }
-
-    public void backToLoginPage(String pageName) throws IOException {
-        Parent parent = FXMLLoader.load(requireNonNull(getClass().getResource(pageName)));
-        window.getScene().setRoot(parent);
-    }
-
-    public void openSignUpPage(String pageName) throws IOException {
+    public void changePage(String pageName) throws IOException {
         Parent parent = FXMLLoader.load(requireNonNull(getClass().getResource(pageName)));
         window.getScene().setRoot(parent);
     }

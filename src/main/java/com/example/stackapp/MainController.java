@@ -8,7 +8,7 @@ public class MainController {
     private static final Main window = new Main();
 
     public void openLoginPage() throws IOException {
-        window.openLoginPage(LOGIN_PAGE);
+        window.changePage(LOGIN_PAGE);
     }
 
 }

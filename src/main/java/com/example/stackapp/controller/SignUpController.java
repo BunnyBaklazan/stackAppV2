@@ -35,6 +35,6 @@ public class SignUpController {
     private Label l_errorText;
 
     public void backToLoginPage() throws IOException {
-        window.backToLoginPage(LOGIN_PAGE);
+        window.changePage(LOGIN_PAGE);
     }
 }
