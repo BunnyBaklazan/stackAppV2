@@ -1,11 +1,17 @@
 package connect.net.sqlite;
 
+import com.example.stackapp.model.UserData;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Connect {
+
+    private static final String INSERT_USER
+            = "INSERT INTO users (ID, first_name, last_name, password, startat, endat, username) values (?, ?, ?, ?, ?, ?, ?)";
+
     /**
      * Connect to a sample database
      */
@@ -21,20 +27,21 @@ public class Connect {
         }
         return conn;
     }
-    public void InsertUser(String firstname, String lastname, String username,String password) {
-        String query = "INSERT INTO users (ID, first_name, last_name, password, startat, endat, username) values (?, ?, ?, ?, ?, ?, ?)";
-        // create the mysql insert preparedstatement
+
+    public void insertUser(UserData user) {
         try {
-            Connection conn = this.connect();
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, 2);
-            pstmt.setString(2, firstname);
-            pstmt.setString(3, lastname);
-            pstmt.setString(4, password);
-            pstmt.setTimestamp(5,null);
-            pstmt.setTimestamp(6,null);
-            pstmt.setString(7, username);
-            pstmt.executeUpdate();
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(INSERT_USER);
+
+            statement.setInt(1, 2);
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+            statement.setString(4, user.getPassword());
+            statement.setTimestamp(5,null);
+            statement.setTimestamp(6,null);
+            statement.setString(7, user.getUserName());
+            statement.executeUpdate();
+
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
