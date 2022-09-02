@@ -17,7 +17,6 @@ public class Login extends Application {
     public void start(Stage stage) throws Exception {
         //Set primary window;
         window = stage;
-
         Parent root = FXMLLoader.load(requireNonNull(getClass().getResource(PAGE)));
         window.setScene(new Scene(root));
         stage.show();

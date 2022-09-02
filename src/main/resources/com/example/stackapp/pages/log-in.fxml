@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.LoginController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.LoginController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: fb3b1e;">
          <children>
@@ -59,12 +59,6 @@
                   <Font name="Cambria Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="95.0" layoutY="335.0" prefHeight="22.0" prefWidth="146.0" text="Don't you have an account?" textFill="#352e2e">
-               <font>
-                  <Font name="Cambria" size="12.0" />
-               </font>
-            </Label>
-            <Button fx:id="button_sign_up" layoutX="245.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#refactorBACK" style="-fx-background-color: transparent;" text="Sign up" textFill="#123fd3" />
          </children>
       </AnchorPane>
    </children>
