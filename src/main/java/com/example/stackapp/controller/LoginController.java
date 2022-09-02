@@ -39,7 +39,7 @@ public class LoginController {
         window.changePage(SIGNUP_PAGE);
     }
 
-    public void login() throws IOException {
+    public void login() {
         String username = tf_username.getText();
         String password = pf_password.getText();
 
