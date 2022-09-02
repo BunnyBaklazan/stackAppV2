@@ -54,7 +54,7 @@
                </font>
             </TextField>
             <PasswordField fx:id="pf_password" layoutX="156.0" layoutY="220.0" prefHeight="25.0" prefWidth="177.0" />
-            <Button fx:id="button_login" layoutX="113.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="34.0" prefWidth="177.0" text="Login">
+            <Button fx:id="button_login" layoutX="113.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#getMeCredentials" prefHeight="34.0" prefWidth="177.0" text="Login">
                <font>
                   <Font name="Cambria Bold" size="18.0" />
                </font>
