@@ -2,32 +2,30 @@ package com.example.stackapp.controller;
 
 import com.example.stackapp.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-
-import java.io.IOException;
 
 public class SampleController {
 
     private static final Main window = new Main();
 
-   /* @FXML
-    private Button b1;
-    @FXML
-    private Button exitBtn;
-    @FXML
-    private ImageView cornerExitBtn;*/
     String boxID;
 
     @FXML
-    private Pane sampleAppPane;
-    @FXML
-    private Pane searchBoxPane;
+    private Pane sampleAppPane, searchBoxPane;
     @FXML
     private TextField searchField;
+    @FXML
+    private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn;
 
 
+
+    /*@FXML
+    private void changeBtnColor() {
+
+    }*/
     @FXML
     private void checkBtn() {
         System.out.println("Btn pressed");
@@ -62,8 +60,4 @@ public class SampleController {
         int boxIdToSearch= Integer.parseInt(boxID);
         System.out.println("User enters: ["+boxIdToSearch+ "] BOX_id to search in DB");
     }
-    //Coment
-    //
-    /*BIG*/
-
 }
