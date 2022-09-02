@@ -2,15 +2,15 @@ package com.example.stackapp.controller;
 
 import com.example.stackapp.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
-
 public class SampleController {
 
     private static final Main window = new Main();
+
 
    /* @FXML
     private Button b1;
@@ -26,8 +26,15 @@ public class SampleController {
     private Pane searchBoxPane;
     @FXML
     private TextField searchField;
+    @FXML
+    private Button showSearchBox_Btn;
 
 
+
+    /*@FXML
+    private void changeBtnColor() {
+
+    }*/
     @FXML
     private void checkBtn() {
         System.out.println("Btn pressed");
