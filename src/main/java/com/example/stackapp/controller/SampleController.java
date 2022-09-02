@@ -11,23 +11,18 @@ public class SampleController {
 
     private static final Main window = new Main();
 
-
-   /* @FXML
-    private Button b1;
-    @FXML
-    private Button exitBtn;
-    @FXML
-    private ImageView cornerExitBtn;*/
     String boxID;
 
     @FXML
-    private Pane sampleAppPane;
-    @FXML
-    private Pane searchBoxPane;
+    private Pane sampleAppPane, searchBoxPane;
+    /*@FXML
+    private Pane searchBoxPane;*/
     @FXML
     private TextField searchField;
     @FXML
-    private Button showSearchBox_Btn;
+    private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, exitBtn;
+    @FXML
+    private Button 
 
 
 
@@ -69,8 +64,4 @@ public class SampleController {
         int boxIdToSearch= Integer.parseInt(boxID);
         System.out.println("User enters: ["+boxIdToSearch+ "] BOX_id to search in DB");
     }
-    //Coment
-    //
-    /*BIG*/
-
 }
