@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class Connect {
 
     private static final String INSERT_USER
-            = "INSERT INTO users (ID, first_name, last_name, password, startat, endat, username) values (?, ?, ?, ?, ?, ?, ?)";
+            = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
 
     /**
      * Connect to a sample database
@@ -33,13 +33,13 @@ public class Connect {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_USER);
 
-            statement.setInt(1, 2);
-            statement.setString(2, user.getFirstName());
-            statement.setString(3, user.getLastName());
-            statement.setString(4, user.getPassword());
-            statement.setTimestamp(5,null);
-            statement.setTimestamp(6,null);
-            statement.setString(7, user.getUserName());
+            //statement.setInt(1, 4);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getPassword());
+            //statement.setTimestamp(4,null);
+            //statement.setTimestamp(5,null);
+            statement.setString(4, user.getUserName());
             statement.executeUpdate();
 
         } catch(SQLException e){
