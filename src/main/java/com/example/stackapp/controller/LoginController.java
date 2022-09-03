@@ -73,7 +73,7 @@ public class LoginController {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
-                        //window.changePage(SIGNUP_PAGE);
+                        window.changePage(SIGNUP_PAGE);
                     } else {
                         System.out.println("Passwords did not match!");
                         l_errorText.setText("Passwords did not match!");
@@ -84,6 +84,8 @@ public class LoginController {
             }
         } catch (SQLException e) {
             System.out.println("Exception!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

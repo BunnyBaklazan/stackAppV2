@@ -16,6 +16,10 @@ public class SignUpController {
     private static final String MAIN_PAGE = "main.fxml";
     private static final Main window = new Main();
 
+    Connect conn;
+    UserData user;
+    String username, password, firstname, lastname;
+
     @FXML
     private Button button_signup;
 
@@ -40,24 +44,32 @@ public class SignUpController {
     public void backToLoginPage() throws IOException {
         window.changePage(LOGIN_PAGE);
     }
-    public void CreateUser() throws IOException {
+    public void CreateUser() {
 
-        String username = tf_username.getText();
-        String password = tf_password.getText();
-        String firstname = tf_first_name.getText();
-        String lastname = tf_last_name.getText();
+        username = tf_username.getText();
+        password = tf_password.getText();
+        firstname = tf_first_name.getText();
+        lastname = tf_last_name.getText();
 
 
         if (!username.isEmpty() && !password.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty()) {
-            Connect conn = new Connect();
+            conn = new Connect();
 
-            UserData user = new UserData(firstname, lastname, username, password);
+            user = new UserData(firstname, lastname, username, password);
             conn.insertUser(user);
             System.out.println("SUCCESSFULLY");
-            window.changePage(MAIN_PAGE);
+            try {
+                window.changePage(MAIN_PAGE);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             System.out.println("Lohs");
-            window.changePage(LOGIN_PAGE);
+            try {
+                window.changePage(LOGIN_PAGE);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
         }
     }
