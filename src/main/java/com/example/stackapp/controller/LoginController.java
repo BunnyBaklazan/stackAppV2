@@ -14,6 +14,7 @@ public class LoginController {
 
     private static final String MAIN_PAGE = "main.fxml";
     private static final String SIGNUP_PAGE = "pages/sign-up.fxml";
+    private static final String WORKER_DASHBOARD = "pages/sample.fxml";
     private static final Main window = new Main();
 
     @FXML
@@ -39,13 +40,20 @@ public class LoginController {
         window.changePage(SIGNUP_PAGE);
     }
 
+    public static boolean isValidCredentials(String username, String password) {
+        if (username.trim().isEmpty() || password.trim().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     public void login() {
         String username = tf_username.getText();
         String password = pf_password.getText();
 
         System.out.println("USER ENTERED VARIABLED " + username + " " + password);
         /// CONNECT TO DABASE, RECEIVE INFO
-        if (username.trim().isEmpty() || password.trim().isEmpty()) {
+        if (isValidCredentials(username,password)) {
             System.out.println("Username or password is missing");
             l_errorText.setVisible(true);
             return;
@@ -73,7 +81,12 @@ public class LoginController {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
-                        window.changePage(SIGNUP_PAGE);
+                        String admin = "asd";
+                        if(username.equals(admin)) {
+                            window.changePage(WORKER_DASHBOARD);
+                            //l_errorText.setText("Admin has entered");
+                            //l_errorText.setVisible(true);
+                        }
                     } else {
                         System.out.println("Passwords did not match!");
                         l_errorText.setText("Passwords did not match!");
