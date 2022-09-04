@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.SampleController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.SampleController">
    <top>
       <Pane prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #99a1a8;" BorderPane.alignment="CENTER">
          <children>
@@ -27,7 +33,7 @@
          <children>
             <VBox layoutY="27.0" prefHeight="494.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="b1" mnemonicParsing="false" onAction="#checkBtn" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="B1">
+                  <Button fx:id="b1" mnemonicParsing="false" onAction="#checkBtn" onMousePressed="#btnPressed" onMouseReleased="#btnReleasedbtnReleased" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="B1">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -72,7 +78,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="d8" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="D8">
+                  <Button fx:id="d8" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D8">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -82,7 +88,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addWorkerBtn" mnemonicParsing="false" onAction="#exit" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="ADD WORKER" visible="false">
+                  <Button fx:id="addWorkerBtn" mnemonicParsing="false" onAction="#exit" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="ADD WORKER">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -95,71 +101,133 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="sampleAppPane" prefHeight="645.0" prefWidth="700.0" visible="true" />
-            <Pane fx:id="searchBoxPane" prefHeight="645.0" prefWidth="700.0" visible="false">
+            <Pane fx:id="sampleAppPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="true" />
+            <Pane fx:id="searchBoxPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
                <children>
-                  <TextField editable="false" layoutX="370.0" layoutY="364.0" prefHeight="42.0" prefWidth="290.0" promptText="Date End">
+                  <TextField fx:id="date_endField" editable="false" layoutX="367.0" layoutY="323.0" prefHeight="45.0" prefWidth="299.0" promptText="Date End" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="450.0" layoutY="461.0" prefHeight="25.0" prefWidth="210.0" promptText="Status">
+                  <TextField fx:id="statusField" editable="false" layoutX="456.0" layoutY="406.0" prefHeight="25.0" prefWidth="210.0" promptText="Status" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="34.0" layoutY="461.0" prefHeight="68.0" prefWidth="161.0" promptText="Weight">
+                  <TextField fx:id="weightField" editable="false" layoutX="37.0" layoutY="406.0" prefHeight="0.0" prefWidth="161.0" promptText="Weight" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="searchField" layoutX="34.0" layoutY="67.0" onKeyTyped="#onKeyTyped" prefHeight="68.0" prefWidth="224.0" promptText="Box_ID">
+                  <TextField fx:id="searchField" layoutX="35.0" layoutY="59.0" onKeyTyped="#onKeyTyped" prefHeight="45.0" prefWidth="224.0" promptText="Box ID" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
-                     </font></TextField>
-                  <Label fx:id="searchLabel" layoutX="36.0" layoutY="22.0" prefHeight="45.0" prefWidth="179.0" text="Search BOX_ID" textFill="#aba9a9">
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="searchLabel" layoutX="51.0" layoutY="27.0" prefHeight="45.0" prefWidth="179.0" text="Search BOX ID" textFill="#aba9a9">
                      <font>
                         <Font size="18.0" />
-                     </font></Label>
-                  <Button fx:id="searchBtn" layoutX="275.0" layoutY="85.0" mnemonicParsing="false" onAction="#getBoxIdByUserInput" prefHeight="50.0" prefWidth="120.0" text="SEARCH" />
-                  <TextField editable="false" layoutX="34.0" layoutY="158.0" prefHeight="57.0" prefWidth="225.0" promptText="Shelf_ID">
+                     </font>
+                  </Label>
+                  <Button fx:id="searchBtn" layoutX="282.0" layoutY="60.0" mnemonicParsing="false" onAction="#getBoxIdByUserInput" prefHeight="44.0" prefWidth="120.0" text="SEARCH">
+                  </Button>
+                  <TextField fx:id="shelf_IDField" editable="false" layoutX="37.0" layoutY="158.0" prefHeight="23.0" prefWidth="225.0" promptText="Shelf ID" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="305.0" layoutY="158.0" prefHeight="51.0" prefWidth="210.0" promptText="Box_ID">
+                  <TextField fx:id="box_IDField" editable="false" layoutX="305.0" layoutY="158.0" prefHeight="0.0" prefWidth="210.0" promptText="Box ID" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="555.0" layoutY="158.0" prefHeight="42.0" prefWidth="107.0" promptText="ID">
+                  <TextField fx:id="client_IDField" editable="false" layoutX="555.0" layoutY="158.0" prefHeight="0.0" prefWidth="107.0" promptText="ID" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="36.0" layoutY="262.0" prefHeight="2.0" prefWidth="628.0" promptText="                       Period">
+                  <TextField fx:id="periodField" editable="false" layoutX="37.0" layoutY="240.0" prefHeight="2.0" prefWidth="628.0" promptText="Period" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="36.0" layoutY="364.0" prefHeight="25.0" prefWidth="282.0" promptText="Date From">
+                  <TextField fx:id="date_fromField" editable="false" layoutX="37.0" layoutY="323.0" prefHeight="45.0" prefWidth="299.0" promptText="Date From" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="226.0" layoutY="461.0" prefHeight="68.0" prefWidth="202.0" promptText="Fulfillment">
+                  <TextField fx:id="fulfillmentField" editable="false" layoutX="227.0" layoutY="406.0" prefHeight="0.0" prefWidth="202.0" promptText="Fulfillment" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" layoutX="34.0" layoutY="563.0" prefHeight="68.0" prefWidth="631.0" promptText="Note">
+                  <TextField fx:id="noteField" editable="false" layoutX="36.0" layoutY="485.0" prefHeight="0.0" prefWidth="631.0" promptText="Note" style="-fx-background-color: #dce2e8;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="editBtn" layoutX="275.0" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="EDIT" />
-                  <Button fx:id="requestBtn" layoutX="410.0" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="REQUEST" />
-                  <Button fx:id="destroyBtn" layoutX="542.0" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="DESTROY" />
+                  <Button fx:id="editBtn" layoutX="245.0" layoutY="568.0" mnemonicParsing="false" onAction="#editBox" prefHeight="50.0" prefWidth="120.0" text="EDIT" textFill="#dada0f">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="requestBtn" layoutX="395.0" layoutY="568.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="REQUEST" textFill="#10ae23" />
+                  <Button fx:id="destroyBtn" layoutX="542.0" layoutY="568.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="DESTROY" textFill="#ae0000" />
+                  <Label layoutX="53.0" layoutY="124.0" prefHeight="45.0" prefWidth="179.0" text="Shelf ID" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="321.0" layoutY="124.0" prefHeight="45.0" prefWidth="179.0" text="Box ID" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="570.0" layoutY="124.0" prefHeight="45.0" prefWidth="179.0" text="Client ID" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="209.0" prefHeight="45.0" prefWidth="179.0" text="Period" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="292.0" prefHeight="45.0" prefWidth="179.0" text="Date From" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="383.0" layoutY="292.0" prefHeight="45.0" prefWidth="179.0" text="Date End" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="374.0" prefHeight="45.0" prefWidth="179.0" text="Weight" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="242.0" layoutY="374.0" prefHeight="45.0" prefWidth="179.0" text="Fulfillment" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="472.0" layoutY="374.0" prefHeight="45.0" prefWidth="179.0" text="Statuss" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="451.0" prefHeight="45.0" prefWidth="179.0" text="Note" textFill="#aba9a9">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="saveBtn" layoutX="245.0" layoutY="568.0" mnemonicParsing="false" onAction="#saveBoxtoDB" prefHeight="50.0" prefWidth="120.0" text="SAVE" textFill="#0f9ed9" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>

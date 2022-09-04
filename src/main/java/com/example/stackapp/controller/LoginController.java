@@ -11,16 +11,11 @@ import java.io.IOException;
 import java.sql.*;
 
 public class LoginController {
-
     private static final String MAIN_PAGE = "main.fxml";
-    private static final String SIGNUP_PAGE = "pages/sign-up.fxml";
+    private static final String SAMPLE_PAGE = "pages/sample.fxml";
     private static final Main window = new Main();
-
     @FXML
     private Button button_login;
-
-    @FXML
-    private Button button_sign_up;
 
     @FXML
     private TextField tf_username;
@@ -31,12 +26,12 @@ public class LoginController {
     @FXML
     private Label l_errorText;
 
-    public void backToLoginPage() throws IOException {
+    public void backToMainPage() throws IOException {
         window.changePage(MAIN_PAGE);
     }
 
     public void refactorBACK() throws IOException {
-        window.changePage(SIGNUP_PAGE);
+        window.changePage(SAMPLE_PAGE);
     }
 
     public void login() {
@@ -73,12 +68,11 @@ public class LoginController {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
-                        window.changePage(SIGNUP_PAGE);
+                        window.changePage(SAMPLE_PAGE);
                     } else {
                         System.out.println("Passwords did not match!");
                         l_errorText.setText("Passwords did not match!");
                         l_errorText.setVisible(true);
-                        //window.changePage(MAIN_PAGE);
                     }
                 }
             }
