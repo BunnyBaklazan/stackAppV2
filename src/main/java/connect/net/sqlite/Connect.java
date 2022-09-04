@@ -12,9 +12,7 @@ public class Connect {
     private static final String INSERT_USER
             = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
 
-    /**
-     * Connect to a sample database
-     */
+
     private Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
 
@@ -37,8 +35,6 @@ public class Connect {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPassword());
-            //statement.setTimestamp(4,null);
-            //statement.setTimestamp(5,null);
             statement.setString(4, user.getUserName());
             statement.executeUpdate();
 
@@ -47,9 +43,6 @@ public class Connect {
         }
 
     }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         //connect();
     }
