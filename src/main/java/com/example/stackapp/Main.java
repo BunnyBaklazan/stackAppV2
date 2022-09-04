@@ -15,6 +15,7 @@ public class Main extends Application {
     private static final String MAIN_PAGE = "main.fxml";
     private static Stage window;
 
+
     @Override
     public void start(Stage stage) throws Exception {
         window = stage;

@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: fb3b1e;">
          <children>
-            <ImageView fitHeight="131.0" fitWidth="130.0" layoutX="34.0" layoutY="62.0" onMouseClicked="#backToLoginPage" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="131.0" fitWidth="130.0" layoutX="34.0" layoutY="62.0" onMouseClicked="#backToMainPage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../136827.png" />
                </image>
