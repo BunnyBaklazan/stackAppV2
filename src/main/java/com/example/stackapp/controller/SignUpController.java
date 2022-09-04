@@ -64,7 +64,7 @@ public class SignUpController {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("Lohs");
+            System.out.println("FAILED");
             try {
                 window.changePage(LOGIN_PAGE);
             } catch (IOException e) {
