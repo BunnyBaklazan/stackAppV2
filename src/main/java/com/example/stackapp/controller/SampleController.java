@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class SampleController {
     //private static final Main window = new Main();
     private final String ADMIN = "admin";
-    private User user = new User("boreil", "worker");
+    private User user = new User("boreil", "admin");
 
     int boxId=0;
     @FXML
@@ -29,10 +29,8 @@ public class SampleController {
     @FXML
     private Button addWorkerBtn = new Button();
 
-    public SampleController () {
-        System.out.println("LOADING CONSTRUCTOR");
-        System.out.println("LOADING CONSTRUCTOR " + user.getRole());
-
+    @FXML
+    public void initialize() {
         addWorkerBtn.setVisible(false);
 
         if (user.getRole().equals(ADMIN)) {
@@ -40,6 +38,12 @@ public class SampleController {
             addWorkerBtn.setVisible(true);
         }
         System.out.println(addWorkerBtn.isVisible());
+
+    }
+
+    public SampleController () {
+        System.out.println("LOADING CONSTRUCTOR");
+        System.out.println("LOADING CONSTRUCTOR " + user.getRole());
     }
 
     @FXML
