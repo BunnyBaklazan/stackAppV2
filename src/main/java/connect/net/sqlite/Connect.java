@@ -2,17 +2,15 @@ package connect.net.sqlite;
 
 import com.example.stackapp.model.UserData;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Connect {
 
     private static final String INSERT_USER
             = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
 
-
+    private static final String SELECT_USER
+            = "SELECT username, password FROM users WHERE username = ? AND password = ?";
     private Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
 
@@ -41,6 +39,24 @@ public class Connect {
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
+
+    }
+    public ResultSet searchForUser(String userName, String password){
+        ResultSet result = null;
+        try{
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(SELECT_USER);
+            statement.setString(1, userName);
+            statement.setString(2, password);
+            return result = statement.executeQuery();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public void searchForBox(){
 
     }
     public static void main(String[] args) {

@@ -23,7 +23,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(requireNonNull(getClass().getResource(MAIN_PAGE)));
         window.setScene(new Scene(root));
 
-        String css= this.getClass().getResource("colors.css").toExternalForm();
+        String css = this.getClass().getResource("colors.css").toExternalForm();
         window.getScene().getStylesheets().add(css);
 
         stage.setResizable(false);

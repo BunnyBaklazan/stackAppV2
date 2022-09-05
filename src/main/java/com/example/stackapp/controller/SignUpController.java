@@ -58,6 +58,7 @@ public class SignUpController {
             user = new UserData(firstname, lastname, username, password);
             conn.insertUser(user);
             System.out.println("SUCCESSFULLY");
+
             try {
                 window.changePage(MAIN_PAGE);
             } catch (IOException e) {

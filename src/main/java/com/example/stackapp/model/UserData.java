@@ -7,7 +7,7 @@ public class UserData {
     private String userName;
     private String password;
 
-    public UserData(String firstName, String lastName, String userName, String password) {
+    public UserData(String userName, String password, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
