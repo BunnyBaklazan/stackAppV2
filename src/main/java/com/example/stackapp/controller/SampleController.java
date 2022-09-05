@@ -2,27 +2,22 @@ package com.example.stackapp.controller;
 
 import com.example.stackapp.Main;
 import com.example.stackapp.model.User;
-import com.example.stackapp.model.UserData;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.util.Arrays;
 
 public class SampleController {
-    //private static final Main window = new Main();
+    private static final Main window = new Main();
     private final String ADMIN = "admin";
-    private User user = new User("boreil", "admin");
-
+    private User user = new User("asd", "admin");
     int boxId=0;
     @FXML
     private Pane sampleAppPane, searchBoxPane;
     @FXML
-    private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, editBtn, requestBtn, destroyBtn, saveBtn;
+    private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn = new Button(), editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn;
     @FXML
     private TextField searchField = new TextField(), shelf_IDField, box_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField, palField, palDestroyField;
     @FXML
@@ -52,13 +47,32 @@ public class SampleController {
         System.out.println("LOADING CONSTRUCTOR " + user.getRole());
     }
 
-    @FXML
+    //check function to change color on press
+   /* @FXML
     private void btnPressed() {
         //setStyle("-fx-background-color: #4e5558;");
+        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
+        for (int i = 0; i < btnArr.length; i++) {
+            btnArr[i].setStyle("-fx-background-color: #ADB9BD;");
+        }
     }
 
-    @FXML
-    private void btnReleasedbtnReleased() {
+    private class MyEventHandler implements EventHandler<Event>{
+        @Override
+        public void handle(Event evt) {
+            String id = ((Button) evt.getSource()).getId();
+            //boldButtonOnClick(id);
+        }
+
+    private void addEvents() {
+        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
+        for (int i = 0; i < btnArr.length; i++) {
+            btnArr[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+        }
+    }*/
+
+    /*@FXML
+    private void btnReleased() {
         //setStyle("-fx-background-color: #AAB2BD;");
     }*/
 
@@ -74,10 +88,60 @@ public class SampleController {
         requestBtn.setVisible(false);
         editBtn.setVisible(false);
         saveBtn.setVisible(true);
+        notificationTxt.setText("");
+    }
+
+    @FXML
+    private void destroyBox() {
+        palDestroyField.setVisible(true);
+        palDestroyLabel.setVisible(true);
+        enterPalNrDestroyLabel.setVisible(true);
+        acceptDestroyBtn.setVisible(true);
+        editBtn.setVisible(false);
+        requestBtn.setVisible(false);
+        destroyBtn.setVisible(false);
+    }
+
+    @FXML
+    private void saveDestroyPalToDB() {
+        palDestroyField.setVisible(false);
+        palDestroyLabel.setVisible(false);
+        enterPalNrDestroyLabel.setVisible(false);
+        acceptDestroyBtn.setVisible(false);
+        editBtn.setVisible(true);
+        requestBtn.setVisible(true);
+        destroyBtn.setVisible(true);
+        notificationTxt.setStyle("-fx-fill: red;");
+        notificationTxt.setText("The box has been successfully deleted and saved in the database at 'PAL[X]:"+palField.getText()+"'");
+    }
+
+    @FXML
+    private void requestBox() {
+        palField.setVisible(true);
+        palLabel.setVisible(true);
+        enterPalNrLabel.setVisible(true);
+        acceptBtn.setVisible(true);
+        editBtn.setVisible(false);
+        requestBtn.setVisible(false);
+        destroyBtn.setVisible(false);
+    }
+
+    @FXML
+    private void saveReqestPalToDB() {
+        palField.setVisible(false);
+        palLabel.setVisible(false);
+        enterPalNrLabel.setVisible(false);
+        acceptBtn.setVisible(false);
+        editBtn.setVisible(true);
+        requestBtn.setVisible(true);
+        destroyBtn.setVisible(true);
+        notificationTxt.setStyle("-fx-fill: #2c6432;");
+        notificationTxt.setText("The box has been successfully saved in the database at 'PAL:[R]"+palField.getText()+"'");
     }
 
     @FXML
     private void saveBoxtoDB() {
+        TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
         //need to add connection to DB to save edits
         String[] testTxtsArr= new String[textFields.length];
         for (int i = 0; i < textFields.length; i++) {
@@ -92,9 +156,11 @@ public class SampleController {
                 notificationTxt.setText("The box has been successfully saved in the database");
             }
         }
-        System.out.println(Arrays.toString(testTxtsArr));
+        System.out.println("Šī brīža array= "+Arrays.toString(testTxtsArr));
         saveBtn.setVisible(false);
         editBtn.setVisible(true);
+
+
     }
     @FXML
     private void checkBtn() {
@@ -126,9 +192,23 @@ public class SampleController {
     }
     @FXML
     private void getBoxIdByUserInput(){
+        //TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
+        //need to add connection to DB to save edits
+        for (int i = 0; i < textFields.length; i++) {
+            if(shelf_IDField.getText().equals("") || client_IDField.getText().equals("") || noteField.getText().equals("No such record! Try again!")) {
+                requestBtn.setVisible(false);
+                destroyBtn.setVisible(false);
+            }else {
+                requestBtn.setVisible(true);
+                destroyBtn.setVisible(true);
+            }
+        }
+
         //int boxIdToSearch= boxId;
         System.out.println("User enters: ["+boxId+ "] BOX_id to search in DB");
         getFieldInputsFromDB();
+        notificationTxt.setStyle("-fx-fill: #aba9a9;");
+        notificationTxt.setText("Last search: "+boxId);
     }
     private void getFieldInputsFromDB() {
         TextField[] testFieldsArr = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
@@ -140,8 +220,8 @@ public class SampleController {
             }
             box_IDField.setText(searchField.getText());
         } else{
-            for (int i = 0; i < testFieldsArr.length; i++) {
-                testFieldsArr[i].setText("");
+            for (TextField textField : testFieldsArr) {
+                textField.setText("");
             }
             box_IDField.setText(""+boxId);
             noteField.setText("No such record! Try again!");
