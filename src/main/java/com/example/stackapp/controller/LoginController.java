@@ -37,10 +37,7 @@ public class LoginController {
     }
 
     public static boolean isValidCredentials(String username, String password) {
-        if (username.trim().isEmpty() || password.trim().isEmpty()) {
-            return false;
-        }
-        return true;
+        return !username.trim().isEmpty() && !password.trim().isEmpty();
     }
 
     public void login() {
@@ -53,16 +50,20 @@ public class LoginController {
         //should I use two String or object
         resultSet = conn.searchForUser(username, password);
 
-        System.out.println("USER ENTERED VARIABLES " + username + " " + password);
 
-        // Check if username and password are written
-        if (!isValidCredentials(username, password)) {
+        System.out.println("USER ENTERED VARIABLED " + username + " " + password);
+        /// CONNECT TO DABASE, RECEIVE INFO
+        if (!isValidCredentials(username,password)) {
             System.out.println("Username or password is missing");
             l_errorText.setVisible(true);
             return;
         }
         l_errorText.setVisible(false);
-
+        
+        // connect to DB
+        Connection conn;
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
         try {
             if(resultSet.getString("password").equals(password) &&
                     resultSet.getString("username").equals(username)) {
@@ -79,6 +80,18 @@ public class LoginController {
                 System.out.println("User is not found!");
                 l_errorText.setText("User is not found!");
                 l_errorText.setVisible(true);
+            } else {
+                while (resultSet.next()) {
+                    String retrievedPassword = resultSet.getString("password");
+                    if (retrievedPassword.equals(password)) {
+                        System.out.println("User found and password is correct.");
+                        window.changePage(SAMPLE_PAGE);
+                    } else {
+                        System.out.println("Passwords did not match!");
+                        l_errorText.setText("Passwords did not match!");
+                        l_errorText.setVisible(true);
+                    }
+                }
             }
 
         } catch (SQLException | IOException e) {
