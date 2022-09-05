@@ -35,7 +35,10 @@ public class LoginController {
     }
 
     public static boolean isValidCredentials(String username, String password) {
-        return !username.trim().isEmpty() && !password.trim().isEmpty();
+        if (username.trim().isEmpty() || password.trim().isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     public void login() {
@@ -44,16 +47,16 @@ public class LoginController {
 
         System.out.println("USER ENTERED VARIABLED " + username + " " + password);
         /// CONNECT TO DABASE, RECEIVE INFO
-        if (!isValidCredentials(username,password)) {
+        if (isValidCredentials(username,password)) {
             System.out.println("Username or password is missing");
             l_errorText.setVisible(true);
             return;
         }
         l_errorText.setVisible(false);
         // connect to DB
-        Connection conn;
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
             // db parameters
             String url = "jdbc:sqlite:stackAppdbv1.db";
@@ -72,7 +75,12 @@ public class LoginController {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
-                        window.changePage(SAMPLE_PAGE);
+                        String admin = "asd";
+                        if(username.equals(admin)) {
+                            window.changePage(SAMPLE_PAGE);
+                            //l_errorText.setText("Admin has entered");
+                            //l_errorText.setVisible(true);
+                        }
                     } else {
                         System.out.println("Passwords did not match!");
                         l_errorText.setText("Passwords did not match!");
