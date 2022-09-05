@@ -1,6 +1,7 @@
 package com.example.stackapp.controller;
 
 import com.example.stackapp.Main;
+import connect.net.sqlite.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginController {
     private static final String MAIN_PAGE = "main.fxml";
@@ -42,56 +44,45 @@ public class LoginController {
     }
 
     public void login() {
+
+        Connect conn = new Connect();
         String username = tf_username.getText();
         String password = pf_password.getText();
+        ResultSet resultSet = null;
 
-        System.out.println("USER ENTERED VARIABLED " + username + " " + password);
-        /// CONNECT TO DABASE, RECEIVE INFO
-        if (isValidCredentials(username,password)) {
+        //should I use two String or object
+        resultSet = conn.searchForUser(username, password);
+
+        System.out.println("USER ENTERED VARIABLES " + username + " " + password);
+
+        // Check if username and password are written
+        if (!isValidCredentials(username, password)) {
             System.out.println("Username or password is missing");
             l_errorText.setVisible(true);
             return;
         }
         l_errorText.setVisible(false);
-        // connect to DB
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            // db parameters
-            String url = "jdbc:sqlite:stackAppdbv1.db";
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
-            preparedStatement = conn.prepareStatement("SELECT password FROM users WHERE USERNAME = ?");
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
 
-            if (!resultSet.isBeforeFirst()) {
+        try {
+            if(resultSet.getString("password").equals(password) &&
+                    resultSet.getString("username").equals(username)) {
+                System.out.println("Everything is fine");
+                window.changePage(SAMPLE_PAGE);
+
+            } else if(!resultSet.getString("password").equals(password) &&
+                    resultSet.getString("username").equals(username)) {
+                System.out.println("Passwords did not match!");
+                l_errorText.setText("Passwords did not match!");
+                l_errorText.setVisible(true);
+
+            } else {
                 System.out.println("User is not found!");
                 l_errorText.setText("User is not found!");
                 l_errorText.setVisible(true);
-            } else {
-                while (resultSet.next()) {
-                    String retrievedPassword = resultSet.getString("password");
-                    if (retrievedPassword.equals(password)) {
-                        System.out.println("User found and password is correct.");
-                        String admin = "asd";
-                        if(username.equals(admin)) {
-                            window.changePage(SAMPLE_PAGE);
-                            //l_errorText.setText("Admin has entered");
-                            //l_errorText.setVisible(true);
-                        }
-                    } else {
-                        System.out.println("Passwords did not match!");
-                        l_errorText.setText("Passwords did not match!");
-                        l_errorText.setVisible(true);
-                    }
-                }
             }
-        } catch (SQLException e) {
+
+        } catch (SQLException | IOException e) {
             System.out.println("Exception!");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }
