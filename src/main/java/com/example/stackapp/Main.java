@@ -37,6 +37,9 @@ public class Main extends Application {
     public void changePage(String pageName) throws IOException {
         Parent parent = FXMLLoader.load(requireNonNull(getClass().getResource(pageName)));
         window.getScene().setRoot(parent);
+
+        String css= this.getClass().getResource("colors.css").toExternalForm();
+        window.getScene().getStylesheets().add(css);
     }
 
 }
