@@ -24,10 +24,16 @@ public class SampleController {
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, editBtn, requestBtn, destroyBtn, saveBtn;
     @FXML
-    private TextField searchField= new TextField(), shelf_IDField, box_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField;
-
+    private TextField searchField = new TextField(), shelf_IDField, box_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField, palField, palDestroyField;
     @FXML
-    private Button addWorkerBtn = new Button();
+    private Text notificationTxt;
+    @FXML
+    private Label palLabel, enterPalNrLabel, palDestroyLabel, enterPalNrDestroyLabel;
+
+    TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
+
+    /*@FXML
+    private final TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};*/
 
     @FXML
     public void initialize() {
@@ -54,13 +60,18 @@ public class SampleController {
     @FXML
     private void btnReleasedbtnReleased() {
         //setStyle("-fx-background-color: #AAB2BD;");
-    }
+    }*/
+
     @FXML
     private void editBox() {
-        TextField[] testFieldsArr = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
-        for (int i = 0; i < testFieldsArr.length; i++) {
-            testFieldsArr[i].setEditable(true);
+        TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
+
+        for (TextField it : textFields) {
+            it.setEditable(true);
         }
+
+        destroyBtn.setVisible(false);
+        requestBtn.setVisible(false);
         editBtn.setVisible(false);
         saveBtn.setVisible(true);
     }
@@ -68,10 +79,18 @@ public class SampleController {
     @FXML
     private void saveBoxtoDB() {
         //need to add connection to DB to save edits
-        TextField[] testFieldsArr = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
-        String[] testTxtsArr= new String[testFieldsArr.length];
-        for (int i = 0; i < testFieldsArr.length; i++) {
-            testTxtsArr[i]= testFieldsArr[i].getText();
+        String[] testTxtsArr= new String[textFields.length];
+        for (int i = 0; i < textFields.length; i++) {
+            if(shelf_IDField.getText().equals("") || client_IDField.getText().equals("") || noteField.getText().equals("No such record! Try again!")) {
+                textFields[i].setEditable(false);
+                notificationTxt.setStyle("-fx-fill: red;");
+                notificationTxt.setText("Error, adding Box to the database");
+            }else {
+                testTxtsArr[i] = textFields[i].getText();
+                textFields[i].setEditable(false);
+                notificationTxt.setStyle("-fx-fill: #2c6432;");
+                notificationTxt.setText("The box has been successfully saved in the database");
+            }
         }
         System.out.println(Arrays.toString(testTxtsArr));
         saveBtn.setVisible(false);
