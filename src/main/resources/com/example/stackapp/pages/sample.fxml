@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -97,19 +98,41 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <Pane fx:id="sampleAppPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
-            <ImageView fx:id="myBox" fitHeight="150.0" fitWidth="200.0" layoutX="384.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+            <ProgressBar id="secretProgressBar" fx:id="secretProgressBar" layoutX="14.0" layoutY="609.0" prefHeight="20.0" prefWidth="121.0" progress="0.0" visible="false" />
+            <ImageView fx:id="myBlackBox" fitHeight="150.0" fitWidth="200.0" layoutX="180.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" rotate="17.5">
                <image>
                   <Image url="@../IMG/box-black.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="myBox2" fitHeight="150.0" fitWidth="200.0" layoutX="180.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../IMG/box-yellow.png" />
+            <ImageView fx:id="myBrownBox" fitHeight="150.0" fitWidth="200.0" layoutX="396.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" rotate="42.7">
+               <Image url="@../IMG/box-brown.png" />
             </ImageView>
-            <Label fx:id="nameID" layoutX="197.0" layoutY="248.0" prefHeight="149.0" prefWidth="307.0" text="STACK APP" textFill="#a19d9d">
+            <Label fx:id="titleTextLabel" layoutX="201.0" layoutY="132.0" onMouseClicked="#stopAnimation" prefHeight="149.0" prefWidth="307.0" text="STACK APP" textFill="#a19d9d">
                <font>
                   <Font name="Silom" size="56.0" />
                </font>
             </Label>
+            <ImageView fx:id="myGreenBox" fitHeight="150.0" fitWidth="200.0" layoutX="180.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true" rotate="-95.5">
+               <Image url="@../IMG/box-green.png" />
+            </ImageView>
+            <ImageView fx:id="myPurpleBox" fitHeight="150.0" fitWidth="200.0" layoutX="550.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" rotate="105.1">
+               <Image url="@../IMG/box-purple.png" />
+            </ImageView>
+            <ImageView fx:id="myPinkBox" fitHeight="150.0" fitWidth="200.0" layoutX="529.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" rotate="153.3">
+               <Image url="@../IMG/box-pink.png" />
+            </ImageView>
+            <ImageView fx:id="myRedBox" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../IMG/box-red.png" />
+            </ImageView>
+            <ImageView fx:id="myOrangeBox" fitHeight="150.0" fitWidth="200.0" layoutX="350.0" layoutY="481.0" pickOnBounds="true" preserveRatio="true" rotate="-137.6">
+               <Image url="@../IMG/box-orange.png" />
+            </ImageView>
+            <ImageView fx:id="myBlueBox" fitHeight="150.0" fitWidth="200.0" layoutX="529.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" rotate="69.4">
+               <Image url="@../IMG/box-blue.png" />
+            </ImageView>
+            <ImageView fx:id="myYellowBox" fitHeight="150.0" fitWidth="200.0" layoutX="75.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" rotate="-33.7">
+               <Image url="@../IMG/box-yellow.png" />
+            </ImageView>
          </Pane>
          <Pane fx:id="searchBoxPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
             <children>
