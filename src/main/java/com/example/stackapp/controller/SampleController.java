@@ -10,12 +10,13 @@ import javafx.scene.text.Text;
 import java.util.Arrays;
 
 public class SampleController {
-    private static final Main window = new Main();
+
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
     int boxId=0;
+
     @FXML
-    private Pane sampleAppPane, searchBoxPane;
+    private Pane sampleAppPane, searchBoxPane, addWorkerPane;
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn = new Button(), editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn;
     @FXML
@@ -24,12 +25,13 @@ public class SampleController {
     private Text notificationTxt;
     @FXML
     private Label palLabel, enterPalNrLabel, palDestroyLabel, enterPalNrDestroyLabel;
+//######################################################################################################################
 
-    TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
 
-    /*@FXML
-    private final TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};*/
-
+    public SampleController () {
+        System.out.println("LOADING CONSTRUCTOR");
+        System.out.println("LOADING CONSTRUCTOR " + user.getRole());
+    }
     @FXML
     public void initialize() {
         addWorkerBtn.setVisible(false);
@@ -41,41 +43,32 @@ public class SampleController {
         System.out.println(addWorkerBtn.isVisible());
 
     }
+//######################################################################################################################
 
-    public SampleController () {
-        System.out.println("LOADING CONSTRUCTOR");
-        System.out.println("LOADING CONSTRUCTOR " + user.getRole());
+
+    /**    ----    Default Panel    -----    */
+    @FXML
+    private void changePanToDefaultPan() {
+        sampleAppPane.setVisible(true);
+        searchBoxPane.setVisible(false);
+        addWorkerPane.setVisible(false);
     }
 
-    //check function to change color on press
-   /* @FXML
-    private void btnPressed() {
-        //setStyle("-fx-background-color: #4e5558;");
-        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
-        for (int i = 0; i < btnArr.length; i++) {
-            btnArr[i].setStyle("-fx-background-color: #ADB9BD;");
-        }
+    @FXML
+    private void checkBtn() {
+        System.out.println("Btn pressed");
     }
+    /**    ----END Default Panel END-----    */
+//######################################################################################################################
 
-    private class MyEventHandler implements EventHandler<Event>{
-        @Override
-        public void handle(Event evt) {
-            String id = ((Button) evt.getSource()).getId();
-            //boldButtonOnClick(id);
-        }
 
-    private void addEvents() {
-        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
-        for (int i = 0; i < btnArr.length; i++) {
-            btnArr[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-        }
-    }*/
-
-    /*@FXML
-    private void btnReleased() {
-        //setStyle("-fx-background-color: #AAB2BD;");
-    }*/
-
+    /**    ----    SearchBox Panel    -----    */
+    @FXML
+    private void changePanToSearchBoxPan() {
+        System.out.println("Yes it is search box pane");
+        sampleAppPane.setVisible(false); //sampleAppPane not shown
+        searchBoxPane.setVisible(true); //searchBoxPane are shown
+    }
     @FXML
     private void editBox() {
         TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
@@ -90,7 +83,6 @@ public class SampleController {
         saveBtn.setVisible(true);
         notificationTxt.setText("");
     }
-
     @FXML
     private void destroyBox() {
         palDestroyField.setVisible(true);
@@ -101,7 +93,6 @@ public class SampleController {
         requestBtn.setVisible(false);
         destroyBtn.setVisible(false);
     }
-
     @FXML
     private void saveDestroyPalToDB() {
         palDestroyField.setVisible(false);
@@ -114,7 +105,6 @@ public class SampleController {
         notificationTxt.setStyle("-fx-fill: red;");
         notificationTxt.setText("The box has been successfully deleted and saved in the database at 'PAL[X]:"+palField.getText()+"'");
     }
-
     @FXML
     private void requestBox() {
         palField.setVisible(true);
@@ -125,7 +115,6 @@ public class SampleController {
         requestBtn.setVisible(false);
         destroyBtn.setVisible(false);
     }
-
     @FXML
     private void saveReqestPalToDB() {
         palField.setVisible(false);
@@ -138,7 +127,6 @@ public class SampleController {
         notificationTxt.setStyle("-fx-fill: #2c6432;");
         notificationTxt.setText("The box has been successfully saved in the database at 'PAL:[R]"+palField.getText()+"'");
     }
-
     @FXML
     private void saveBoxtoDB() {
         TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
@@ -163,23 +151,6 @@ public class SampleController {
 
     }
     @FXML
-    private void checkBtn() {
-        System.out.println("Btn pressed");
-    }
-    @FXML
-    private void exit() {
-//        System.out.println("Exit Btn Pressed");
-//        addWorkerBtn.setVisible(true);
-    }
-
-    @FXML
-    private void changePanToSearchBoxPan() {
-        System.out.println("Yes it is search box pane");
-        sampleAppPane.setVisible(false); //sampleAppPane not shown
-        searchBoxPane.setVisible(true); //searchBoxPane are shown
-    }
-
-    @FXML
     private int onKeyTyped() {
         searchField.setTextFormatter(new TextFormatter<>(c -> {
             if(!c.getControlNewText().matches("\\d*"))
@@ -192,7 +163,7 @@ public class SampleController {
     }
     @FXML
     private void getBoxIdByUserInput(){
-        //TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
+        TextField[] textFields = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
         //need to add connection to DB to save edits
         for (int i = 0; i < textFields.length; i++) {
             if(shelf_IDField.getText().equals("") || client_IDField.getText().equals("") || noteField.getText().equals("No such record! Try again!")) {
@@ -228,4 +199,46 @@ public class SampleController {
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
         }
     }
+    /**    ----END SearchBox Panel END-----    */
+//######################################################################################################################
+
+
+    /**    ----    AddWorker Panel    -----    */
+    @FXML
+    private void changePanToAddWorkerPan() {
+        sampleAppPane.setVisible(false);
+        searchBoxPane.setVisible(false);
+        addWorkerPane.setVisible(true);
+    }
+    /**    ----END AddWorker Panel END-----    */
+//######################################################################################################################
+
+    //check function to change color on press
+   /* @FXML
+    private void btnPressed() {
+        //setStyle("-fx-background-color: #4e5558;");
+        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
+        for (int i = 0; i < btnArr.length; i++) {
+            btnArr[i].setStyle("-fx-background-color: #ADB9BD;");
+        }
+    }
+
+    private class MyEventHandler implements EventHandler<Event>{
+        @Override
+        public void handle(Event evt) {
+            String id = ((Button) evt.getSource()).getId();
+            //boldButtonOnClick(id);
+        }
+
+    private void addEvents() {
+        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
+        for (int i = 0; i < btnArr.length; i++) {
+            btnArr[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+        }
+    }*/
+
+    /*@FXML
+    private void btnReleased() {
+        //setStyle("-fx-background-color: #AAB2BD;");
+    }*/
 }
