@@ -32,7 +32,7 @@
       <ImageView fitHeight="120.0" fitWidth="116.0" layoutX="143.0" layoutY="26.0" pickOnBounds="true"
                  preserveRatio="true">
          <image>
-            <Image url="@../2721577.png"/>
+            <Image url="@../IMG/2721577.png"/>
          </image>
       </ImageView>
       <Label fx:id="l_errorText" layoutX="95.0" layoutY="135.0" prefHeight="22.0" prefWidth="200.0"
