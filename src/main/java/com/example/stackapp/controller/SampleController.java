@@ -1,15 +1,17 @@
 package com.example.stackapp.controller;
 
-import com.example.stackapp.Main;
 import com.example.stackapp.model.User;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.util.Arrays;
 
 public class SampleController {
+    private volatile boolean running = true;
 
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
@@ -24,7 +26,13 @@ public class SampleController {
     @FXML
     private Text notificationTxt;
     @FXML
-    private Label palLabel, enterPalNrLabel, palDestroyLabel, enterPalNrDestroyLabel;
+    private Label titleTextLabel, palLabel, enterPalNrLabel, palDestroyLabel, enterPalNrDestroyLabel;
+    @FXML
+    private ImageView myBlackBox, myYellowBox, myBrownBox, myBlueBox, myRedBox, myPinkBox, myGreenBox, myPurpleBox, myOrangeBox;
+    @FXML
+    private ProgressIndicator secretProgressBar;
+
+    LoadingScreen loadingScreen; //need to move down....test test
 //######################################################################################################################
 
 
@@ -34,8 +42,14 @@ public class SampleController {
     }
     @FXML
     public void initialize() {
-        addWorkerBtn.setVisible(false);
+        ImageView[] myBoxImageArr= {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+        for (int i = 0; i < myBoxImageArr.length; i++) {
+            myBoxImageArr[i].setVisible(false);
+        }
+        loadingScreen= new SampleController.LoadingScreen(secretProgressBar, myRedBox);
+        startAnimationProgress();
 
+        addWorkerBtn.setVisible(false);
         if (user.getRole().equals(ADMIN)) {
             System.out.println("INSIDE");
             addWorkerBtn.setVisible(true);
@@ -52,6 +66,7 @@ public class SampleController {
         sampleAppPane.setVisible(true);
         searchBoxPane.setVisible(false);
         addWorkerPane.setVisible(false);
+        restartAnimation();
     }
 
     @FXML
@@ -241,4 +256,118 @@ public class SampleController {
     private void btnReleased() {
         //setStyle("-fx-background-color: #AAB2BD;");
     }*/
+//######################################################################################################################
+
+    /**    ----    Animation    -----    */
+
+    @FXML
+    void startAnimationProgress() {
+        Thread thread= new Thread(loadingScreen);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    @FXML
+    void restartAnimation() {
+        running= true;
+        ImageView[] myBoxImageArr= {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+        for (int i = 0; i < myBoxImageArr.length; i++) {
+            myBoxImageArr[i].setVisible(false);
+        }
+        secretProgressBar.setProgress(0);
+        startAnimationProgress();
+    }
+
+    @FXML
+    void stopAnimation() {
+        secretProgressBar.setProgress(0);
+        running= false;
+
+        ImageView[] myBoxImageArr= {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+        for (int i = 0; i < myBoxImageArr.length; i++) {
+            myBoxImageArr[i].setVisible(true);
+        }
+
+        myPinkBox.setLayoutX(188); myPinkBox.setLayoutY(248); myPinkBox.setRotate(0);
+        myBlueBox.setLayoutX(354); myBlueBox.setLayoutY(248); myBlueBox.setRotate(0);
+
+        myPurpleBox.setLayoutX(105); myPurpleBox.setLayoutY(372); myPurpleBox.setRotate(0);
+        myOrangeBox.setLayoutX(263); myOrangeBox.setLayoutY(372); myOrangeBox.setRotate(0);
+        myBrownBox.setLayoutX(421); myBrownBox.setLayoutY(372); myBrownBox.setRotate(0);
+
+        myBlackBox.setLayoutX(22);myBlackBox.setLayoutY(495); myBlackBox.setRotate(0);
+        myYellowBox.setLayoutX(180); myYellowBox.setLayoutY(495); myYellowBox.setRotate(0);
+        myRedBox.setLayoutX(338); myRedBox.setLayoutY(495); myRedBox.setRotate(0);
+        myGreenBox.setLayoutX(496); myGreenBox.setLayoutY(495); myGreenBox.setRotate(0);
+
+
+
+
+    }
+    public class LoadingScreen implements Runnable {
+        ImageView[] myBoxImageArr= {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+
+        ProgressIndicator secretProgressBar;
+        ImageView img;
+
+        public LoadingScreen(ProgressIndicator secretProgressBar, ImageView img){
+            this.secretProgressBar = secretProgressBar;
+            this.img= img;
+        }
+
+        @Override
+        public void run() {
+            while (secretProgressBar.getProgress() <= 1 && running) {
+                if(secretProgressBar.getProgress()>= 0.1 && secretProgressBar.getProgress()<= 0.15) {
+                    myBoxImageArr[7].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.15 && secretProgressBar.getProgress()<= 0.2){
+                    myBoxImageArr[0].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.2 && secretProgressBar.getProgress()<= 0.25){
+                    myBoxImageArr[3].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.25 && secretProgressBar.getProgress()<= 0.3){
+                    myBoxImageArr[1].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.3 && secretProgressBar.getProgress()<= 0.35){
+                    myBoxImageArr[6].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.35 && secretProgressBar.getProgress()<= 0.4){
+                    myBoxImageArr[4].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.4 && secretProgressBar.getProgress()<= 0.45){
+                    myBoxImageArr[2].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.45 && secretProgressBar.getProgress()<= 0.5){
+                    myBoxImageArr[5].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.5 && secretProgressBar.getProgress()<= 0.55){
+                    myBoxImageArr[8].setVisible(true);
+                } else if(secretProgressBar.getProgress()>= 0.55 && secretProgressBar.getProgress()<= 0.6){
+                    myBoxImageArr[7].setLayoutX(188); myBoxImageArr[7].setLayoutY(248);
+                } else if(secretProgressBar.getProgress()>= 0.6 && secretProgressBar.getProgress()<= 0.65){
+                    myBoxImageArr[0].setLayoutX(354); myBoxImageArr[0].setLayoutY(248);
+                } else if(secretProgressBar.getProgress()>= 0.65 && secretProgressBar.getProgress()<= 0.7){
+                    myBoxImageArr[3].setLayoutX(105); myBoxImageArr[3].setLayoutY(372);
+                } else if(secretProgressBar.getProgress()>= 0.7 && secretProgressBar.getProgress()<= 0.75){
+                    myBoxImageArr[1].setLayoutX(263); myBoxImageArr[1].setLayoutY(372);
+                } else if(secretProgressBar.getProgress()>= 0.75 && secretProgressBar.getProgress()<= 0.8){
+                    myBoxImageArr[6].setLayoutX(421); myBoxImageArr[6].setLayoutY(372);
+                } else if(secretProgressBar.getProgress()>= 0.8 && secretProgressBar.getProgress()<= 0.85){
+                    myBoxImageArr[4].setLayoutX(22); myBoxImageArr[4].setLayoutY(495);
+                } else if(secretProgressBar.getProgress()>= 0.85 && secretProgressBar.getProgress()<= 0.9){
+                    myBoxImageArr[2].setLayoutX(180); myBoxImageArr[2].setLayoutY(495);
+                } else if(secretProgressBar.getProgress()>= 0.9 && secretProgressBar.getProgress()<= 0.95){
+                    myBoxImageArr[5].setLayoutX(338); myBoxImageArr[5].setLayoutY(495);
+                } else if(secretProgressBar.getProgress()>= 0.95 && secretProgressBar.getProgress()<= 0.99){
+                    myBoxImageArr[8].setLayoutX(496); myBoxImageArr[8].setLayoutY(495);
+                }
+                Platform.runLater(() -> secretProgressBar.setProgress(secretProgressBar.getProgress() + 0.01));
+                synchronized (this) {
+                    try {
+                        Thread.sleep(150);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        running= false;
+                    }
+                }
+            }
+
+        }
+    }
+    /**    ----END Animation END-----    */
+//######################################################################################################################
 }
