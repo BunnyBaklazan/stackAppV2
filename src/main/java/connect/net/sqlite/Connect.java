@@ -11,7 +11,7 @@ public class Connect {
 
     private static final String SELECT_USER
             = "SELECT username, password FROM users WHERE username = ? AND password = ?";
-    private Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
 
         Connection conn = null;
