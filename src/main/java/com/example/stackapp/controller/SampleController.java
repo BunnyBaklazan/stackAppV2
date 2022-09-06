@@ -65,9 +65,9 @@ public class SampleController {
     /**    ----    SearchBox Panel    -----    */
     @FXML
     private void changePanToSearchBoxPan() {
-        System.out.println("Yes it is search box pane");
-        sampleAppPane.setVisible(false); //sampleAppPane not shown
-        searchBoxPane.setVisible(true); //searchBoxPane are shown
+        sampleAppPane.setVisible(false);
+        searchBoxPane.setVisible(true);
+        addWorkerPane.setVisible(false);
     }
     @FXML
     private void editBox() {
