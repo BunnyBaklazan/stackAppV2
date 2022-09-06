@@ -55,7 +55,7 @@ public class SignUpController {
         if (!username.isEmpty() && !password.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty()) {
             conn = new Connect();
 
-            user = new UserData(firstname, lastname, username, password);
+            user = new UserData(firstname, lastname,  password, username);
             conn.insertUser(user);
             System.out.println("SUCCESSFULLY");
 
