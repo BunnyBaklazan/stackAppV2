@@ -11,7 +11,7 @@
          <children>
             <ImageView fitHeight="131.0" fitWidth="130.0" layoutX="35.0" layoutY="54.0" onMouseClicked="#backToLoginPage" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../IMG/136827.png" />
+                  <Image url="@../IMG/square.png" />
                </image>
             </ImageView>
             <Label layoutX="30.0" layoutY="215.0" text="StackApp">

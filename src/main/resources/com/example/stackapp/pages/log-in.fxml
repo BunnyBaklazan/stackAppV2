@@ -18,7 +18,7 @@
          <ImageView fitHeight="131.0" fitWidth="130.0" layoutX="34.0" layoutY="62.0" onMouseClicked="#backToMainPage"
                     pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../IMG/box-png-icon-yellow.png"/>
+               <Image url="@../IMG/box-yellow.png"/>
             </image>
          </ImageView>
          <Label layoutX="31.0" layoutY="226.0" text="StackApp" textFill="#dcc30d">
@@ -32,7 +32,7 @@
       <ImageView fitHeight="120.0" fitWidth="116.0" layoutX="143.0" layoutY="26.0" pickOnBounds="true"
                  preserveRatio="true">
          <image>
-            <Image url="@../IMG/2721577.png"/>
+            <Image url="@../IMG/ID.png"/>
          </image>
       </ImageView>
       <Label fx:id="l_errorText" layoutX="95.0" layoutY="135.0" prefHeight="22.0" prefWidth="200.0"

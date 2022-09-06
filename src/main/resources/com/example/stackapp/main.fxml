@@ -25,12 +25,12 @@
          <AnchorPane layoutX="375.0" layoutY="174.0">
             <ImageView fx:id="myBox" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#openLoginPage"
                        pickOnBounds="true" preserveRatio="true" visible="false">
-               <Image url="@IMG/box-png-icon-yellow.png"/>
+               <Image url="@IMG/box-yellow.png"/>
             </ImageView>
             <ImageView fx:id="myBox2" fitHeight="150.0" fitWidth="200.0" layoutY="6.0" onMouseClicked="#openLoginPage"
                        pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@IMG/box-png-icon-5.png"/>
+                  <Image url="@IMG/box-black.png"/>
                </image>
             </ImageView>
          </AnchorPane>

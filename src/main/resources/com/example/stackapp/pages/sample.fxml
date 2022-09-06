@@ -22,7 +22,7 @@
          </Label>
          <Label layoutX="842.0" layoutY="14.0" />
          <ImageView fx:id="cornerExitBtn" fitHeight="24.0" fitWidth="22.0" layoutX="865.0" layoutY="12.0" onMouseClicked="#changePanToDefaultPan" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../IMG/pngwing.com.png" />
+            <Image url="@../IMG/x.png" />
          </ImageView>
       </Pane>
    </top>
@@ -96,14 +96,14 @@
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <Pane fx:id="sampleAppPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
+         <Pane fx:id="sampleAppPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
             <ImageView fx:id="myBox" fitHeight="150.0" fitWidth="200.0" layoutX="384.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../IMG/box-png-icon-5.png" />
+                  <Image url="@../IMG/box-black.png" />
                </image>
             </ImageView>
             <ImageView fx:id="myBox2" fitHeight="150.0" fitWidth="200.0" layoutX="180.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../IMG/box-png-icon-yellow.png" />
+               <Image url="@../IMG/box-yellow.png" />
             </ImageView>
             <Label fx:id="nameID" layoutX="197.0" layoutY="248.0" prefHeight="149.0" prefWidth="307.0" text="STACK APP" textFill="#a19d9d">
                <font>
@@ -284,7 +284,7 @@
                </Button>
             </children>
          </Pane>
-         <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" />
+         <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false" />
       </AnchorPane>
    </center>
 </BorderPane>
