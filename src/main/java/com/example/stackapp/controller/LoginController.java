@@ -50,7 +50,6 @@ public class LoginController {
         String password = pf_password.getText();
         ResultSet resultSet = null;
 
-        //should I use two String or object
         resultSet = conn.searchForUser(username, password);
 
         System.out.println("USER ENTERED VARIABLES " + username + " " + password);
@@ -64,21 +63,18 @@ public class LoginController {
         l_errorText.setVisible(false);
 
         try {
-            if(resultSet.getString("password").equals(password) &&
+            //some magic it works only like that, and not otherwise
+            if(resultSet.getString("password") == null ||
+                    resultSet.getString("username") == null) {
+                System.out.println("Something is not right!");
+                l_errorText.setText("Check password or username");
+                l_errorText.setVisible(true);
+
+            } else if(resultSet.getString("password").equals(password) &&
                     resultSet.getString("username").equals(username)) {
                 System.out.println("Everything is fine");
                 window.changePage(SAMPLE_PAGE);
 
-            } else if(!resultSet.getString("password").equals(password) &&
-                    resultSet.getString("username").equals(username)) {
-                System.out.println("Passwords did not match!");
-                l_errorText.setText("Passwords did not match!");
-                l_errorText.setVisible(true);
-
-            } else {
-                System.out.println("User is not found!");
-                l_errorText.setText("User is not found!");
-                l_errorText.setVisible(true);
             }
 
         } catch (SQLException | IOException e) {

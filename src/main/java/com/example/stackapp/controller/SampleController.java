@@ -1,16 +1,15 @@
 package com.example.stackapp.controller;
 
-import com.example.stackapp.Main;
+import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
-import com.example.stackapp.model.UserData;
+import connect.net.sqlite.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
+import java.time.Period;
 import java.util.Arrays;
 
 public class SampleController {
@@ -18,14 +17,13 @@ public class SampleController {
     private final String ADMIN = "admin";
     private User user = new User("boreil", "admin");
 
-    int boxId=0;
+    long boxId = 1;
     @FXML
     private Pane sampleAppPane, searchBoxPane;
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, editBtn, requestBtn, destroyBtn, saveBtn;
     @FXML
-    private TextField searchField= new TextField(), shelf_IDField, box_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField;
-
+    private TextField searchField = new TextField(), shelf_IDField, box_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField;
     @FXML
     private Button addWorkerBtn = new Button();
 
@@ -95,26 +93,68 @@ public class SampleController {
     }
 
     @FXML
-    private int onKeyTyped() {
+    private long onKeyTyped() {
         searchField.setTextFormatter(new TextFormatter<>(c -> {
             if(!c.getControlNewText().matches("\\d*"))
                 return null;
             else
                 return c;
         }));
-        boxId= Integer.parseInt(searchField.getText());
+        //boxId = Long.parseLong(searchField.getText());
         return boxId;
     }
     @FXML
     private void getBoxIdByUserInput(){
-        //int boxIdToSearch= boxId;
+        //int boxIdToSearch = boxId;
         System.out.println("User enters: ["+boxId+ "] BOX_id to search in DB");
         getFieldInputsFromDB();
     }
+
+
     private void getFieldInputsFromDB() {
-        TextField[] testFieldsArr = {shelf_IDField, client_IDField, periodField, date_fromField, date_endField, weightField, fulfillmentField, statusField, noteField};
-        String[] testTxtsArr = {"D1BC7", "34", "10YEARS", "2015-08-12", "2025-08-12", "Light", "Half full", "Check", "Damage on right side"};
-        if(searchField.getText().equals("1004")) {
+
+        Connect conn = new Connect();
+        if(conn.searchForBox(boxId) == null){
+            System.out.println("We don't have that box");
+            noteField.setText("No such record! Try again!");
+            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
+        } else {
+
+            BoxData box = conn.searchForBox(boxId);
+            //some problems with it
+            Period period = Period.between(box.getDate_from().toLocalDate(), box.getDate_end().toLocalDate());
+            
+            //refactor later
+            shelf_IDField.setText(box.getShelf_id());
+            box_IDField.setText(Long.toString(boxId));
+            shelf_IDField.setText(box.getShelf_id());
+            client_IDField.setText(Long.toString(box.getClient_id()));
+            periodField.setText(period.toString());
+            date_fromField.setText(box.getDate_from().toString());
+            date_endField.setText(box.getDate_end().toString());
+            weightField.setText(box.getWeight());
+            fulfillmentField.setText(box.getFulfillment());
+            statusField.setText(box.getStatus());
+            noteField.setText(box.getInfo_note());
+        }
+
+
+
+        /*searchField.setText(
+                box.getShelf_id(),
+                Long.toString(box.getBox_id()),
+                Long.toString(box.getClient_id()),
+                period.getYears(),
+                box.getDate_from().toString(),
+                box.getDate_end().toString(),
+                box.getWeight(),
+                box.getFulfillment(),
+                box.getStatus(),
+                box.getInfo_note()
+        );*/
+
+
+       /* if(searchField.getText().equals("1004")) {
             for (int i = 0; i < testFieldsArr.length; i++) {
                 testFieldsArr[i].setText(testTxtsArr[i]);
                 testFieldsArr[i].setStyle("-fx-text-fill: black; -fx-background-color:  #dce2e8;");
@@ -127,6 +167,6 @@ public class SampleController {
             box_IDField.setText(""+boxId);
             noteField.setText("No such record! Try again!");
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-        }
+        }*/
     }
 }
