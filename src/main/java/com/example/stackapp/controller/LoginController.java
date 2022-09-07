@@ -64,13 +64,13 @@ public class LoginController {
 
         try {
             //some magic it works only like that, and not otherwise
-            if(resultSet.getString("password") == null ||
+            if (resultSet.getString("password") == null ||
                     resultSet.getString("username") == null) {
                 System.out.println("Something is not right!");
                 l_errorText.setText("Check password or username");
                 l_errorText.setVisible(true);
 
-            } else if(resultSet.getString("password").equals(password) &&
+            } else if (resultSet.getString("password").equals(password) &&
                     resultSet.getString("username").equals(username)) {
                 System.out.println("Everything is fine");
                 window.changePage(SAMPLE_PAGE);

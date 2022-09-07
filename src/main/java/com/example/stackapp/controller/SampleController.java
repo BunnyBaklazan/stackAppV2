@@ -9,11 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 
-import java.time.Period;
 import java.util.Arrays;
+
+import static com.example.stackapp.model.SampleUtils.calcPeriod;
 
 public class SampleController {
     //private static final Main window = new Main();
+
     private final String ADMIN = "admin";
     private User user = new User("boreil", "admin");
 
@@ -107,31 +109,29 @@ public class SampleController {
     private void getBoxIdByUserInput(){
         //int boxIdToSearch = boxId;
         System.out.println("User enters: ["+boxId+ "] BOX_id to search in DB");
-        getFieldInputsFromDB();
+        getBoxById();
     }
 
 
-    private void getFieldInputsFromDB() {
+    private void getBoxById() {
 
         Connect conn = new Connect();
-        if(conn.searchForBox(boxId) == null){
+        BoxData box = conn.searchForBox(boxId);
+
+        if (box == null) {
             System.out.println("We don't have that box");
             noteField.setText("No such record! Try again!");
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-        } else {
 
-            BoxData box = conn.searchForBox(boxId);
-            //some problems with it
-            Period period = Period.between(box.getDate_from().toLocalDate(), box.getDate_end().toLocalDate());
-            
+        } else {
             //refactor later
-            shelf_IDField.setText(box.getShelf_id());
+            shelf_IDField.setText(box.getShelfId());
             box_IDField.setText(Long.toString(boxId));
-            shelf_IDField.setText(box.getShelf_id());
+            shelf_IDField.setText(box.getShelfId());
             client_IDField.setText(Long.toString(box.getClient_id()));
-            periodField.setText(period.toString());
-            date_fromField.setText(box.getDate_from().toString());
-            date_endField.setText(box.getDate_end().toString());
+            periodField.setText(calcPeriod(box.getDate_from(), box.getDate_end()));
+            date_fromField.setText(box.getDate_from());
+            date_endField.setText(box.getDate_end());
             weightField.setText(box.getWeight());
             fulfillmentField.setText(box.getFulfillment());
             statusField.setText(box.getStatus());
@@ -139,34 +139,5 @@ public class SampleController {
         }
 
 
-
-        /*searchField.setText(
-                box.getShelf_id(),
-                Long.toString(box.getBox_id()),
-                Long.toString(box.getClient_id()),
-                period.getYears(),
-                box.getDate_from().toString(),
-                box.getDate_end().toString(),
-                box.getWeight(),
-                box.getFulfillment(),
-                box.getStatus(),
-                box.getInfo_note()
-        );*/
-
-
-       /* if(searchField.getText().equals("1004")) {
-            for (int i = 0; i < testFieldsArr.length; i++) {
-                testFieldsArr[i].setText(testTxtsArr[i]);
-                testFieldsArr[i].setStyle("-fx-text-fill: black; -fx-background-color:  #dce2e8;");
-            }
-            box_IDField.setText(searchField.getText());
-        } else{
-            for (int i = 0; i < testFieldsArr.length; i++) {
-                testFieldsArr[i].setText("");
-            }
-            box_IDField.setText(""+boxId);
-            noteField.setText("No such record! Try again!");
-            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-        }*/
     }
 }

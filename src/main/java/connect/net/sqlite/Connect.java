@@ -18,11 +18,9 @@ public class Connect {
     private static final String INSERT_BOX
             ="";
 
-    private static final String SELECT_COUNT_STACK
+    private static final String SELECT_COUNT
             ="SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
-    
-     private static final String SELECT_COUNT_SHELF
-            ="SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
+
 
     private Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
@@ -34,6 +32,7 @@ public class Connect {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         return conn;
     }
 
@@ -79,26 +78,26 @@ public class Connect {
         }
     }
 
-    public BoxData searchForBox(long box_id){
+    public BoxData searchForBox(long boxId){
 
         try{
             ResultSet result;
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_BOX);
-            statement.setLong(1, box_id);
+            statement.setLong(1, boxId);
             result = statement.executeQuery();
 
             if(result == null){
                 System.out.println("Bro we don't have it");
                 return null;
             }
-            System.out.println(result.getString("date_from"));
+
             return new BoxData(
-                    box_id,
+                    boxId,
                     result.getLong("client_id"),
                     //some troubles with date
-                    result.getDate("date_from"),
-                    result.getDate("date_end"),
+                    result.getString("date_from"),
+                    result.getString("date_end"),
                     result.getString("fulfillment"),
                     result.getString("status"),
                     result.getString("info_note"),
@@ -116,7 +115,7 @@ public class Connect {
         try{
            // ResultSet result = null;
             Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_COUNT_STACK);
+            PreparedStatement statement = conn.prepareStatement(SELECT_COUNT);
             statement.setString(1, stack);
             return statement.executeQuery();
 
@@ -126,18 +125,20 @@ public class Connect {
 
         return null;
     }
+
     //max capacity 9 like shelf is 
     public ResultSet shelf_capacity(String shelf){
         try{
             // ResultSet result = null;
              Connection conn = connect();
-             PreparedStatement statement = conn.prepareStatement(SELECT_COUNT_SHELF);
+             PreparedStatement statement = conn.prepareStatement(SELECT_COUNT);
              statement.setString(1, shelf);
              return statement.executeQuery();
  
          } catch(SQLException e){
              System.out.println(e);
          }
+
         return null;
     }
 
