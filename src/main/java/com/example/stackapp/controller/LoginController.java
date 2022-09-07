@@ -45,7 +45,6 @@ public class LoginController {
         String username = tf_username.getText();
         String password = pf_password.getText();
 
-
         System.out.println("USER ENTERED VARIABLED " + username + " " + password);
         /// CONNECT TO DABASE, RECEIVE INFO
         if (!isValidCredentials(username,password)) {
