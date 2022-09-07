@@ -22,7 +22,7 @@
             </font>
          </Label>
          <Label layoutX="842.0" layoutY="14.0" />
-         <ImageView fx:id="cornerExitBtn" fitHeight="24.0" fitWidth="22.0" layoutX="865.0" layoutY="12.0"  pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="cornerExitBtn" fitHeight="24.0" fitWidth="22.0" layoutX="865.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../IMG/pngwing.com.png" />
          </ImageView>
       </Pane>
@@ -99,7 +99,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <Pane>
          </Pane>
-         <TableView fx:id="table_users" layoutX="35.0" layoutY="41.0" prefHeight="298.0" prefWidth="613.0">
+         <TableView fx:id="table_users" layoutX="35.0" layoutY="41.0" onMouseClicked="#handleMouseAction" prefHeight="298.0" prefWidth="613.0">
            <columns>
              <TableColumn fx:id="tc_id" prefWidth="88.0" text="ID" />
              <TableColumn fx:id="tc_first_name" prefWidth="134.0" text="FIRST NAME" />
@@ -108,13 +108,8 @@
                <TableColumn fx:id="tc_username" prefWidth="115.0" text="USERNAME" />
            </columns>
          </TableView>
-         <VBox layoutX="145.0" layoutY="377.0" prefHeight="200.0" prefWidth="106.0" spacing="12.0">
+         <VBox layoutX="165.0" layoutY="393.0" prefHeight="200.0" prefWidth="106.0" spacing="15.0">
             <children>
-               <Label prefHeight="38.0" prefWidth="62.0" text="ID">
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
                <Label text="FIRST NAME">
                   <font>
                      <Font size="16.0" />
@@ -137,13 +132,8 @@
                </Label>
             </children>
          </VBox>
-         <VBox layoutX="271.0" layoutY="377.0" prefHeight="200.0" prefWidth="142.0" spacing="10.0">
+         <VBox layoutX="271.0" layoutY="393.0" prefHeight="200.0" prefWidth="142.0" spacing="10.0">
             <children>
-               <TextField fx:id="tf_id">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </TextField>
                <TextField fx:id="tf_first_name">
                   <font>
                      <Font size="14.0" />
@@ -166,17 +156,17 @@
                </TextField>
             </children>
          </VBox>
-         <Button fx:id="btn_insert" layoutX="502.0" layoutY="409.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" text="Insert">
+         <Button fx:id="btn_insert" layoutX="502.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#insertUser" prefHeight="30.0" prefWidth="64.0" text="Insert">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button fx:id="btn_update" layoutX="501.0" layoutY="455.0" mnemonicParsing="false" text="Update">
+         <Button fx:id="btn_update" layoutX="501.0" layoutY="455.0" mnemonicParsing="false" onAction="#update" onMouseClicked="#update" text="Update">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button fx:id="btn_delete" layoutX="501.0" layoutY="502.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Delete">
+         <Button fx:id="btn_delete" layoutX="501.0" layoutY="502.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="66.0" text="Delete">
             <font>
                <Font size="14.0" />
             </font>

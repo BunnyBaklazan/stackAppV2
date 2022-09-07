@@ -1,9 +1,6 @@
 package com.example.stackapp.controller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.prefs.Preferences;
 import com.example.stackapp.Main;
 import com.example.stackapp.model.User;
@@ -17,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import org.w3c.dom.events.MouseEvent;
 
 import java.util.Arrays;
 
@@ -26,8 +24,6 @@ public class AdminController {
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn = new Button();
 
-    @FXML
-    private TextField tf_id;
     @FXML
     private TextField tf_first_name;
     @FXML
@@ -55,7 +51,58 @@ public class AdminController {
     @FXML
     private TableColumn<UserData, String> tc_username;
 
+    @FXML
+    private void handleMouseAction() {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+        tf_first_name.setText(user.getFirstName());
+        tf_last_name.setText(user.getLastName());
+        tf_password.setText(user.getPassword());
+        tf_username.setText(user.getUserName());
+    }
 
+    @FXML
+    private void delete() throws SQLException {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+        String query = "DELETE FROM users WHERE id = ?";
+        Connection conn = Connect.connect();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.executeUpdate();
+
+            tf_first_name.setText("");
+            tf_last_name.setText("");
+            tf_password.setText("");
+            tf_username.setText("");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //put execution of query here
+        showUsersTable();
+    }
+
+    @FXML
+    private void update() {
+        String first_Name = tf_first_name.getText();
+        String last_Name = tf_last_name.getText();
+        String password = tf_password.getText();
+        String username = tf_username.getText();
+        //String query = "UPDATE users SET title = ";
+        showUsersTable();
+    }
+
+    @FXML
+    private void insertUser() {
+        String first_Name = tf_first_name.getText();
+        String last_Name = tf_last_name.getText();
+        String password = tf_password.getText();
+        String username = tf_username.getText();
+        //Connect.insertUser(); // query for insertion
+        showUsersTable(); // show table after insertion
+
+    }
 
     @FXML
     public void initialize() {
@@ -67,7 +114,6 @@ public class AdminController {
         } else {
             // show content from sample controller
         }
-
     }
 
     public ObservableList<UserData> getUsersData() {
@@ -106,7 +152,5 @@ public class AdminController {
         table_users.setItems(list);
     }
 
-    public AdminController() {
 
-    }
 }
