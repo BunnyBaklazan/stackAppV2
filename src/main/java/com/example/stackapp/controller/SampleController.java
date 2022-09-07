@@ -1,6 +1,9 @@
 package com.example.stackapp.controller;
 
+import static com.example.stackapp.model.SampleUtils.calcPeriod;
+import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
+import connect.net.sqlite.Connect;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -13,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.util.Arrays;
-
 public class SampleController{
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
@@ -24,13 +26,13 @@ public class SampleController{
 
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
-
     private volatile boolean running = true;
-
+    
+    long boxId = 1;
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
-    private int boxId = 0, boxesAt1st = 1, boxesAt2nd = 2, boxesAt3rd = 3, boxesAt4th = 4, boxesAt5th = 5, boxesAt6th = 6, boxesAt7th = 7;
+    private int boxesAt1st = 1, boxesAt2nd = 2, boxesAt3rd = 3, boxesAt4th = 4, boxesAt5th = 5, boxesAt6th = 6, boxesAt7th = 7;
 
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane;
@@ -48,7 +50,6 @@ public class SampleController{
     private ProgressIndicator secretProgressBar;
 
     LoadingScreen loadingScreen; //need to move down....test test
-//######################################################################################################################
 
     public SampleController() {
         System.out.println("LOADING CONSTRUCTOR");
@@ -80,7 +81,6 @@ public class SampleController{
         }
         System.out.println(addWorkerBtn.isVisible());
     }
-//######################################################################################################################
 
 
     /**
@@ -285,6 +285,41 @@ public class SampleController{
         noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
     }
 
+        //int boxIdToSearch= boxId;
+        System.out.println("User enters: ["+boxId+ "] BOX_id to search in DB");
+        getBoxById();
+        notificationTxt.setStyle("-fx-fill: #aba9a9;");
+        notificationTxt.setText("Last search: "+boxId);
+    }
+
+
+    private void getBoxById() {
+
+        Connect conn = new Connect();
+        BoxData box = conn.searchForBox(boxId);
+
+        if (box == null) {
+            System.out.println("We don't have that box");
+            noteField.setText("No such record! Try again!");
+            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
+
+        } else {
+            //refactor later
+            shelf_IDField.setText(box.getShelfId());
+            box_IDField.setText(Long.toString(boxId));
+            shelf_IDField.setText(box.getShelfId());
+            client_IDField.setText(Long.toString(box.getClient_id()));
+            periodField.setText(calcPeriod(box.getDate_from(), box.getDate_end()));
+            date_fromField.setText(box.getDate_from());
+            date_endField.setText(box.getDate_end());
+            weightField.setText(box.getWeight());
+            fulfillmentField.setText(box.getFulfillment());
+            statusField.setText(box.getStatus());
+            noteField.setText(box.getInfo_note());
+        }
+
+    }
+    
     /**    ----END SearchBox Panel END-----    */
 //######################################################################################################################
 

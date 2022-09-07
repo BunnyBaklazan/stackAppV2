@@ -9,10 +9,13 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.prefs.Preferences;
 
 public class LoginController {
     private static final String MAIN_PAGE = "main.fxml";
     private static final String SAMPLE_PAGE = "pages/sample.fxml";
+    private static final String ADMIN_DASHBOARD = "pages/admin.fxml";
+    private static final Preferences userPreferences = Preferences.userRoot();
     private static final Main window = new Main();
     @FXML
     private Button button_login;
@@ -72,7 +75,14 @@ public class LoginController {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
-                        window.changePage(SAMPLE_PAGE);
+                        userPreferences.put("username", username);
+                        if(username.equals("asd")) {
+                            userPreferences.put("role", "admin");
+                            window.changePage(ADMIN_DASHBOARD);
+                        } else {
+                            userPreferences.put("role", "worker");
+                            window.changePage(SAMPLE_PAGE);
+                        }
                     } else {
                         System.out.println("Passwords did not match!");
                         l_errorText.setText("Passwords did not match!");
