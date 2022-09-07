@@ -25,3 +25,15 @@
     -fx-background-color: linear-gradient(from 0% 34% to 78% 100%, #51506f, #AAB2BD, #DAC432);
 }
 
+.button:hover{
+    -fx-text-fill: yellow;
+}
+
+.button:pressed{
+    -fx-text-fill: blue;
+}
+
+.button:focused{
+    -fx-text-fill: green;
+}
+
