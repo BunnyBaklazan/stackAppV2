@@ -3,15 +3,19 @@ package com.example.stackapp.controller;
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
 import connect.net.sqlite.Connect;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import java.time.Period;
 import java.util.Arrays;
+
+import static com.example.stackapp.model.SampleUtils.calcPeriod;
 
 public class SampleController {
     private volatile boolean running = true;
@@ -35,7 +39,6 @@ public class SampleController {
     private ProgressIndicator secretProgressBar;
 
     LoadingScreen loadingScreen; //need to move down....test test
-//######################################################################################################################
 
 
     public SampleController () {
@@ -59,7 +62,6 @@ public class SampleController {
         System.out.println(addWorkerBtn.isVisible());
 
     }
-//######################################################################################################################
 
 
     /**    ----    Default Panel    -----    */
@@ -194,69 +196,37 @@ public class SampleController {
 
         //int boxIdToSearch= boxId;
         System.out.println("User enters: ["+boxId+ "] BOX_id to search in DB");
-        getFieldInputsFromDB();
+        getBoxById();
         notificationTxt.setStyle("-fx-fill: #aba9a9;");
         notificationTxt.setText("Last search: "+boxId);
     }
 
 
-    private void getFieldInputsFromDB() {
+    private void getBoxById() {
 
         Connect conn = new Connect();
-        if(conn.searchForBox(boxId) == null){
+        BoxData box = conn.searchForBox(boxId);
+
+        if (box == null) {
             System.out.println("We don't have that box");
             noteField.setText("No such record! Try again!");
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-        } else {
 
-            BoxData box = conn.searchForBox(boxId);
-            //some problems with it
-            Period period = Period.between(box.getDate_from().toLocalDate(), box.getDate_end().toLocalDate());
-            
+        } else {
             //refactor later
-            shelf_IDField.setText(box.getShelf_id());
+            shelf_IDField.setText(box.getShelfId());
             box_IDField.setText(Long.toString(boxId));
-            shelf_IDField.setText(box.getShelf_id());
+            shelf_IDField.setText(box.getShelfId());
             client_IDField.setText(Long.toString(box.getClient_id()));
-            periodField.setText(period.toString());
-            date_fromField.setText(box.getDate_from().toString());
-            date_endField.setText(box.getDate_end().toString());
+            periodField.setText(calcPeriod(box.getDate_from(), box.getDate_end()));
+            date_fromField.setText(box.getDate_from());
+            date_endField.setText(box.getDate_end());
             weightField.setText(box.getWeight());
             fulfillmentField.setText(box.getFulfillment());
             statusField.setText(box.getStatus());
             noteField.setText(box.getInfo_note());
         }
 
-
-
-        /*searchField.setText(
-                box.getShelf_id(),
-                Long.toString(box.getBox_id()),
-                Long.toString(box.getClient_id()),
-                period.getYears(),
-                box.getDate_from().toString(),
-                box.getDate_end().toString(),
-                box.getWeight(),
-                box.getFulfillment(),
-                box.getStatus(),
-                box.getInfo_note()
-        );*/
-
-
-       /* if(searchField.getText().equals("1004")) {
-            for (int i = 0; i < testFieldsArr.length; i++) {
-                testFieldsArr[i].setText(testTxtsArr[i]);
-                testFieldsArr[i].setStyle("-fx-text-fill: black; -fx-background-color:  #dce2e8;");
-            }
-            box_IDField.setText(searchField.getText());
-        } else{
-            for (TextField textField : testFieldsArr) {
-                textField.setText("");
-            }
-            box_IDField.setText(""+boxId);
-            noteField.setText("No such record! Try again!");
-            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-        }*/
     }
     /**    ----END SearchBox Panel END-----    */
 //######################################################################################################################
