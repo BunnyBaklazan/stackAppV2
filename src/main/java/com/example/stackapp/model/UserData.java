@@ -2,18 +2,35 @@ package com.example.stackapp.model;
 
 public class UserData {
 
+    private int id;
     private String firstName;
     private String lastName;
-    private String userName;
     private String password;
+    private String userName;
 
-    public UserData(String userName, String password, String firstName, String lastName) {
+
+    public UserData(String firstName, String lastName, String password, String userName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
         this.password = password;
+        this.userName = userName;
     }
 
+    public UserData(int id, String password, String firstName, String lastName, String userName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.userName = userName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getFirstName() {
         return firstName;
     }
