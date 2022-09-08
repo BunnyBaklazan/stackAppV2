@@ -81,24 +81,21 @@ public class Connect {
     public BoxData searchForBox(long boxId){
 
         try{
+
             ResultSet result;
             Connection conn = connect();
-            //Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
             PreparedStatement statement = conn.prepareStatement(SELECT_BOX);
-            System.out.println("Blackpink");
             statement.setLong(1, boxId);
             result = statement.executeQuery();
 
-            System.out.println(result.getRow());
-            if(result.getRow() == 0){
-                System.out.println("Bro we don't have it");
+            if(!result.isBeforeFirst()){
+                System.out.println("Answer from connect! Bro we don't have it");
                 return null;
             }
 
             return new BoxData(
                     boxId,
                     result.getLong("client_id"),
-                    //some troubles with date
                     result.getString("date_from"),
                     result.getString("date_end"),
                     result.getString("fulfillment"),
