@@ -1,51 +1,49 @@
 package com.example.stackapp.model;
 
-import java.sql.Date;
-
 public class BoxData {
 
     private long boxId;
     private long clientId; // client that owns a box
-    private String date_from; // date start
-    private String date_end; // date end
+    private String dateFrom; // date start
+    private String dateEnd; // date end
     private String fulfillment; // date when it was placed
     private String status; // the last time box was disturbed
     private String weight; // weight of box
     private String shelfId; // the name of the shelf where the box keeps
-    private String info_note; // addition info about box
+    private String infoNote; // addition info about box
 
 
-    public BoxData(long boxId, long clientId, String date_from, String date_end, String fulfillment, String status, String info_note, String weight, String shelfId) {
+    public BoxData(long boxId, long clientId, String dateFrom, String dateEnd, String fulfillment, String status, String infoNote, String weight, String shelfId) {
         this.boxId = boxId;
         this.clientId = clientId;
-        this.date_from = date_from;
-        this.date_end = date_end;
+        this.dateFrom = dateFrom;
+        this.dateEnd = dateEnd;
         this.fulfillment = fulfillment;
         this.status = status;
         this.weight = weight;
         this.shelfId = shelfId;
-        this.info_note = info_note;
+        this.infoNote = infoNote;
 
     }
 
-    public long getBox_id() { return boxId; }
+    public long getBoxId() { return boxId; }
 
-    public void setBox_id(long box_id) { this.boxId = box_id; }
+    public void setBoxId(long boxId) { this.boxId = boxId; }
 
 
     public long getClient_id() { return clientId; }
 
-    public void setClient_id(long client_id) { this.clientId = client_id; }
+    public void setClientId(long clientId) { this.clientId = clientId; }
 
 
-    public String getDate_from() { return date_from; }
+    public String getDateFrom() { return dateFrom; }
 
-    public void setDate_from(String date_from) { this.date_from = date_from; }
+    public void setDateFrom(String dateFrom) { this.dateFrom = dateFrom; }
 
 
-    public String getDate_end() { return date_end; }
+    public String getDateEnd() { return dateEnd; }
 
-    public void setDate_end(String date_end) { this.date_end = date_end; }
+    public void setDateEnd(String dateEnd) { this.dateEnd = dateEnd; }
 
 
     public String getWeight() { return weight; }
@@ -58,9 +56,9 @@ public class BoxData {
     public void setShelfId(String shelfId) { this.shelfId = shelfId; }
 
 
-    public String getInfo_note() { return info_note; }
+    public String getInfoNote() { return infoNote; }
 
-    public void setInfo_note(String info_note) { this.info_note = info_note; }
+    public void setInfoNote(String infoNote) { this.infoNote = infoNote; }
 
 
     public String getFulfillment() { return fulfillment; }

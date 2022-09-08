@@ -287,7 +287,7 @@ public class SampleController {
     void onNoteEditChangeColor() {
         noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
     }
-
+    
     /**    ----END SearchBox Panel END-----    */
 //######################################################################################################################
 
