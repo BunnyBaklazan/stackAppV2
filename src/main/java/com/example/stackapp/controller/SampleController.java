@@ -14,8 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-
 import java.util.Arrays;
+import java.util.List;
+
 public class SampleController{
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
@@ -32,7 +33,12 @@ public class SampleController{
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
-    private int boxesAt1st = 1, boxesAt2nd = 2, boxesAt3rd = 3, boxesAt4th = 4, boxesAt5th = 5, boxesAt6th = 6, boxesAt7th = 7;
+    private int boxesAt2nd = 2;
+    private int boxesAt3rd = 3;
+    private int boxesAt4th = 4;
+    private int boxesAt5th = 5;
+    private int boxesAt6th = 6;
+    private int boxesAt7th = 7;
 
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane;
@@ -49,6 +55,8 @@ public class SampleController{
     @FXML
     private ProgressIndicator secretProgressBar;
 
+    List<Pane> allPanels;
+
     LoadingScreen loadingScreen; //need to move down....test test
 
     public SampleController() {
@@ -58,18 +66,16 @@ public class SampleController{
 
     @FXML
     public void initialize() {
+        allPanels= List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane);
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
-        b1Pane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
 
         ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
-        for (int i = 0; i < myBoxImageArr.length; i++) {
-            myBoxImageArr[i].setVisible(false);
+        for (ImageView imageView : myBoxImageArr) {
+            imageView.setVisible(false);
         }
         loadingScreen = new SampleController.LoadingScreen(secretProgressBar, myRedBox);
         startAnimationProgress();
@@ -88,14 +94,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToDefaultPan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1Pane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
         restartAnimation();
     }
 
@@ -112,15 +115,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToSearchBoxPan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         searchBoxPane.setVisible(true);
-        sampleAppPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1Pane.setVisible(false);
-
-        editBtn.setVisible(false);
-        requestBtn.setVisible(false);
-        destroyBtn.setVisible(false);
     }
 
     @FXML
@@ -338,14 +337,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToAddWorkerPan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp WORKERS");
         addWorkerPane.setVisible(true);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        b1Pane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
     }
     /**    ----END AddWorker Panel END-----    */
 //######################################################################################################################
@@ -356,14 +352,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToB1Pan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Column- B1");
         b1Pane.setVisible(true);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
     }
     /**    ----END B1 Panel END-----    */
 //######################################################################################################################
@@ -374,14 +367,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToB2Pan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Column- B1");
         b2Pane.setVisible(true);
-        b1Pane.setVisible(false);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        d1Pane.setVisible(false);
     }
     /**    ----END B1 Panel END-----    */
 //######################################################################################################################
@@ -392,14 +382,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToD1Pan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Column- B1");
         d1Pane.setVisible(true);
-        b1Pane.setVisible(false);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
 
     }
     /**    ----END B1 Panel END-----    */
@@ -453,8 +440,8 @@ public class SampleController{
     void restartAnimation() {
         running = true;
         ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
-        for (int i = 0; i < myBoxImageArr.length; i++) {
-            myBoxImageArr[i].setVisible(false);
+        for (ImageView imageView : myBoxImageArr) {
+            imageView.setVisible(false);
         }
         secretProgressBar.setProgress(0);
         startAnimationProgress();
@@ -466,8 +453,8 @@ public class SampleController{
         running = false;
 
         ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
-        for (int i = 0; i < myBoxImageArr.length; i++) {
-            myBoxImageArr[i].setVisible(true);
+        for (ImageView imageView : myBoxImageArr) {
+            imageView.setVisible(true);
         }
 
         myPinkBox.setLayoutX(188);
@@ -598,7 +585,7 @@ public class SampleController{
 //######################################################################################################################
     @FXML
     void setBarTable() {
-        boxesAt1st = 5;
+        int boxesAt1st = 5;
         boxesAt2nd = 9;
         boxesAt3rd = 5;
         boxesAt4th = 2;
