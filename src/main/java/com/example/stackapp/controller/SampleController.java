@@ -314,17 +314,15 @@ public class SampleController{
 
             //refactor later
             shelfIDField.setText(box.getShelfId());
-            boxIDField.setText(Long.toString(1));
-            shelfIDField.setText(box.getShelfId());
+            boxIDField.setText(Long.toString(boxId));
             clientIDField.setText(Long.toString(box.getClient_id()));
-            periodField.setText(calcPeriod(box.getDate_from(), box.getDate_end()));
-            dateFromField.setText(box.getDate_from());
-            dateEndField.setText(box.getDate_end());
+            periodField.setText(calcPeriod(box.getDateFrom(), box.getDateEnd()));
+            dateFromField.setText(box.getDateFrom());
+            dateEndField.setText(box.getDateEnd());
             weightField.setText(box.getWeight());
             fulfillmentField.setText(box.getFulfillment());
             statusField.setText(box.getStatus());
-            noteField.setText(box.getInfo_note());
-            System.out.println("not null");
+            noteField.setText(box.getInfoNote());
         }
 
     }
