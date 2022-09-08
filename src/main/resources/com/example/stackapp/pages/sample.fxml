@@ -157,49 +157,49 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <Label fx:id="b1AA" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label fx:id="b1aa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA1" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.rowIndex="3">
+                     <Label fx:id="b1ba" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA2" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.rowIndex="2">
+                     <Label fx:id="b1bb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA3" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.rowIndex="1">
+                     <Label fx:id="b1bc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA4" prefHeight="88.0" prefWidth="121.0" text=" BD">
+                     <Label fx:id="b1bd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BD">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA7" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Label fx:id="b1ab" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA6" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label fx:id="b1ac" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA5" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.columnIndex="1">
+                     <Label fx:id="b1ad" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.columnIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
                   </children>
                </GridPane>
-               <Text layoutX="236.0" layoutY="98.0" onMouseClicked="#changePanToShelfPan" strokeType="OUTSIDE" strokeWidth="0.0" text="B1" textAlignment="CENTER" wrappingWidth="228.21630859375">
+               <Text layoutX="236.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B1" textAlignment="CENTER" wrappingWidth="228.21630859375">
                   <font>
                      <Font name="System Bold" size="70.0" />
                   </font>
@@ -220,42 +220,42 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <Label fx:id="b1AA51" prefHeight="88.0" prefWidth="121.0" text=" AD">
+                     <Label fx:id="b2ad" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AD">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA61" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="1">
+                     <Label fx:id="b2ac" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA71" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="2">
+                     <Label fx:id="b2ab" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA41" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1">
+                     <Label fx:id="b2bd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA31" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label fx:id="b2bc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA21" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Label fx:id="b2bb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA11" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label fx:id="b2ba" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA9" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="3">
+                     <Label fx:id="b2aa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
@@ -269,7 +269,7 @@
                </Text>
             </children>
          </Pane>
-         <Pane fx:id="d1Pane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
+         <Pane fx:id="d1Pane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
             <children>
                <GridPane gridLinesVisible="true" layoutY="128.0" prefHeight="501.0" prefWidth="699.0" style="-fx-background-color: LIGHTBLUE; -fx-border-color: BLUE;">
                  <columnConstraints>
@@ -289,182 +289,182 @@
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <Label fx:id="b1AA8" prefHeight="88.0" prefWidth="121.0" text=" AE" GridPane.rowIndex="1">
+                     <Label fx:id="d1ae" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AE" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA12" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <Label fx:id="d1ba" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA22" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <Label fx:id="d1bb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA32" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label fx:id="d1bc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA42" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Label fx:id="d1bd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA72" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="4">
+                     <Label fx:id="d1ab" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA62" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="3">
+                     <Label fx:id="d1ac" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA52" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.rowIndex="2">
+                     <Label fx:id="d1ad" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA81" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="5">
+                     <Label fx:id="d1aa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA82" prefHeight="88.0" prefWidth="121.0" text=" AF">
+                     <Label fx:id="d1af" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AF">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA83" prefHeight="88.0" prefWidth="121.0" text=" CA" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <Label fx:id="d1ca" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CA" GridPane.columnIndex="2" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA84" prefHeight="88.0" prefWidth="121.0" text=" CB" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <Label fx:id="d1cb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CB" GridPane.columnIndex="2" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA85" prefHeight="88.0" prefWidth="121.0" text=" CC" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <Label fx:id="d1cc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CC" GridPane.columnIndex="2" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA86" prefHeight="88.0" prefWidth="121.0" text=" CD" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <Label fx:id="d1cd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CD" GridPane.columnIndex="2" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA87" prefHeight="88.0" prefWidth="121.0" text=" CE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <Label fx:id="d1ce" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA88" prefHeight="88.0" prefWidth="121.0" text=" CF" GridPane.columnIndex="2">
+                     <Label fx:id="d1cf" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CF" GridPane.columnIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA89" prefHeight="88.0" prefWidth="121.0" text=" BE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label fx:id="d1be" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA810" prefHeight="88.0" prefWidth="121.0" text=" BF" GridPane.columnIndex="1">
+                     <Label fx:id="d1bf" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BF" GridPane.columnIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA811" prefHeight="88.0" prefWidth="121.0" text=" DA" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <Label fx:id="d1da" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DA" GridPane.columnIndex="3" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA812" prefHeight="88.0" prefWidth="121.0" text=" EA" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <Label fx:id="d1ea" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EA" GridPane.columnIndex="4" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA813" prefHeight="88.0" prefWidth="121.0" text=" FA" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <Label fx:id="d1fa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FA" GridPane.columnIndex="5" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA814" prefHeight="88.0" prefWidth="121.0" text=" FB" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <Label fx:id="d1fb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FB" GridPane.columnIndex="5" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA815" prefHeight="88.0" prefWidth="121.0" text=" FC" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <Label fx:id="d1fc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FC" GridPane.columnIndex="5" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA816" prefHeight="88.0" prefWidth="121.0" text=" FD" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                     <Label fx:id="d1fd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FD" GridPane.columnIndex="5" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA817" prefHeight="88.0" prefWidth="121.0" text=" FE" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <Label fx:id="d1fe" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FE" GridPane.columnIndex="5" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA818" prefHeight="88.0" prefWidth="121.0" text=" FF" GridPane.columnIndex="5">
+                     <Label fx:id="d1ff" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FF" GridPane.columnIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA819" prefHeight="88.0" prefWidth="121.0" text=" DB" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <Label fx:id="d1db" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DB" GridPane.columnIndex="3" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA820" prefHeight="88.0" prefWidth="121.0" text=" EB" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <Label fx:id="d1eb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EB" GridPane.columnIndex="4" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA821" prefHeight="88.0" prefWidth="121.0" text=" DC" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <Label fx:id="d1dc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DC" GridPane.columnIndex="3" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA822" prefHeight="88.0" prefWidth="121.0" text=" EC" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <Label fx:id="d1ec" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EC" GridPane.columnIndex="4" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA823" prefHeight="88.0" prefWidth="121.0" text=" DD" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <Label fx:id="d1dd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DD" GridPane.columnIndex="3" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA824" prefHeight="88.0" prefWidth="121.0" text=" ED" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <Label fx:id="d1ed" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" ED" GridPane.columnIndex="4" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA825" prefHeight="88.0" prefWidth="121.0" text=" DE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <Label fx:id="d1de" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA826" prefHeight="88.0" prefWidth="121.0" text=" EE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <Label fx:id="d1ee" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA827" prefHeight="88.0" prefWidth="121.0" text=" DF" GridPane.columnIndex="3">
+                     <Label fx:id="d1df" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DF" GridPane.columnIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1AA828" prefHeight="88.0" prefWidth="121.0" text=" EF" GridPane.columnIndex="4">
+                     <Label fx:id="d1ef" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EF" GridPane.columnIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>

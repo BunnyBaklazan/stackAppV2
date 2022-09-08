@@ -14,6 +14,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.util.Arrays;
@@ -37,17 +38,14 @@ public class SampleController {
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
-    private int boxesAt2nd = 2;
-    private int boxesAt3rd = 3;
-    private int boxesAt4th = 4;
-    private int boxesAt5th = 5;
-    private int boxesAt6th = 6;
-    private int boxesAt7th = 7;
+    private int b1st, b2nd, b3rd, b4th, b5th, b6th, b7th;
 
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane;
     @FXML
     private Button b1Btn, b2Btn, d1Btn, d2Btn, d3Btn, d4Btn, d5Btn, d6Btn, d7Btn, d8Btn, showSearchBox_Btn, searchBtn, editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
+    @FXML
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
     @FXML
     private TextField shelfIDField, boxIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField, palRequestField, palDestroyField, searchField = new TextField();
     @FXML
@@ -62,6 +60,7 @@ public class SampleController {
     List<Pane> allPanels;
     List<ImageView> allBoxIMG;
     List<TextField> textFieldsForConnection;
+    List<Integer> boxPlaces;
 
     LoadingScreen loadingScreen; //need to move down....test test
 
@@ -73,6 +72,8 @@ public class SampleController {
     @FXML
     public void initialize() {
         //b1Btn.setStyle("-fx-text-fill: BLACK; -fx-background-color: #AAB2BD");
+        boxPlaces= List.of(b1st, b2nd, b3rd, b4th, b5th, b6th, b7th);
+
         textFieldsForConnection= List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField);
 
         allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane);
@@ -546,13 +547,23 @@ public class SampleController {
 //######################################################################################################################
 
 
+    @FXML
+    private void handleLabel(MouseEvent event) {
+        Label label = (Label) event.getSource();
+        String labelText = label.getText();
+        String labelID = ((Label) event.getSource()).getId();
+        System.out.println("Mouse click on label: "+labelText);
+        System.out.println("Clicked ID: "+ labelID);
+        changePanToShelfPan(labelID);
+    }
+
     /**
      * ----    ShelfPanel Panel    -----
      */
     @FXML
-    private void changePanToShelfPan() {
-        setBarTable();
-        leftCornerInfoLabel.setText("StackApp Shelf- B1-BB");
+    private void changePanToShelfPan(String address) {
+        setBarTable(address);
+        leftCornerInfoLabel.setText("StackApp Shelf- "+address.toUpperCase());
         b1ShelfPane.setVisible(true);
         b1Pane.setVisible(false);
         sampleAppPane.setVisible(false);
@@ -565,28 +576,41 @@ public class SampleController {
      */
 //######################################################################################################################
     @FXML
-    void setBarTable() {
-        int boxesAt1st = 5;
-        boxesAt2nd = 9;
-        boxesAt3rd = 5;
-        boxesAt4th = 2;
-        boxesAt5th = 7;
-        boxesAt6th = 7;
-        boxesAt7th = 3;
+    void setBarTable(String address) {
+        System.out.println("String wee need: "+address);
+        if((address.substring(0,2)).equals("B2")) {
+            System.out.println("Its B2");
+        }
+        b1st = 5;
+        b2nd = 9;
+        b3rd = 5;
+        b4th = 2;
+        b5th = 7;
+        b6th = 7;
+        b7th = 3;
 
         bc.setVisible(true);
-        bc.setTitle("D1BB");
+        bc.setTitle(address.toUpperCase());
         //xAxis.setLabel("BOXES");
         //yAxis.setLabel("UNITS");
 
         XYChart.Series boxes = new XYChart.Series();//, nr2= new XYChart.Series(), nr3= new XYChart.Series(), nr4= new XYChart.Series(), nr5= new XYChart.Series(), nr6= new XYChart.Series(), nr7= new XYChart.Series();
-        boxes.getData().add(new XYChart.Data("1", boxesAt1st));
-        boxes.getData().add(new XYChart.Data("2", boxesAt2nd));
-        boxes.getData().add(new XYChart.Data("3", boxesAt3rd));
-        boxes.getData().add(new XYChart.Data("4", boxesAt4th));
-        boxes.getData().add(new XYChart.Data("5", boxesAt5th));
-        boxes.getData().add(new XYChart.Data("6", boxesAt6th));
-        boxes.getData().add(new XYChart.Data("7", boxesAt7th));
+        System.out.println("BEFORE" + boxes.getData());
+
+        boxes.getData().clear(); // CLEAR TABLE DATA?
+
+        System.out.println("AFTER" + boxes.getData());
+
+
+        boxes.getData().add(new XYChart.Data("A", b1st));
+        boxes.getData().add(new XYChart.Data("B", b2nd));
+        boxes.getData().add(new XYChart.Data("C", b3rd));
+        boxes.getData().add(new XYChart.Data("D", b4th));
+        boxes.getData().add(new XYChart.Data("E", b5th));
+        boxes.getData().add(new XYChart.Data("F", b6th));
+        boxes.getData().add(new XYChart.Data("G", b7th));
         bc.getData().addAll(boxes);
     }
+
 }
+
