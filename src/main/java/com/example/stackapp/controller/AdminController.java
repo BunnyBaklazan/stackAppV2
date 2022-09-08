@@ -18,36 +18,51 @@ import org.w3c.dom.events.MouseEvent;
 
 import java.util.Arrays;
 
+import static connect.net.sqlite.Connect.connect;
+
 public class AdminController {
     private static final Main window = new Main();
     protected final static Preferences userPreferences = Preferences.userRoot();
+
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn = new Button();
 
     @FXML
     private TextField tf_first_name;
+
     @FXML
     private TextField tf_last_name;
+
     @FXML
     private TextField tf_password;
+
     @FXML
     private TextField tf_username;
+
     @FXML
     private Button btn_insert;
+
     @FXML
     private Button btn_update;
+
     @FXML
     private Button btn_delete;
+
     @FXML
     private TableView<UserData> table_users;
+
     @FXML
     private TableColumn<UserData, Integer> tc_id;
+
     @FXML
     private TableColumn<UserData, String> tc_first_name;
+
     @FXML
     private TableColumn<UserData, String> tc_last_name;
+
     @FXML
     private TableColumn<UserData, String> tc_password;
+
     @FXML
     private TableColumn<UserData, String> tc_username;
 
@@ -60,11 +75,22 @@ public class AdminController {
         tf_username.setText(user.getUserName());
     }
 
+    //private void executeQuery(String query) { // for refactoring
+    //    Connection conn = getConnection();
+    //    PreparedStatement ps;
+    //    try {
+    //        ps = conn.prepareStatement(query);
+    //        ps.executeUpdate();
+    //    } catch(Exception e) {
+    //        e.printStackTrace();
+    //    }
+    //     }
+
     @FXML
     private void delete() throws SQLException {
         UserData user = table_users.getSelectionModel().getSelectedItem();
         String query = "DELETE FROM users WHERE id = ?";
-        Connection conn = Connect.connect();
+        Connection conn = connect();
         PreparedStatement preparedStatement;
         try {
             preparedStatement = conn.prepareStatement(query);
@@ -85,23 +111,43 @@ public class AdminController {
 
     @FXML
     private void update() {
-        String first_Name = tf_first_name.getText();
-        String last_Name = tf_last_name.getText();
-        String password = tf_password.getText();
-        String username = tf_username.getText();
-        //String query = "UPDATE users SET title = ";
+        Connection conn = connect();
+        String query = "UPDATE users SET "
+                + " first_name ='" + tf_first_name.getText() + "' "
+                + ", last_name ='"+ tf_last_name.getText() + "' "
+                + ", password ='" + tf_password.getText()+"' "
+                + " WHERE username='" + tf_username.getText()+"' ";
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        try {
+            preparedStatement = conn.prepareStatement(query);
+           // preparedStatement.setInt(1, user.getId());
+            preparedStatement.executeUpdate();
+
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
         showUsersTable();
     }
 
     @FXML
-    private void insertUser() {
-        String first_Name = tf_first_name.getText();
-        String last_Name = tf_last_name.getText();
-        String password = tf_password.getText();
-        String username = tf_username.getText();
-        //Connect.insertUser(); // query for insertion
-        showUsersTable(); // show table after insertion
+    private void insert() throws SQLException {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+        try{
+        Connection conn = connect();
+        String query = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
+        PreparedStatement statement = conn.prepareStatement(query);
 
+        statement.setString(1, tf_first_name.getText());
+        statement.setString(2, tf_last_name.getText());
+        statement.setString(3, tf_password.getText());
+        statement.setString(4, tf_first_name.getText() + tf_last_name.getText());
+        statement.executeUpdate();
+
+    } catch(SQLException e){
+        System.out.println(e.getMessage());
+    }
+        showUsersTable(); // show table after insertion
     }
 
     @FXML
@@ -118,7 +164,7 @@ public class AdminController {
 
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();
-        Connection conn = Connect.connect();
+        Connection conn = connect();
         String query = "SELECT * FROM users";
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -151,6 +197,4 @@ public class AdminController {
 
         table_users.setItems(list);
     }
-
-
 }
