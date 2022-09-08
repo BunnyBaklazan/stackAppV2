@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AdminController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AdminController">
    <top>
       <Pane prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #99a1a8;" BorderPane.alignment="CENTER">
          <Label layoutX="14.0" layoutY="11.0" text="StackApp Choose Destination">
@@ -108,7 +108,7 @@
                <TableColumn fx:id="tc_username" prefWidth="115.0" text="USERNAME" />
            </columns>
          </TableView>
-         <VBox layoutX="165.0" layoutY="393.0" prefHeight="200.0" prefWidth="106.0" spacing="15.0">
+         <VBox layoutX="165.0" layoutY="402.0" prefHeight="200.0" prefWidth="106.0" spacing="15.0">
             <children>
                <Label text="FIRST NAME">
                   <font>
@@ -134,39 +134,39 @@
          </VBox>
          <VBox layoutX="271.0" layoutY="393.0" prefHeight="200.0" prefWidth="142.0" spacing="10.0">
             <children>
-               <TextField fx:id="tf_first_name">
+               <TextField fx:id="tf_first_name" promptText="FIRST NAME">
                   <font>
                      <Font size="14.0" />
                   </font>
                </TextField>
-               <TextField fx:id="tf_last_name">
+               <TextField fx:id="tf_last_name" promptText="LAST NAME">
                   <font>
                      <Font size="14.0" />
                   </font>
                </TextField>
-               <TextField fx:id="tf_password">
+               <TextField fx:id="tf_password" onMouseClicked="#setUsername" promptText="PASSWORD">
                   <font>
                      <Font size="14.0" />
                   </font>
                </TextField>
-               <TextField fx:id="tf_username">
+               <TextField fx:id="tf_username" promptText="USERNAME">
                   <font>
                      <Font size="14.0" />
                   </font>
                </TextField>
             </children>
          </VBox>
-         <Button fx:id="btn_insert" layoutX="502.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#insert" prefHeight="30.0" prefWidth="64.0" text="Insert">
+         <Button fx:id="btn_insert" layoutX="501.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#insert" prefHeight="30.0" prefWidth="64.0" text="Insert">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button fx:id="btn_update" layoutX="501.0" layoutY="455.0" mnemonicParsing="false" onAction="#update" onMouseClicked="#update" text="Update">
+         <Button fx:id="btn_update" layoutX="501.0" layoutY="455.0" mnemonicParsing="false" onAction="#update" onMouseClicked="#update" prefHeight="30.0" prefWidth="64.0" text="Update">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button fx:id="btn_delete" layoutX="501.0" layoutY="502.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="66.0" text="Delete">
+         <Button fx:id="btn_delete" layoutX="501.0" layoutY="502.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="64.0" text="Delete">
             <font>
                <Font size="14.0" />
             </font>

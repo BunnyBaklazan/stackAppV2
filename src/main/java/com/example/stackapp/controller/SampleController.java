@@ -362,6 +362,8 @@ public class SampleController {
         }
         leftCornerInfoLabel.setText("StackApp WORKERS");
         addWorkerPane.setVisible(true);
+
+
     }
     /**    ----END AddWorker Panel END-----    */
 //######################################################################################################################

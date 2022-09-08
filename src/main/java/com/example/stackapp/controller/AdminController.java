@@ -197,4 +197,11 @@ public class AdminController {
 
         table_users.setItems(list);
     }
+
+    @FXML
+    void setUsername() {
+        String name= tf_first_name.getText().toLowerCase();
+        String surname= tf_last_name.getText().toLowerCase();
+        tf_username.setText(name+"."+surname);
+    }
 }
