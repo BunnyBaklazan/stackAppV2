@@ -22,7 +22,7 @@ public class Connect {
             ="SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
 
 
-    private Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
 
         Connection conn = null;
@@ -83,11 +83,14 @@ public class Connect {
         try{
             ResultSet result;
             Connection conn = connect();
+            //Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
             PreparedStatement statement = conn.prepareStatement(SELECT_BOX);
+            System.out.println("Blackpink");
             statement.setLong(1, boxId);
             result = statement.executeQuery();
 
-            if(result == null){
+            System.out.println(result.getRow());
+            if(result.getRow() == 0){
                 System.out.println("Bro we don't have it");
                 return null;
             }
@@ -104,7 +107,7 @@ public class Connect {
                     result.getString("weight"),
                     result.getString("shelf_id")
             );
-            
+
         } catch (SQLException e){
             System.out.println(e.getMessage());
             return null;

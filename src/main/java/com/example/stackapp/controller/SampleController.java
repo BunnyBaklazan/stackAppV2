@@ -28,7 +28,7 @@ public class SampleController{
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
     private volatile boolean running = true;
     
-    long boxId = 1;
+    public long boxId = 1;
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
@@ -168,7 +168,8 @@ public class SampleController{
             editBtn.setVisible(true);
         }
         System.out.println("User enters: [" + boxId + "] BOX_id to search in DB");
-        getFieldInputsFromDB();
+        //getFieldInputsFromDB();
+        getBoxById(boxId);
         notificationTxt.setStyle("-fx-fill: #aba9a9;");
         notificationTxt.setText("Last search: " + boxId);
     }
@@ -244,7 +245,7 @@ public class SampleController{
     }
 
     @FXML
-    private void saveReqestPalToDB() {
+    private void saveRequestPalToDB() {
         palRequestField.setVisible(false);
         palLabel.setVisible(false);
         enterPalNrLabel.setVisible(false);
@@ -273,7 +274,7 @@ public class SampleController{
                 notificationTxt.setText("The box has been successfully saved in the database");
             }
         }
-        System.out.println("Šī brīža array= " + Arrays.toString(testTxtsArr));
+        System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
         saveBtn.setVisible(false);
         editBtn.setVisible(true);
 
@@ -285,37 +286,39 @@ public class SampleController{
         noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
     }
 
-        //int boxIdToSearch= boxId;
-        System.out.println("User enters: ["+boxId+ "] BOX_id to search in DB");
-        getBoxById();
-        notificationTxt.setStyle("-fx-fill: #aba9a9;");
-        notificationTxt.setText("Last search: "+boxId);
-    }
 
 
-    private void getBoxById() {
-
+    private void getBoxById(long boxId) {
+        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
         Connect conn = new Connect();
         BoxData box = conn.searchForBox(boxId);
 
         if (box == null) {
-            System.out.println("We don't have that box");
+
+            System.out.println("Is null");
+            for (TextField textField : testFieldsArr) {
+                textField.setText("");
+            }
+
+            boxIDField.setText("" + this.boxId);
             noteField.setText("No such record! Try again!");
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
 
+            System.out.println("We don't have that box");
         } else {
             //refactor later
-            shelf_IDField.setText(box.getShelfId());
-            box_IDField.setText(Long.toString(boxId));
-            shelf_IDField.setText(box.getShelfId());
-            client_IDField.setText(Long.toString(box.getClient_id()));
+            shelfIDField.setText(box.getShelfId());
+            boxIDField.setText(Long.toString(this.boxId));
+            shelfIDField.setText(box.getShelfId());
+            clientIDField.setText(Long.toString(box.getClient_id()));
             periodField.setText(calcPeriod(box.getDate_from(), box.getDate_end()));
-            date_fromField.setText(box.getDate_from());
-            date_endField.setText(box.getDate_end());
+            dateFromField.setText(box.getDate_from());
+            dateEndField.setText(box.getDate_end());
             weightField.setText(box.getWeight());
             fulfillmentField.setText(box.getFulfillment());
             statusField.setText(box.getStatus());
             noteField.setText(box.getInfo_note());
+            System.out.println("not null");
         }
 
     }

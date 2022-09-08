@@ -624,7 +624,7 @@
                      <Font size="24.0" />
                   </font>
                </TextField>
-               <Button fx:id="acceptBtn" layoutX="245.0" layoutY="568.0" mnemonicParsing="false" onAction="#saveReqestPalToDB" prefHeight="50.0" prefWidth="120.0" text="ACCEPT" textFill="#0f9ed9" visible="false">
+               <Button fx:id="acceptBtn" layoutX="245.0" layoutY="568.0" mnemonicParsing="false" onAction="#saveRequestPalToDB" prefHeight="50.0" prefWidth="120.0" text="ACCEPT" textFill="#0f9ed9" visible="false">
                   <font>
                      <Font name="System Bold" size="13.0" />
                   </font>
