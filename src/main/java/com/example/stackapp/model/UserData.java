@@ -16,7 +16,7 @@ public class UserData {
         this.userName = userName;
     }
 
-    public UserData(int id, String password, String firstName, String lastName, String userName) {
+    public UserData(int id,  String firstName, String lastName, String password, String userName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

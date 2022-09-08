@@ -156,7 +156,7 @@
                </TextField>
             </children>
          </VBox>
-         <Button fx:id="btn_insert" layoutX="502.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#insertUser" prefHeight="30.0" prefWidth="64.0" text="Insert">
+         <Button fx:id="btn_insert" layoutX="502.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#insert" prefHeight="30.0" prefWidth="64.0" text="Insert">
             <font>
                <Font size="14.0" />
             </font>
