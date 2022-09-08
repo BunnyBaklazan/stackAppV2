@@ -222,6 +222,7 @@ public class SampleController{
 
     @FXML
     private void saveDestroyPalToDB() {
+
         editBtn.setVisible(true);
         requestBtn.setVisible(true);
         destroyBtn.setVisible(true);
@@ -235,6 +236,7 @@ public class SampleController{
 
     @FXML
     private void onBtnPress_RequestBox() {
+
         palRequestField.setVisible(true);
         palLabel.setVisible(true);
         enterPalNrLabel.setVisible(true);
@@ -246,6 +248,7 @@ public class SampleController{
 
     @FXML
     private void saveRequestPalToDB() {
+
         palRequestField.setVisible(false);
         palLabel.setVisible(false);
         enterPalNrLabel.setVisible(false);
@@ -292,7 +295,7 @@ public class SampleController{
         TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
         Connect conn = new Connect();
         BoxData box = conn.searchForBox(boxId);
-
+        System.out.println("BoxId is " + boxId);
         if (box == null) {
 
             System.out.println("Is null");
@@ -300,15 +303,18 @@ public class SampleController{
                 textField.setText("");
             }
 
-            boxIDField.setText("" + this.boxId);
+            boxIDField.setText("" + boxId);
             noteField.setText("No such record! Try again!");
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
 
             System.out.println("We don't have that box");
+
         } else {
+            noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
+
             //refactor later
             shelfIDField.setText(box.getShelfId());
-            boxIDField.setText(Long.toString(this.boxId));
+            boxIDField.setText(Long.toString(1));
             shelfIDField.setText(box.getShelfId());
             clientIDField.setText(Long.toString(box.getClient_id()));
             periodField.setText(calcPeriod(box.getDate_from(), box.getDate_end()));
