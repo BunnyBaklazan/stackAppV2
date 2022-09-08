@@ -3,20 +3,13 @@ package com.example.stackapp.controller;
 import java.sql.*;
 import java.util.prefs.Preferences;
 import com.example.stackapp.Main;
-import com.example.stackapp.model.User;
 import com.example.stackapp.model.UserData;
-import connect.net.sqlite.Connect;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import org.w3c.dom.events.MouseEvent;
-
-import java.util.Arrays;
+import org.mindrot.jbcrypt.BCrypt;
 
 import static connect.net.sqlite.Connect.connect;
 
@@ -130,23 +123,25 @@ public class AdminController {
         showUsersTable();
     }
 
+    private String encryptPass(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
     @FXML
     private void insert() throws SQLException {
-        UserData user = table_users.getSelectionModel().getSelectedItem();
+
         try{
-        Connection conn = connect();
-        String query = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
-        PreparedStatement statement = conn.prepareStatement(query);
-
-        statement.setString(1, tf_first_name.getText());
-        statement.setString(2, tf_last_name.getText());
-        statement.setString(3, tf_password.getText());
-        statement.setString(4, tf_first_name.getText() + tf_last_name.getText());
-        statement.executeUpdate();
-
-    } catch(SQLException e){
-        System.out.println(e.getMessage());
-    }
+            Connection conn = connect();
+            String query = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, tf_first_name.getText());
+            statement.setString(2, tf_last_name.getText());
+            statement.setString(3, encryptPass(tf_password.getText()));
+            statement.setString(4, tf_first_name.getText() + tf_last_name.getText());
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
         showUsersTable(); // show table after insertion
     }
 

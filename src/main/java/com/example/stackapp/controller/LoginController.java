@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.sql.*;
@@ -45,9 +46,10 @@ public class LoginController {
         String username = tf_username.getText();
         String password = pf_password.getText();
 
+
         System.out.println("USER ENTERED VARIABLED " + username + " " + password);
         /// CONNECT TO DABASE, RECEIVE INFO
-        if (!isValidCredentials(username,password)) {
+        if (!isValidCredentials(username, password)) {
             System.out.println("Username or password is missing");
             l_errorText.setVisible(true);
             return;
@@ -73,7 +75,8 @@ public class LoginController {
             } else {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("password");
-                    if (retrievedPassword.equals(password)) {
+                    //throw new RuntimeException(e);
+                    if (BCrypt.checkpw(password, retrievedPassword)) { // database update is needed otherwise it won't let you in :(
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
                         if(username.equals("asd")) {
