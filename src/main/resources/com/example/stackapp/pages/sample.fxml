@@ -95,7 +95,7 @@
                      <Font size="16.0" />
                   </font>
                </Button>
-               <Button fx:id="addWorkerBtn" mnemonicParsing="false" onAction="#changePanToAddWorkerPan" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" stylesheets="@../colors.css" text="ADD WORKER" visible="false">
+               <Button fx:id="addWorkerBtn" mnemonicParsing="false" onAction="#changePanToAddWorkerPan" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" stylesheets="@../colors.css" text="ADD WORKER" visible="true">
                   <font>
                      <Font size="16.0" />
                   </font>
@@ -542,7 +542,7 @@
                      <Font size="24.0" />
                   </font>
                </TextField>
-               <Button fx:id="editBtn" layoutX="245.0" layoutY="568.0" mnemonicParsing="false" onAction="#editBox" prefHeight="50.0" prefWidth="120.0" text="EDIT" textFill="#dada0f">
+               <Button fx:id="editBtn" layoutX="245.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBtnPress_EditBox" prefHeight="50.0" prefWidth="120.0" text="EDIT" textFill="#dada0f">
                   <font>
                      <Font name="System Bold" size="13.0" />
                   </font>
@@ -654,7 +654,7 @@
          <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false" />
          <Pane fx:id="b1ShelfPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
             <children>
-               <BarChart fx:id="bc" layoutY="14.0" prefHeight="508.0" prefWidth="672.0" style="-fx-background-color: #dce2e8;">
+               <BarChart fx:id="barChart" layoutY="14.0" prefHeight="508.0" prefWidth="672.0" style="-fx-background-color: #dce2e8;">
                  <xAxis>
                    <CategoryAxis side="TOP" tickMarkVisible="false" fx:id="xAxis" />
                  </xAxis>

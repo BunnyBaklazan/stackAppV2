@@ -1,6 +1,7 @@
 package com.example.stackapp.controller;
 
 import static com.example.stackapp.model.SampleUtils.calcPeriod;
+
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
 import connect.net.sqlite.Connect;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,9 +24,9 @@ public class SampleController {
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
     @FXML
-    private NumberAxis yAxis = new NumberAxis();
+    private NumberAxis yAxis = new NumberAxis(0, 9, 1);
     @FXML
-    private BarChart<?, ?> bc = new BarChart<>(xAxis, yAxis);
+    private BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
@@ -34,29 +36,33 @@ public class SampleController {
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
-    private int b1st, b2nd, b3rd, b4th, b5th, b6th, b7th;
+    private int count1, count2, count3, count4, count5, count6, count7;
 
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane;
     @FXML
-    private Button b1Btn, b2Btn, d1Btn, d2Btn, d3Btn, d4Btn, d5Btn, d6Btn, d7Btn, d8Btn, showSearchBox_Btn, searchBtn, editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
+    private Button b1Btn, b2Btn, d1Btn, d2Btn, d3Btn, d4Btn, d5Btn, d6Btn, d7Btn, d8Btn, showSearchBox_Btn, searchBtn,
+            editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
     @FXML
-    private TextField shelfIDField, boxIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField, palRequestField, palDestroyField, searchField = new TextField();
+    private TextField shelfIDField, boxIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
+            fulfillmentField, statusField, noteField, palRequestField, palDestroyField, searchField = new TextField();
     @FXML
     private Text notificationTxt;
     @FXML
-    private Label leftCornerInfoLabel, titleTextLabel, palLabel, enterPalNrLabel, palDestroyLabel, enterPalNrDestroyLabel;
+    private Label leftCornerInfoLabel, titleTextLabel, palLabel, enterPalNrLabel, palDestroyLabel,
+            enterPalNrDestroyLabel;
     @FXML
-    private ImageView myBlackBox, myYellowBox, myBrownBox, myBlueBox, myRedBox, myPinkBox, myGreenBox, myPurpleBox, myOrangeBox;
+    private ImageView myBlackBox, myYellowBox, myBrownBox, myBlueBox, myRedBox, myPinkBox, myGreenBox, myPurpleBox,
+            myOrangeBox;
     @FXML
     private ProgressIndicator secretProgressBar;
 
     List<Pane> allPanels;
     List<ImageView> allBoxIMG;
     List<TextField> textFieldsForConnection;
-    List<Integer> boxPlaces;
+    List<Button> nrBtns;
 
     LoadingScreen loadingScreen; //need to move down....test test
 
@@ -68,9 +74,10 @@ public class SampleController {
     @FXML
     public void initialize() {
         //b1Btn.setStyle("-fx-text-fill: BLACK; -fx-background-color: #AAB2BD");
-        boxPlaces= List.of(b1st, b2nd, b3rd, b4th, b5th, b6th, b7th);
+        nrBtns = List.of(btn1, btn2, btn3, btn4, btn5, btn6, btn7);
 
-        textFieldsForConnection= List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField);
+        textFieldsForConnection = List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField,
+                dateEndField, weightField, fulfillmentField, statusField, noteField);
 
         allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane);
         for (Pane allPanel : allPanels) {
@@ -79,7 +86,8 @@ public class SampleController {
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
 
-        allBoxIMG = List.of(myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox);
+        allBoxIMG = List.of(myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox,
+                myYellowBox);
         for (ImageView imageView : allBoxIMG) {
             imageView.setVisible(false);
         }
@@ -87,11 +95,18 @@ public class SampleController {
         loadingScreen = new SampleController.LoadingScreen(secretProgressBar, myRedBox);
         startAnimationProgress();
 
-        addWorkerBtn.setVisible(false);
+        addWorkerBtn.setDisable(true);
         if (user.getRole().equals(ADMIN)) {
-            addWorkerBtn.setVisible(true);
+            addWorkerBtn.setDisable(false);
         }
 
+        // CHART SETTINGS
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(0.0);
+        yAxis.setUpperBound(9.0);
+        yAxis.setTickUnit(1.0);
+
+        barChart.setAnimated(false);
     }
 
 
@@ -126,6 +141,10 @@ public class SampleController {
         }
         leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         searchBoxPane.setVisible(true);
+        destroyBtn.setDisable(true);
+        requestBtn.setDisable(true);
+        editBtn.setDisable(true);
+        saveBtn.setDisable(true);
     }
 
     @FXML
@@ -145,7 +164,8 @@ public class SampleController {
     }
 
     private void getBoxById(long boxId) {
-        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
+        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
+                fulfillmentField, statusField, noteField};
         Connect conn = new Connect();
         BoxData box = conn.searchForBox(boxId);
         System.out.println("BoxId is " + boxId);
@@ -159,7 +179,9 @@ public class SampleController {
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
 
         } else {
-            List<String> dataFromDB = List.of(Long.toString(boxId), box.getShelfId(), Long.toString(box.getClient_id()), calcPeriod(box.getDateFrom(), box.getDateEnd()), box.getDateFrom(), box.getDateEnd(), box.getWeight(), box.getFulfillment(), box.getStatus(), box.getInfoNote());
+            List<String> dataFromDB = List.of(Long.toString(boxId), box.getShelfId(), Long.toString(box.getClient_id()),
+                    calcPeriod(box.getDateFrom(), box.getDateEnd()), box.getDateFrom(), box.getDateEnd(), box.getWeight(),
+                    box.getFulfillment(), box.getStatus(), box.getInfoNote());
             noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
             for (int i = 0; i < textFieldsForConnection.size(); i++) {
                 textFieldsForConnection.get(i).setText(dataFromDB.get(i));
@@ -168,23 +190,27 @@ public class SampleController {
         }
 
     }
+
     @FXML
     private void getBoxIdByUserInput() {
-        TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
+        TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
+                fulfillmentField, statusField, noteField};
         //need to add connection to DB to save edits
         for (int i = 0; i < textFields.length; i++) {
-            if (shelfIDField.getText().equals("") || clientIDField.getText().equals("") || noteField.getText().equals("No such record! Try again!")) {
-                requestBtn.setVisible(false);
-                destroyBtn.setVisible(false);
+            if (shelfIDField.getText().equals("") || clientIDField.getText().equals("") ||
+                    noteField.getText().equals("No such record! Try again!")) {
+                requestBtn.setDisable(true);
+                destroyBtn.setDisable(true);
+                saveBtn.setDisable(true);
             } else {
-                requestBtn.setVisible(true);
-                destroyBtn.setVisible(true);
+                requestBtn.setDisable(false);
+                destroyBtn.setDisable(false);
+                saveBtn.setDisable(true);
             }
-            acceptBtn.setVisible(false);
-            acceptDestroyBtn.setVisible(false);
-            saveBtn.setVisible(false);
-
-            editBtn.setVisible(true);
+            acceptBtn.setDisable(true);
+            acceptDestroyBtn.setDisable(true);
+            saveBtn.setDisable(true);
+            editBtn.setDisable(false);
         }
         System.out.println("User enters: [" + boxId + "] BOX_id to search in DB");
         //getFieldInputsFromDB();
@@ -194,17 +220,20 @@ public class SampleController {
     }
 
     @FXML
-    private void editBox() {
-        TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
+    private void onBtnPress_EditBox() {
+        TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
+                fulfillmentField, statusField, noteField};
 
         for (TextField it : textFields) {
             it.setEditable(true);
         }
-
-        destroyBtn.setVisible(false);
-        requestBtn.setVisible(false);
-        editBtn.setVisible(false);
         saveBtn.setVisible(true);
+        editBtn.setVisible(true);
+
+        destroyBtn.setDisable(true);
+        requestBtn.setDisable(true);
+        saveBtn.setDisable(false);
+        editBtn.setDisable(true);
         notificationTxt.setText("");
         onNoteEditChangeColor();
     }
@@ -214,24 +243,26 @@ public class SampleController {
         palDestroyField.setVisible(true);
         palDestroyLabel.setVisible(true);
         enterPalNrDestroyLabel.setVisible(true);
-        acceptDestroyBtn.setVisible(true);
-        editBtn.setVisible(false);
-        requestBtn.setVisible(false);
-        destroyBtn.setVisible(false);
+        acceptDestroyBtn.setDisable(false);
+        editBtn.setDisable(true);
+        requestBtn.setDisable(true);
+        destroyBtn.setDisable(true);
+        saveBtn.setDisable(false);
     }
 
     @FXML
     private void saveDestroyPalToDB() {
 
-        editBtn.setVisible(true);
-        requestBtn.setVisible(true);
-        destroyBtn.setVisible(true);
+        editBtn.setDisable(false);
+        requestBtn.setDisable(false);
+        destroyBtn.setDisable(false);
         palDestroyField.setVisible(false);
         palDestroyLabel.setVisible(false);
         enterPalNrDestroyLabel.setVisible(false);
-        acceptDestroyBtn.setVisible(false);
+        acceptDestroyBtn.setDisable(true);
         notificationTxt.setStyle("-fx-fill: red;");
-        notificationTxt.setText("The box has been successfully deleted and saved in the database at 'PAL[X]:" + palDestroyField.getText() + "'");
+        notificationTxt.setText("The box has been successfully deleted and saved in the database at 'PAL[X]:" +
+                palDestroyField.getText() + "'");
     }
 
     @FXML
@@ -240,10 +271,11 @@ public class SampleController {
         palRequestField.setVisible(true);
         palLabel.setVisible(true);
         enterPalNrLabel.setVisible(true);
-        acceptBtn.setVisible(true);
-        editBtn.setVisible(false);
-        requestBtn.setVisible(false);
-        destroyBtn.setVisible(false);
+        acceptBtn.setDisable(false);
+        editBtn.setDisable(true);
+        requestBtn.setDisable(true);
+        destroyBtn.setDisable(true);
+        saveBtn.setDisable(false);
     }
 
     @FXML
@@ -252,21 +284,30 @@ public class SampleController {
         palRequestField.setVisible(false);
         palLabel.setVisible(false);
         enterPalNrLabel.setVisible(false);
-        acceptBtn.setVisible(false);
+
         editBtn.setVisible(true);
-        requestBtn.setVisible(true);
-        destroyBtn.setVisible(true);
+        saveBtn.setVisible(false);
+
+        acceptBtn.setDisable(true);
+        editBtn.setDisable(false);
+        requestBtn.setDisable(false);
+        destroyBtn.setDisable(false);
+        saveBtn.setDisable(true);
         notificationTxt.setStyle("-fx-fill: #2c6432;");
-        notificationTxt.setText("The box has been successfully saved in the database at 'PAL:[R]" + palRequestField.getText() + "'");
+        notificationTxt.setText(
+                "The box has been successfully saved in the database at 'PAL:[R]" +
+                palRequestField.getText() + "'");
     }
 
     @FXML
     private void saveBoxtoDB() {
-        TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
+        TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
+                fulfillmentField, statusField, noteField};
         //need to add connection to DB to save edits
         String[] testTxtsArr = new String[textFields.length];
         for (int i = 0; i < textFields.length; i++) {
-            if (shelfIDField.getText().equals("") || clientIDField.getText().equals("") || noteField.getText().equals("No such record! Try again!")) {
+            if (shelfIDField.getText().equals("") || clientIDField.getText().equals("") ||
+                    noteField.getText().equals("No such record! Try again!")) {
                 textFields[i].setEditable(false);
                 notificationTxt.setStyle("-fx-fill: red;");
                 notificationTxt.setText("Error, adding Box to the database");
@@ -277,9 +318,13 @@ public class SampleController {
                 notificationTxt.setText("The box has been successfully saved in the database");
             }
         }
-        System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
-        saveBtn.setVisible(false);
+
         editBtn.setVisible(true);
+        saveBtn.setVisible(false);
+
+        System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
+        saveBtn.setDisable(true);
+        editBtn.setDisable(false);
 
 
     }
@@ -288,7 +333,7 @@ public class SampleController {
     void onNoteEditChangeColor() {
         noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
     }
-    
+
     /**    ----END SearchBox Panel END-----    */
 //######################################################################################################################
 
@@ -400,7 +445,8 @@ public class SampleController {
     @FXML
     void restartAnimation() {
         running = true;
-        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox,
+                myRedBox, myYellowBox};
         for (ImageView imageView : myBoxImageArr) {
             imageView.setVisible(false);
         }
@@ -413,7 +459,8 @@ public class SampleController {
         secretProgressBar.setProgress(0);
         running = false;
 
-        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox,
+                myRedBox, myYellowBox};
         for (ImageView imageView : myBoxImageArr) {
             imageView.setVisible(true);
         }
@@ -450,7 +497,8 @@ public class SampleController {
     }
 
     public class LoadingScreen implements Runnable {
-        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
+        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox,
+                myRedBox, myYellowBox};
 
         ProgressIndicator secretProgressBar;
         ImageView img;
@@ -519,20 +567,20 @@ public class SampleController {
                     }
                 }
             }
-
         }
     }
-    /**    ----END Animation END-----    */
+
+    /**
+     * ----END Animation END-----
+     */
 //######################################################################################################################
-
-
     @FXML
     private void handleLabel(MouseEvent event) {
         Label label = (Label) event.getSource();
         String labelText = label.getText();
         String labelID = ((Label) event.getSource()).getId();
-        System.out.println("Mouse click on label: "+labelText);
-        System.out.println("Clicked ID: "+ labelID);
+        System.out.println("Mouse click on label: " + labelText);
+        System.out.println("Clicked ID: " + labelID);
         changePanToShelfPan(labelID);
     }
 
@@ -541,13 +589,12 @@ public class SampleController {
      */
     @FXML
     private void changePanToShelfPan(String address) {
-        setBarTable(address);
-        leftCornerInfoLabel.setText("StackApp Shelf- "+address.toUpperCase());
+        loadGraphWindow(address);
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         b1ShelfPane.setVisible(true);
-        b1Pane.setVisible(false);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
+        leftCornerInfoLabel.setText("StackApp Shelf- " + address.toUpperCase());
     }
 
     /**
@@ -555,41 +602,51 @@ public class SampleController {
      */
 //######################################################################################################################
     @FXML
-    void setBarTable(String address) {
-        System.out.println("String wee need: "+address);
-        if((address.substring(0,2)).equals("B2")) {
-            System.out.println("Its B2");
+    void loadGraphWindow(String address) {
+        barChart.setVisible(true);
+        barChart.setTitle(address.toUpperCase());
+
+        String temp = address.substring(0, 2);
+        int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
+        int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};
+        if (temp.equals("b1")) {
+            for (int i = 0; i < nrBtns.size(); i++) {
+                nrBtns.get(i).setLayoutX(xCoordinates[i]);
+            }
+        } else {
+            for (int i = 0; i < nrBtns.size(); i++) {
+                nrBtns.get(i).setLayoutX(xCoordinatesRev[i]);
+            }
         }
-        b1st = 5;
-        b2nd = 9;
-        b3rd = 5;
-        b4th = 2;
-        b5th = 7;
-        b6th = 7;
-        b7th = 3;
 
-        bc.setVisible(true);
-        bc.setTitle(address.toUpperCase());
-        //xAxis.setLabel("BOXES");
-        //yAxis.setLabel("UNITS");
+        count1 = 5;
+        count2 = 9;
+        count3 = 5;
+        count4 = 2;
+        count5 = 7;
+        count6 = 7;
+        count7 = 3;
 
-        XYChart.Series boxes = new XYChart.Series();//, nr2= new XYChart.Series(), nr3= new XYChart.Series(), nr4= new XYChart.Series(), nr5= new XYChart.Series(), nr6= new XYChart.Series(), nr7= new XYChart.Series();
-        System.out.println("BEFORE" + boxes.getData());
-
-        boxes.getData().clear(); // CLEAR TABLE DATA?
-
-        System.out.println("AFTER" + boxes.getData());
-
-
-        boxes.getData().add(new XYChart.Data("A", b1st));
-        boxes.getData().add(new XYChart.Data("B", b2nd));
-        boxes.getData().add(new XYChart.Data("C", b3rd));
-        boxes.getData().add(new XYChart.Data("D", b4th));
-        boxes.getData().add(new XYChart.Data("E", b5th));
-        boxes.getData().add(new XYChart.Data("F", b6th));
-        boxes.getData().add(new XYChart.Data("G", b7th));
-        bc.getData().addAll(boxes);
+        resetGraph();
+        addSerie(new XYChart.Series<>());
     }
 
+    private void resetGraph() {
+        if (barChart.getData().size() > 0) {
+            barChart.getData().remove(0);
+        }
+    }
+
+    private void addSerie(XYChart.Series<String, Number> boxSerie) {
+        boxSerie.getData().add(new XYChart.Data("A", count1));
+        boxSerie.getData().add(new XYChart.Data("B", count2));
+        boxSerie.getData().add(new XYChart.Data("C", count3));
+        boxSerie.getData().add(new XYChart.Data("D", count4));
+        boxSerie.getData().add(new XYChart.Data("E", count5));
+        boxSerie.getData().add(new XYChart.Data("F", count6));
+        boxSerie.getData().add(new XYChart.Data("G", count7));
+
+        barChart.getData().addAll(boxSerie);
+    }
 }
 
