@@ -1,7 +1,7 @@
 package com.example.stackapp.controller;
 
 import static com.example.stackapp.model.SampleUtils.calcPeriod;
-
+import static java.lang.String.valueOf;
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
 import connect.net.sqlite.Connect;
@@ -16,11 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class SampleController {
+
+    public static final String EMPTY_STRING = "";
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
     @FXML
@@ -32,7 +33,7 @@ public class SampleController {
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
     private volatile boolean running = true;
 
-    public long boxId = 1;
+    public long boxId;
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
@@ -164,14 +165,17 @@ public class SampleController {
     }
 
     private void getBoxById(long boxId) {
-        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
-                fulfillmentField, statusField, noteField};
+
+        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField,
+                weightField, fulfillmentField, statusField, noteField};
         Connect conn = new Connect();
         BoxData box = conn.searchForBox(boxId);
         System.out.println("BoxId is " + boxId);
+
         if (box == null) {
+            System.out.println("it is null");
             for (TextField textField : testFieldsArr) {
-                textField.setText("");
+                textField.clear();
             }
 
             boxIDField.setText("" + boxId);
@@ -179,13 +183,23 @@ public class SampleController {
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
 
         } else {
-            List<String> dataFromDB = List.of(Long.toString(boxId), box.getShelfId(), Long.toString(box.getClient_id()),
-                    calcPeriod(box.getDateFrom(), box.getDateEnd()), box.getDateFrom(), box.getDateEnd(), box.getWeight(),
-                    box.getFulfillment(), box.getStatus(), box.getInfoNote());
             noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
-            for (int i = 0; i < textFieldsForConnection.size(); i++) {
-                textFieldsForConnection.get(i).setText(dataFromDB.get(i));
-            }
+
+            boxIDField.setText(valueOf(box.getId()));
+            shelfIDField.setText(box.getShelfId());
+            clientIDField.setText(valueOf(box.getClient_id()));
+            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != null
+                    ? calcPeriod(box.getDateFrom(), box.getDateEnd())
+                    : EMPTY_STRING);
+            dateFromField.setText(box.getDateFrom() != null ? box.getDateFrom() : EMPTY_STRING);
+            dateEndField.setText(box.getDateEnd() != null ? box.getDateEnd() : EMPTY_STRING);
+            weightField.setText(box.getWeight() != null ? box.getWeight() : EMPTY_STRING);
+            fulfillmentField.setText(box.getFulfillment() != null ? box.getFulfillment() : EMPTY_STRING);
+            statusField.setText(box.getStatus() != null ? box.getStatus() : EMPTY_STRING);
+            noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : EMPTY_STRING);
+
+            //blackpink in the area
+            //please stop with blackpink!
 
         }
 

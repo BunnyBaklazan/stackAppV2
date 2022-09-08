@@ -2,7 +2,7 @@ package com.example.stackapp.model;
 
 public class BoxData {
 
-    private long boxId;
+    private long id;
     private long clientId; // client that owns a box
     private String dateFrom; // date start
     private String dateEnd; // date end
@@ -13,8 +13,18 @@ public class BoxData {
     private String infoNote; // addition info about box
 
 
-    public BoxData(long boxId, long clientId, String dateFrom, String dateEnd, String fulfillment, String status, String infoNote, String weight, String shelfId) {
-        this.boxId = boxId;
+    public BoxData(
+            long id,
+            long clientId,
+            String dateFrom,
+            String dateEnd,
+            String fulfillment,
+            String status,
+            String infoNote,
+            String weight,
+            String shelfId) {
+
+        this.id = id;
         this.clientId = clientId;
         this.dateFrom = dateFrom;
         this.dateEnd = dateEnd;
@@ -26,9 +36,9 @@ public class BoxData {
 
     }
 
-    public long getBoxId() { return boxId; }
+    public long getId() { return id; }
 
-    public void setBoxId(long boxId) { this.boxId = boxId; }
+    public void setId(long boxId) { this.id = boxId; }
 
 
     public long getClient_id() { return clientId; }

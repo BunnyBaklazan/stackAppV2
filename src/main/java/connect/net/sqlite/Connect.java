@@ -4,6 +4,7 @@ import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.UserData;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class Connect {
     private static final String INSERT_USER
