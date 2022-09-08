@@ -141,7 +141,7 @@ public class AdminController {
         statement.setString(1, tf_first_name.getText());
         statement.setString(2, tf_last_name.getText());
         statement.setString(3, tf_password.getText());
-        statement.setString(4, tf_first_name.getText() + tf_last_name.getText());
+        statement.setString(4, tf_username.getText());
         statement.executeUpdate();
 
     } catch(SQLException e){
@@ -202,6 +202,6 @@ public class AdminController {
     void setUsername() {
         String name= tf_first_name.getText().toLowerCase();
         String surname= tf_last_name.getText().toLowerCase();
-        tf_username.setText(name+"."+surname);
+        tf_username.setText(name.toLowerCase()+"."+surname.toLowerCase());
     }
 }
