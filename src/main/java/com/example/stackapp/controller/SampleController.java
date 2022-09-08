@@ -158,7 +158,7 @@ public class SampleController {
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
 
         } else {
-            List<String> dataFromDB = List.of(Long.toString(boxId), box.getShelfId(), Long.toString(box.getClient_id()), calcPeriod(box.getDate_from(), box.getDate_end()), box.getDate_from(), box.getDate_end(), box.getWeight(), box.getFulfillment(), box.getStatus(), box.getInfo_note());
+            List<String> dataFromDB = List.of(Long.toString(boxId), box.getShelfId(), Long.toString(box.getClient_id()), calcPeriod(box.getDateFrom(), box.getDateEnd()), box.getDateFrom(), box.getDateEnd(), box.getWeight(), box.getFulfillment(), box.getStatus(), box.getInfoNote());
             noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
             for (int i = 0; i < textFieldsForConnection.size(); i++) {
                 textFieldsForConnection.get(i).setText(dataFromDB.get(i));
