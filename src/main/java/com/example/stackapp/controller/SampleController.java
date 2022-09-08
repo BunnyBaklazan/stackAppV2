@@ -14,9 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-
 import java.util.Arrays;
-public class SampleController{
+import java.util.List;
+
+public class SampleController {
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
     @FXML
@@ -27,12 +28,17 @@ public class SampleController{
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
     private volatile boolean running = true;
-    
+
     public long boxId = 1;
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
-    private int boxesAt1st = 1, boxesAt2nd = 2, boxesAt3rd = 3, boxesAt4th = 4, boxesAt5th = 5, boxesAt6th = 6, boxesAt7th = 7;
+    private int boxesAt2nd = 2;
+    private int boxesAt3rd = 3;
+    private int boxesAt4th = 4;
+    private int boxesAt5th = 5;
+    private int boxesAt6th = 6;
+    private int boxesAt7th = 7;
 
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane;
@@ -49,6 +55,10 @@ public class SampleController{
     @FXML
     private ProgressIndicator secretProgressBar;
 
+    List<Pane> allPanels;
+    List<ImageView> allBoxIMG;
+    List<TextField> textFieldsForConnection;
+
     LoadingScreen loadingScreen; //need to move down....test test
 
     public SampleController() {
@@ -58,28 +68,29 @@ public class SampleController{
 
     @FXML
     public void initialize() {
+        //b1Btn.setStyle("-fx-text-fill: BLACK; -fx-background-color: #AAB2BD");
+        textFieldsForConnection= List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField);
+
+        allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane);
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
-        b1Pane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
 
-        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
-        for (int i = 0; i < myBoxImageArr.length; i++) {
-            myBoxImageArr[i].setVisible(false);
+        allBoxIMG = List.of(myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox);
+        for (ImageView imageView : allBoxIMG) {
+            imageView.setVisible(false);
         }
+
         loadingScreen = new SampleController.LoadingScreen(secretProgressBar, myRedBox);
         startAnimationProgress();
 
         addWorkerBtn.setVisible(false);
         if (user.getRole().equals(ADMIN)) {
-            System.out.println("INSIDE");
             addWorkerBtn.setVisible(true);
         }
-        System.out.println(addWorkerBtn.isVisible());
+
     }
 
 
@@ -88,14 +99,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToDefaultPan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1Pane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
         restartAnimation();
     }
 
@@ -112,15 +120,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToSearchBoxPan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         searchBoxPane.setVisible(true);
-        sampleAppPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1Pane.setVisible(false);
-
-        editBtn.setVisible(false);
-        requestBtn.setVisible(false);
-        destroyBtn.setVisible(false);
     }
 
     @FXML
@@ -139,16 +143,30 @@ public class SampleController{
         }
     }
 
-    /*private int validateBoxId() {
-        searchField.setTextFormatter(new TextFormatter<>(c -> {
-            if(!c.getControlNewText().matches("\\d*"))
-                return null;
-            else
-                return c;
-        }));
-        boxId= Integer.parseInt(searchField.getText());
-        return boxId;
-    }*/
+    private void getBoxById(long boxId) {
+        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
+        Connect conn = new Connect();
+        BoxData box = conn.searchForBox(boxId);
+        System.out.println("BoxId is " + boxId);
+        if (box == null) {
+            for (TextField textField : testFieldsArr) {
+                textField.setText("");
+            }
+
+            boxIDField.setText("" + boxId);
+            noteField.setText("No such record! Try again!");
+            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
+
+        } else {
+            List<String> dataFromDB = List.of(Long.toString(boxId), box.getShelfId(), Long.toString(box.getClient_id()), calcPeriod(box.getDate_from(), box.getDate_end()), box.getDate_from(), box.getDate_end(), box.getWeight(), box.getFulfillment(), box.getStatus(), box.getInfo_note());
+            noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
+            for (int i = 0; i < textFieldsForConnection.size(); i++) {
+                textFieldsForConnection.get(i).setText(dataFromDB.get(i));
+            }
+
+        }
+
+    }
     @FXML
     private void getBoxIdByUserInput() {
         TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
@@ -172,25 +190,6 @@ public class SampleController{
         getBoxById(boxId);
         notificationTxt.setStyle("-fx-fill: #aba9a9;");
         notificationTxt.setText("Last search: " + boxId);
-    }
-
-    private void getFieldInputsFromDB() {
-        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
-        String[] testTxtsArr = {"D1BC7", "34", "10YEARS", "2015-08-12", "2025-08-12", "Light", "Half full", "Check", "Damage on right side"};
-        if (searchField.getText().equals("1004")) {
-            for (int i = 0; i < testFieldsArr.length; i++) {
-                testFieldsArr[i].setText(testTxtsArr[i]);
-                testFieldsArr[i].setStyle("-fx-text-fill: black; -fx-background-color:  #dce2e8;");
-            }
-            boxIDField.setText(searchField.getText());
-        } else {
-            for (TextField textField : testFieldsArr) {
-                textField.setText("");
-            }
-            boxIDField.setText("" + boxId);
-            noteField.setText("No such record! Try again!");
-            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-        }
     }
 
     @FXML
@@ -288,44 +287,6 @@ public class SampleController{
     void onNoteEditChangeColor() {
         noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
     }
-
-
-
-    private void getBoxById(long boxId) {
-        TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField};
-        Connect conn = new Connect();
-        BoxData box = conn.searchForBox(boxId);
-        System.out.println("BoxId is " + boxId);
-        if (box == null) {
-
-            System.out.println("Is null");
-            for (TextField textField : testFieldsArr) {
-                textField.setText("");
-            }
-
-            boxIDField.setText("" + boxId);
-            noteField.setText("No such record! Try again!");
-            noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
-
-            System.out.println("We don't have that box");
-
-        } else {
-            noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
-
-            //refactor later
-            shelfIDField.setText(box.getShelfId());
-            boxIDField.setText(Long.toString(boxId));
-            clientIDField.setText(Long.toString(box.getClient_id()));
-            periodField.setText(calcPeriod(box.getDateFrom(), box.getDateEnd()));
-            dateFromField.setText(box.getDateFrom());
-            dateEndField.setText(box.getDateEnd());
-            weightField.setText(box.getWeight());
-            fulfillmentField.setText(box.getFulfillment());
-            statusField.setText(box.getStatus());
-            noteField.setText(box.getInfoNote());
-        }
-
-    }
     
     /**    ----END SearchBox Panel END-----    */
 //######################################################################################################################
@@ -336,14 +297,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToAddWorkerPan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp WORKERS");
         addWorkerPane.setVisible(true);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        b1Pane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
     }
     /**    ----END AddWorker Panel END-----    */
 //######################################################################################################################
@@ -354,14 +312,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToB1Pan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Column- B1");
         b1Pane.setVisible(true);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
-        d1Pane.setVisible(false);
     }
     /**    ----END B1 Panel END-----    */
 //######################################################################################################################
@@ -372,14 +327,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToB2Pan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Column- B1");
         b2Pane.setVisible(true);
-        b1Pane.setVisible(false);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        d1Pane.setVisible(false);
     }
     /**    ----END B1 Panel END-----    */
 //######################################################################################################################
@@ -390,14 +342,11 @@ public class SampleController{
      */
     @FXML
     private void changePanToD1Pan() {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
         leftCornerInfoLabel.setText("StackApp Column- B1");
         d1Pane.setVisible(true);
-        b1Pane.setVisible(false);
-        sampleAppPane.setVisible(false);
-        searchBoxPane.setVisible(false);
-        addWorkerPane.setVisible(false);
-        b1ShelfPane.setVisible(false);
-        b2Pane.setVisible(false);
 
     }
     /**    ----END B1 Panel END-----    */
@@ -451,8 +400,8 @@ public class SampleController{
     void restartAnimation() {
         running = true;
         ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
-        for (int i = 0; i < myBoxImageArr.length; i++) {
-            myBoxImageArr[i].setVisible(false);
+        for (ImageView imageView : myBoxImageArr) {
+            imageView.setVisible(false);
         }
         secretProgressBar.setProgress(0);
         startAnimationProgress();
@@ -464,8 +413,8 @@ public class SampleController{
         running = false;
 
         ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox};
-        for (int i = 0; i < myBoxImageArr.length; i++) {
-            myBoxImageArr[i].setVisible(true);
+        for (ImageView imageView : myBoxImageArr) {
+            imageView.setVisible(true);
         }
 
         myPinkBox.setLayoutX(188);
@@ -596,7 +545,7 @@ public class SampleController{
 //######################################################################################################################
     @FXML
     void setBarTable() {
-        boxesAt1st = 5;
+        int boxesAt1st = 5;
         boxesAt2nd = 9;
         boxesAt3rd = 5;
         boxesAt4th = 2;
