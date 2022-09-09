@@ -11,10 +11,8 @@ public class Connect {
 
     private static final String INSERT_BOX
             ="";
-
     private static final String SELECT_COUNT
-            = "SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
-
+            = "SELECT COUNT(*) FROM box WHERE shelf_id LIKE '";
 
 
     private static final String INSERT_USER
@@ -36,7 +34,7 @@ public class Connect {
             ="SELECT password FROM users WHERE USERNAME = ?";
 
 
-    public static Connection connect() {
+    private static Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
 
         Connection conn = null;
@@ -81,11 +79,16 @@ public class Connect {
 
     }
 
+    public void updateBox(BoxData box){
+        //insert
+    }
+
     //create new box in the db
     public void insertBox(BoxData box) {
         try{
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_BOX);
+            statement.executeQuery();
 
         }catch (SQLException e){
             System.out.println(e);
@@ -95,7 +98,6 @@ public class Connect {
     public BoxData searchForBox(long boxId) {
 
         try{
-
             ResultSet result;
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_BOX);
@@ -126,23 +128,23 @@ public class Connect {
     }
 
     //trying to give an objective view how much space are taken
-    public ResultSet capacityOf(String shelf) {
+    public int capacityOf(String shelf) {
         try{
             ResultSet result = null;
             Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_COUNT);
-            statement.setString(1, shelf);
+            PreparedStatement statement = conn.prepareStatement(SELECT_COUNT+shelf+"%"+"'");
+            result = statement.executeQuery();
 
             if(!result.isBeforeFirst()){
-                System.out.println("The answer is 0");
-                return null;
+                return 0;
             }
 
-            return result;
+            System.out.println("capacity - " + result.getInt(1));
+            return result.getInt(1);
 
         } catch(SQLException e){
             System.out.println(e);
-            return null;
+            return 0;
         }
     }
 
@@ -159,7 +161,7 @@ public class Connect {
         }
     }
 
-    public void updateUserTable(UserData user){
+    public static void updateUserTable(UserData user){
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(UPDATE_USER);

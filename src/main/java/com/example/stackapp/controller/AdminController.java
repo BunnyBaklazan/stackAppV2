@@ -22,8 +22,6 @@ public class AdminController {
     private static final Main window = new Main();
     protected final static Preferences userPreferences = Preferences.userRoot();
 
-    private Connect conn;
-
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn = new Button();
 
@@ -90,7 +88,7 @@ public class AdminController {
     private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
 
-        conn = new Connect();
+        Connect conn = new Connect();
         conn.deleteUser(user.getId());
 
         tf_first_name.setText("");
@@ -104,23 +102,15 @@ public class AdminController {
 
     @FXML
     private void update() {
-        conn = new Connect();
 
-       conn.updateUserTable(
+        Connect.updateUserTable(
                new UserData(
                    tf_first_name.getText(),
                    tf_last_name.getText(),
                    tf_password.getText(),
                    tf_username.getText()
                )
-       );
-        /*String query = "UPDATE users SET "
-                + " first_name ='" + tf_first_name.getText() + "' "
-                + ", last_name ='"+ tf_last_name.getText() + "' "
-                + ", password ='" + tf_password.getText()+"' "
-                + " WHERE username='" + tf_username.getText()+"' ";
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;*/
+        );
 
         showUsersTable();
     }
@@ -131,7 +121,7 @@ public class AdminController {
 
     @FXML
     private void insert()  {
-        conn = new Connect();
+        Connect conn = new Connect();
 
         UserData user = new UserData(
                 tf_first_name.getText(),
@@ -155,6 +145,7 @@ public class AdminController {
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }*/
+
         showUsersTable(); // show table after insertion
     }
 
@@ -173,7 +164,7 @@ public class AdminController {
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();
 
-        conn = new Connect();
+        Connect conn = new Connect();
         ResultSet result = conn.showAllUsers();
 
         try{
