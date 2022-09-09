@@ -14,9 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.prefs.Preferences;
+
 public class AdminController {
     private static final Main window = new Main();
     protected final static Preferences userPreferences = Preferences.userRoot();
+
+    private Connect conn;
 
     @FXML
     private Button b1, b2, d1, d2, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn = new Button();
@@ -83,7 +89,8 @@ public class AdminController {
     @FXML
     private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-        Connect conn = new Connect();
+
+        conn = new Connect();
         conn.deleteUser(user.getId());
 
         tf_first_name.setText("");
@@ -97,23 +104,24 @@ public class AdminController {
 
     @FXML
     private void update() {
-        Connection conn = connect();
-        String query = "UPDATE users SET "
+        conn = new Connect();
+
+       conn.updateUserTable(
+               new UserData(
+                   tf_first_name.getText(),
+                   tf_last_name.getText(),
+                   tf_password.getText(),
+                   tf_username.getText()
+               )
+       );
+        /*String query = "UPDATE users SET "
                 + " first_name ='" + tf_first_name.getText() + "' "
                 + ", last_name ='"+ tf_last_name.getText() + "' "
                 + ", password ='" + tf_password.getText()+"' "
                 + " WHERE username='" + tf_username.getText()+"' ";
         PreparedStatement preparedStatement;
-        ResultSet resultSet;
+        ResultSet resultSet;*/
 
-        try {
-            preparedStatement = conn.prepareStatement(query);
-           // preparedStatement.setInt(1, user.getId());
-            preparedStatement.executeUpdate();
-
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
         showUsersTable();
     }
 
@@ -122,11 +130,18 @@ public class AdminController {
     }
 
     @FXML
-    private void insert() throws SQLException {
-        try{
-            Connection conn = connect();
-            String query = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
-            PreparedStatement statement = conn.prepareStatement(query);
+    private void insert()  {
+        conn = new Connect();
+
+        UserData user = new UserData(
+                tf_first_name.getText(),
+                tf_last_name.getText(),
+                encryptPass(tf_password.getText()),
+                tf_username.getText());
+
+        conn.insertUser(user);
+
+      /*      PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, tf_first_name.getText());
             statement.setString(2, tf_last_name.getText());
             statement.setString(3, encryptPass(tf_password.getText()));
@@ -134,7 +149,7 @@ public class AdminController {
             statement.executeUpdate();
         } catch(SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
         showUsersTable(); // show table after insertion
     }
 
@@ -152,25 +167,26 @@ public class AdminController {
 
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();
-        Connection conn = connect();
-        String query = "SELECT * FROM users";
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;
-        try {
-            preparedStatement = conn.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
-            UserData user;
-            while(resultSet.next()) {
-                user = new UserData(resultSet.getInt("id"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("password"),
-                        resultSet.getString("username"));
+
+        conn = new Connect();
+        ResultSet result = conn.showAllUsers();
+
+        try{
+            while(result.next()) {
+                UserData user = new UserData(result.getInt("id"),
+                        result.getString("first_name"),
+                        result.getString("last_name"),
+                        result.getString("password"),
+                        result.getString("username")
+                );
+
                 usersList.add(user);
             }
-        } catch (Exception e) {
+
+        }  catch (Exception e) {
             e.printStackTrace();
         }
+
         return usersList;
     }
 

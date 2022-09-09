@@ -4,15 +4,8 @@ import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.UserData;
 
 import java.sql.*;
-import java.util.Objects;
 
 public class Connect {
-    private static final String INSERT_USER
-            = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
-
-    private static final String SELECT_USER
-            = "SELECT username, password FROM users WHERE username = ? AND password = ?";
-
     private static final String SELECT_BOX
             = "SELECT * FROM box WHERE b_id = ?";
 
@@ -20,10 +13,27 @@ public class Connect {
             ="";
 
     private static final String SELECT_COUNT
-            ="SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
+            = "SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
+
+
+
+    private static final String INSERT_USER
+            = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
+
+    private static final String SELECT_USER
+            = "SELECT * FROM users";
 
     public static final String DELETE_USER
-            ="DELETE FROM users WHERE id = ?";;
+            = "DELETE FROM users WHERE id = ?";
+
+    public static final String UPDATE_USER
+            = "UPDATE users SET first_name = ? , "
+            + "last_name = ? , "
+            + "password = ? "
+            + "WHERE username = ?";
+
+    public static  final String LOGIN_CHECK
+            ="SELECT password FROM users WHERE USERNAME = ?";
 
 
     public static Connection connect() {
@@ -57,23 +67,22 @@ public class Connect {
         }
 
     }
-    public ResultSet searchForUser(String userName, String password){
+    public ResultSet showAllUsers() {
         try{
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_USER);
-            statement.setString(1, userName);
-            statement.setString(2, password);
             return statement.executeQuery();
 
         } catch (SQLException e){
             System.out.println(e.getMessage());
             return null;
+
         }
 
     }
 
     //create new box in the db
-    public void insertBox(BoxData box){
+    public void insertBox(BoxData box) {
         try{
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_BOX);
@@ -83,7 +92,7 @@ public class Connect {
         }
     }
 
-    public BoxData searchForBox(long boxId){
+    public BoxData searchForBox(long boxId) {
 
         try{
 
@@ -117,7 +126,7 @@ public class Connect {
     }
 
     //trying to give an objective view how much space are taken
-    public ResultSet capacityOf(String shelf){
+    public ResultSet capacityOf(String shelf) {
         try{
             ResultSet result = null;
             Connection conn = connect();
@@ -137,7 +146,7 @@ public class Connect {
         }
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(int id) {
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(DELETE_USER);
@@ -150,7 +159,37 @@ public class Connect {
         }
     }
 
+    public void updateUserTable(UserData user){
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(UPDATE_USER);
 
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getUserName());
+            statement.executeUpdate();
+
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ResultSet checkLogin(String username){
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(LOGIN_CHECK);
+            statement.setString(1, username);
+
+            return statement.executeQuery();
+
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+
+        }
+
+    }
 
 
 
