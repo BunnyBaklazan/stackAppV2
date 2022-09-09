@@ -88,8 +88,8 @@ public class AdminController {
     private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
 
-        Connect conn = new Connect();
-        conn.deleteUser(user.getId());
+        //Connect conn = new Connect();
+        Connect.deleteUser(user.getId());
 
         tf_first_name.setText("");
         tf_last_name.setText("");
@@ -108,7 +108,7 @@ public class AdminController {
                    tf_first_name.getText(),
                    tf_last_name.getText(),
                    tf_password.getText(),
-                   tf_username.getText()
+                   tc_id.getText()
                )
         );
 
@@ -121,7 +121,7 @@ public class AdminController {
 
     @FXML
     private void insert()  {
-        Connect conn = new Connect();
+        //Connect conn = new Connect();
 
         UserData user = new UserData(
                 tf_first_name.getText(),
@@ -129,7 +129,7 @@ public class AdminController {
                 encryptPass(tf_password.getText()),
                 tf_username.getText());
 
-        conn.insertUser(user);
+        Connect.insertUser(user);
         showUsersTable(); // show table after insertion
     }
 
@@ -148,12 +148,13 @@ public class AdminController {
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();
 
-        Connect conn = new Connect();
-        ResultSet result = conn.showAllUsers();
+        //Connect conn = new Connect();
+        ResultSet result = Connect.showAllUsers();
 
         try{
             while(result.next()) {
-                UserData user = new UserData(result.getInt("id"),
+                UserData user = new UserData(
+                        result.getInt("id"),
                         result.getString("first_name"),
                         result.getString("last_name"),
                         result.getString("password"),
@@ -184,8 +185,8 @@ public class AdminController {
 
     @FXML
     void setUsername() {
-        String name= tf_first_name.getText().toLowerCase();
-        String surname= tf_last_name.getText().toLowerCase();
+        String name = tf_first_name.getText().toLowerCase();
+        String surname = tf_last_name.getText().toLowerCase();
         tf_username.setText(name.toLowerCase()+"."+surname.toLowerCase());
     }
 }

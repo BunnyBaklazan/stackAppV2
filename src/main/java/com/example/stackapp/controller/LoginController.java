@@ -46,7 +46,6 @@ public class LoginController {
     public void login() {
         String username = tf_username.getText();
         String password = pf_password.getText();
-        Connect conn = new Connect();
         ResultSet result = null;
 
         System.out.println("USER ENTERED VARIABLED " + username + " " + password);
@@ -59,7 +58,7 @@ public class LoginController {
         l_errorText.setVisible(false);
 
         try {
-            result = conn.checkLogin(username);
+            result = Connect.checkLogin(username);
 
             if (!result.isBeforeFirst()) {
                 System.out.println("User is not found!");

@@ -5,12 +5,17 @@ import com.example.stackapp.model.UserData;
 
 import java.sql.*;
 
+import static java.lang.String.valueOf;
+
 public class Connect {
     private static final String SELECT_BOX
             = "SELECT * FROM box WHERE b_id = ?";
 
     private static final String INSERT_BOX
-            ="";
+            ="INSERT INTO box (b_id, client_id, date_from, date_end," +
+            " fulfillment, info_note, weight, shelf_id, status) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
     private static final String SELECT_COUNT
             = "SELECT COUNT(*) FROM box WHERE shelf_id LIKE '";
 
@@ -28,7 +33,7 @@ public class Connect {
             = "UPDATE users SET first_name = ? , "
             + "last_name = ? , "
             + "password = ? "
-            + "WHERE username = ?";
+            + "WHERE id = ?";
 
     public static  final String LOGIN_CHECK
             ="SELECT password FROM users WHERE USERNAME = ?";
@@ -49,7 +54,8 @@ public class Connect {
         return conn;
     }
 
-    public void insertUser(UserData user) {
+    public static void insertUser(UserData user) {
+
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_USER);
@@ -65,7 +71,7 @@ public class Connect {
         }
 
     }
-    public ResultSet showAllUsers() {
+    public static ResultSet showAllUsers() {
         try{
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_USER);
@@ -79,23 +85,47 @@ public class Connect {
 
     }
 
+    public static String giveUsername(){
+        try{
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(SELECT_USER);
+            ResultSet result = statement.executeQuery();
+            return result.getString("username");
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     public void updateBox(BoxData box){
         //insert
+
     }
 
     //create new box in the db
-    public void insertBox(BoxData box) {
+    public static void insertBox(BoxData box) {
         try{
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_BOX);
-            statement.executeQuery();
+
+            statement.setString(1, valueOf(box.getId()));
+            statement.setString(2, valueOf(box.getClientId()));
+            statement.setString(3, box.getDateFrom());
+            statement.setString(4, box.getDateEnd());
+            statement.setString(5, box.getFulfillment());
+            statement.setString(6, box.getInfoNote());
+            statement.setString(7, box.getWeight());
+            statement.setString(8, box.getShelfId());
+            statement.setString(9, box.getStatus());
+            statement.executeUpdate();
 
         }catch (SQLException e){
             System.out.println(e);
         }
     }
 
-    public BoxData searchForBox(long boxId) {
+    public static BoxData searchForBox(long boxId) {
 
         try{
             ResultSet result;
@@ -139,7 +169,6 @@ public class Connect {
                 return 0;
             }
 
-            System.out.println("capacity - " + result.getInt(1));
             return result.getInt(1);
 
         } catch(SQLException e){
@@ -148,7 +177,7 @@ public class Connect {
         }
     }
 
-    public void deleteUser(int id) {
+    public static void deleteUser(int id) {
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(DELETE_USER);
@@ -169,7 +198,7 @@ public class Connect {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPassword());
-            statement.setString(4, user.getUserName());
+            statement.setString(4, valueOf(user.getId()));
             statement.executeUpdate();
 
         } catch(SQLException e){
@@ -177,7 +206,7 @@ public class Connect {
         }
     }
 
-    public ResultSet checkLogin(String username){
+    public static ResultSet checkLogin(String username){
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(LOGIN_CHECK);
@@ -197,5 +226,6 @@ public class Connect {
 
     public static void main(String[] args) {
         //connect();
+        //blackpink in the area
     }
 }

@@ -191,8 +191,7 @@ public class SampleController {
         TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField,
                 weightField, fulfillmentField, statusField, noteField};
 
-        Connect conn = new Connect();
-        BoxData box = conn.searchForBox(boxId);
+        BoxData box = Connect.searchForBox(boxId);
         System.out.println("BoxId is " + boxId);
 
         if (box == null) {
@@ -210,7 +209,7 @@ public class SampleController {
 
             boxIDField.setText(valueOf(box.getId()));
             shelfIDField.setText(box.getShelfId());
-            clientIDField.setText(valueOf(box.getClient_id()));
+            clientIDField.setText(valueOf(box.getClientId()));
             periodField.setText(box.getDateFrom() != null && box.getDateEnd() != null
                     ? calcPeriod(box.getDateFrom(), box.getDateEnd())
                     : EMPTY_STRING);
@@ -250,7 +249,7 @@ public class SampleController {
             editBtn.setDisable(false);
         }
         System.out.println("User enters: [" + boxId + "] BOX_id to search in DB");
-        //getFieldInputsFromDB();
+
         getBoxById(boxId);
         notificationTxt.setStyle("-fx-fill: #aba9a9;");
         notificationTxt.setText("Last search: " + boxId);
@@ -693,8 +692,8 @@ public class SampleController {
     void loadGraphWindow(String address) {
         barChart.setVisible(true);
         barChart.setTitle(address.toUpperCase());
-        System.out.println("Addres is " + address);
         String temp = address.substring(0, 2);
+
         int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
         int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};
         if (temp.equals("b1")) {

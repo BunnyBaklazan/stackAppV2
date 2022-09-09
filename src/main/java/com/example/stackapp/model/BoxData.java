@@ -41,7 +41,7 @@ public class BoxData {
     public void setId(long boxId) { this.id = boxId; }
 
 
-    public long getClient_id() { return clientId; }
+    public long getClientId() { return clientId; }
 
     public void setClientId(long clientId) { this.clientId = clientId; }
 
