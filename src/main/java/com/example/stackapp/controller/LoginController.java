@@ -72,11 +72,11 @@ public class LoginController {
                     //throw new RuntimeException(e);
 
                     // database update is needed otherwise it won't let you in :(
-                    if (BCrypt.checkpw(password, retrievedPassword)) {
+                   if (BCrypt.checkpw(password, retrievedPassword)) {
+                    //if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
-
-                        if(username.equals("asd")) {
+                        if(username.equals("asd.asd")) {
                             userPreferences.put("role", "admin");
                             window.changePage(ADMIN_DASHBOARD);
 
