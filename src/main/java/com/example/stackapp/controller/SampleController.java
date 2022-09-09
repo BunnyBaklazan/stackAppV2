@@ -6,6 +6,7 @@ import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
 import connect.net.sqlite.Connect;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -40,7 +41,7 @@ public class SampleController {
     private int count1, count2, count3, count4, count5, count6, count7;
 
     @FXML
-    private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane;
+    private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, shelfPane, addressPane;
     @FXML
     private Button b1Btn, b2Btn, d1Btn, d2Btn, d3Btn, d4Btn, d5Btn, d6Btn, d7Btn, d8Btn, showSearchBox_Btn, searchBtn,
             editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
@@ -59,6 +60,14 @@ public class SampleController {
             myOrangeBox;
     @FXML
     private ProgressIndicator secretProgressBar;
+
+    @FXML
+    private Text bIdForBox1, bIdForBox2, bIdForBox3, bIdForBox4, bIdForBox5, bIdForBox6, bIdForBox7, bIdForBox8, bIdForBox9;
+
+    @FXML
+    private ImageView box1, box2, box3, box4, box5, box6, box7, box8, box9;
+
+
 
     List<Pane> allPanels;
     List<ImageView> allBoxIMG;
@@ -80,7 +89,7 @@ public class SampleController {
         textFieldsForConnection = List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField,
                 dateEndField, weightField, fulfillmentField, statusField, noteField);
 
-        allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, b1ShelfPane);
+        allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, shelfPane, addressPane);
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
@@ -140,8 +149,21 @@ public class SampleController {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
-        leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         searchBoxPane.setVisible(true);
+        leftCornerInfoLabel.setText("StackApp SEARCH BOX");
+        destroyBtn.setDisable(true);
+        requestBtn.setDisable(true);
+        editBtn.setDisable(true);
+        saveBtn.setDisable(true);
+    }
+
+    @FXML
+    private void changePanToSearchBoxPan(String boxID) {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
+        searchBoxPane.setVisible(true);
+        leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         destroyBtn.setDisable(true);
         requestBtn.setDisable(true);
         editBtn.setDisable(true);
@@ -447,6 +469,55 @@ public class SampleController {
     }*/
 //######################################################################################################################
 
+
+    /**
+     * ----    Address Panel    -----
+     */
+    @FXML
+    private void checksPressedSectionID(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        String btnText = button.getText();
+        String btnID = ((Button) event.getSource()).getId();
+        String textToShow= leftCornerInfoLabel.getText().substring(leftCornerInfoLabel.getText().length()-4)+btnID.substring(3);
+        System.out.println("Mouse click on label: " + btnText);
+        System.out.println("Clicked ID: " + btnID);
+        System.out.println("Full ID: "+textToShow);
+        changePanToAddressPan(btnID, textToShow);
+    }
+    @FXML
+    void changePanToAddressPan(String btnID, String leftCornerTxt) {
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
+        addressPane.setVisible(true);
+        System.out.println("Wee are in Section: "+btnID);
+        leftCornerInfoLabel.setText("StackApp Section- " + leftCornerTxt);
+    }
+    /**    ----END Address Panel END-----    */
+//######################################################################################################################
+
+
+    /**
+     * ----    Section Panel(Where is all 9Boxes)    -----
+     */
+    @FXML
+    private void checksPressedBoxID(MouseEvent event) {
+
+        //need to connect pressed box wit text on it- BoxID and path it changePanToSearchBoxPan(boxID);
+
+
+        ImageView img = (ImageView) event.getSource();
+        String imgID = ((ImageView) event.getSource()).getId();
+        String textToShow= leftCornerInfoLabel.getText().substring(leftCornerInfoLabel.getText().length()-4)+imgID.substring(3);
+        System.out.println("Clicked ID: " + imgID);
+        System.out.println("Full ID: "+textToShow);
+
+        String boxID= "";
+        changePanToSearchBoxPan(boxID);
+    }
+    /**    ----END Section Panel END-----    */
+//######################################################################################################################
+
     /**
      * ----    Animation    -----
      */
@@ -591,7 +662,7 @@ public class SampleController {
      */
 //######################################################################################################################
     @FXML
-    private void handleLabel(MouseEvent event) {
+    private void checksPressedShelfID(MouseEvent event) {
         Label label = (Label) event.getSource();
         String labelText = label.getText();
         String labelID = ((Label) event.getSource()).getId();
@@ -609,7 +680,7 @@ public class SampleController {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
-        b1ShelfPane.setVisible(true);
+        shelfPane.setVisible(true);
         leftCornerInfoLabel.setText("StackApp Shelf- " + address.toUpperCase());
     }
 
