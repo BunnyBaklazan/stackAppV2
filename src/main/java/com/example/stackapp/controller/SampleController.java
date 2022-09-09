@@ -26,7 +26,7 @@ public class SampleController {
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
     @FXML
-    private NumberAxis yAxis = new NumberAxis(0, 9, 1);
+    private NumberAxis yAxis = new NumberAxis();
     @FXML
     private BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
@@ -65,14 +65,18 @@ public class SampleController {
     private Text bIdForBox1, bIdForBox2, bIdForBox3, bIdForBox4, bIdForBox5, bIdForBox6, bIdForBox7, bIdForBox8, bIdForBox9;
 
     @FXML
+    private Text cIdForBox1, cIdForBox2, cIdForBox3, cIdForBox4, cIdForBox5, cIdForBox6, cIdForBox7, cIdForBox8, cIdForBox9;
+
+    @FXML
     private ImageView box1, box2, box3, box4, box5, box6, box7, box8, box9;
-
-
 
     List<Pane> allPanels;
     List<ImageView> allBoxIMG;
     List<TextField> textFieldsForConnection;
     List<Button> nrBtns;
+    List<ImageView> boxes;
+    List<Text> boxIDs;
+    List<Text> clientIDs;
 
     LoadingScreen loadingScreen; //need to move down....test test
 
@@ -84,6 +88,11 @@ public class SampleController {
     @FXML
     public void initialize() {
         //b1Btn.setStyle("-fx-text-fill: BLACK; -fx-background-color: #AAB2BD");
+
+        boxes = List.of(box1, box2, box3, box4, box5, box6, box7, box8, box9);
+        boxIDs = List.of(bIdForBox1, bIdForBox2, bIdForBox3, bIdForBox4, bIdForBox5, bIdForBox6, bIdForBox7, bIdForBox8, bIdForBox9);
+        clientIDs = List.of(cIdForBox1, cIdForBox2, cIdForBox3, cIdForBox4, cIdForBox5, cIdForBox6, cIdForBox7, cIdForBox8, cIdForBox9);
+
         nrBtns = List.of(btn1, btn2, btn3, btn4, btn5, btn6, btn7);
 
         textFieldsForConnection = List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField,
@@ -113,7 +122,7 @@ public class SampleController {
         // CHART SETTINGS
         yAxis.setAutoRanging(false);
         yAxis.setLowerBound(0.0);
-        yAxis.setUpperBound(9.0);
+        yAxis.setUpperBound(10.0);
         yAxis.setTickUnit(1.0);
 
         barChart.setAnimated(false);
@@ -408,33 +417,33 @@ public class SampleController {
 
 
     /**
-     * ----    B1 Panel    -----
+     * ----    B2 Panel    -----
      */
     @FXML
     private void changePanToB2Pan() {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
-        leftCornerInfoLabel.setText("StackApp Column- B1");
+        leftCornerInfoLabel.setText("StackApp Column- B2");
         b2Pane.setVisible(true);
     }
-    /**    ----END B1 Panel END-----    */
+    /**    ----END B2 Panel END-----    */
 //######################################################################################################################
 
 
     /**
-     * ----    B1 Panel    -----
+     * ----    D1 Panel    -----
      */
     @FXML
     private void changePanToD1Pan() {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
-        leftCornerInfoLabel.setText("StackApp Column- B1");
+        leftCornerInfoLabel.setText("StackApp Column- D1");
         d1Pane.setVisible(true);
 
     }
-    /**    ----END B1 Panel END-----    */
+    /**    ----END D1 Panel END-----    */
 //######################################################################################################################
 
 
@@ -469,8 +478,33 @@ public class SampleController {
         //setStyle("-fx-background-color: #AAB2BD;");
     }*/
 //######################################################################################################################
+    /**
+     * ----    Shelf Panel    -----
+     */
+    @FXML
+    private void checksPressedShelfID(MouseEvent event) {
+        Label label = (Label) event.getSource();
+        String labelText = label.getText();
+        String labelID = ((Label) event.getSource()).getId();
+        System.out.println("Mouse click on label: " + labelText);
+        System.out.println("Clicked ID: " + labelID);
+        changePanToShelfPan(labelID);
+    }
 
+    @FXML
+    private void changePanToShelfPan(String address) {
+        loadGraphWindow(address.toUpperCase());
+        for (Pane allPanel : allPanels) {
+            allPanel.setVisible(false);
+        }
+        shelfPane.setVisible(true);
+        leftCornerInfoLabel.setText("StackApp Shelf- " + address.toUpperCase());
+    }
 
+    /**
+     * ----END Shelf Panel END-----
+     */
+//######################################################################################################################
     /**
      * ----    Address Panel    -----
      */
@@ -479,32 +513,66 @@ public class SampleController {
         Button button = (Button) event.getSource();
         String btnText = button.getText();
         String btnID = ((Button) event.getSource()).getId();
-        String textToShow= leftCornerInfoLabel.getText().substring(leftCornerInfoLabel.getText().length()-4)+btnID.substring(3);
-        System.out.println("Mouse click on label: " + btnText);
+        String textToShow= leftCornerInfoLabel.getText()
+                .substring(leftCornerInfoLabel.getText().length()-4) +btnID.substring(3);
+        System.out.println("Mouse click on Button: " + btnText);
         System.out.println("Clicked ID: " + btnID);
         System.out.println("Full ID: "+textToShow);
-        changePanToAddressPan(btnID, textToShow);
+
+        Connect conn = new Connect();
+        int boxesAtGraph= conn.capacityOf(textToShow);
+
+        changePanToAddressPan(btnID, textToShow, boxesAtGraph);
     }
     @FXML
-    void changePanToAddressPan(String btnID, String leftCornerTxt) {
+    void changePanToAddressPan(String btnID, String leftCornerTxt, int boxesAtGraph) {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
         addressPane.setVisible(true);
+
         System.out.println("Wee are in Section: "+btnID);
         leftCornerInfoLabel.setText("StackApp Section- " + leftCornerTxt);
+
+        // refactor for real data from DB
+        List<String> boxIDss= List.of("13345", "56007", "12202", "23300", "21220", "1200",  "55200", "27820", "182");
+        List<String> clientIDss= List.of("5", "57", "22", "23", "2", "12",  "5", "20", "5");
+
+
+
+        for (int i = 0; i < boxes.size(); i++) {
+            boxes.get(i).setVisible(false);
+            clientIDs.get(i).setVisible(false);
+            boxIDs.get(i).setVisible(false);
+        }
+
+        for (int i = 1; i <= boxes.size(); i++) {
+            if(boxesAtGraph== i) {
+                for (int j = 0; j < boxes.size(); j++) {
+                    if(j<boxesAtGraph) {
+                        boxes.get(j).setVisible(true);
+                        clientIDs.get(j).setVisible(true);
+                        clientIDs.get(j).setText(clientIDss.get(j)); // refactor for real data from DB
+                        boxIDs.get(j).setVisible(true);
+                        boxIDs.get(j).setText(boxIDss.get(j)); // refactor for real data from DB
+                    }
+                }
+            }
+        }
+
+        // and also numbers with them with real boxes...
+
+
     }
     /**    ----END Address Panel END-----    */
 //######################################################################################################################
-
-
     /**
      * ----    Section Panel(Where is all 9Boxes)    -----
      */
     @FXML
     private void checksPressedBoxID(MouseEvent event) {
 
-        //need to connect pressed box wit text on it- BoxID and path it changePanToSearchBoxPan(boxID);
+        //need to connect pressed box with text on it- BoxID and path it changePanToSearchBoxPan(boxID);
 
 
         ImageView img = (ImageView) event.getSource();
@@ -519,6 +587,90 @@ public class SampleController {
     /**    ----END Section Panel END-----    */
 //######################################################################################################################
 
+    /**
+     * ----    Graph window    -----
+     */
+    @FXML
+    void loadGraphWindow(String address) {
+
+
+        boolean mirrorShelf;
+        barChart.setVisible(true);
+        barChart.setTitle(address);
+        System.out.println("Addres is " + address);
+        String temp = address.substring(0, 2).toUpperCase();
+        int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
+        int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};
+        if (temp.equals("B1")) { //for other D's need add OR(||)
+            mirrorShelf= true;
+            for (int i = 0; i < nrBtns.size(); i++) {
+                nrBtns.get(i).setLayoutX(xCoordinates[i]);
+            }
+        } else {
+            mirrorShelf= false;
+            for (int i = 0; i < nrBtns.size(); i++) {
+                nrBtns.get(i).setLayoutX(xCoordinatesRev[i]);
+            }
+        }
+        Connect conn = new Connect();
+/*
+        // This shortcut doesnt work!!!
+        int[] counts = {count1, count2, count3, count4, count5, count6, count7};
+
+        for (int i = 0; i < counts.length; i++) {
+            counts[i] = conn.capacityOf(address + (i+1));
+            System.out.println(address + (i+1));
+        }*/
+        //insert data from select count
+        count1 = conn.capacityOf(address + "1");
+        count2 = conn.capacityOf(address + "2");
+        count3 = conn.capacityOf(address + "3");
+        count4 = conn.capacityOf(address + "4");
+        count5 = conn.capacityOf(address + "5");
+        count6 = conn.capacityOf(address + "6");
+        count7 = conn.capacityOf(address + "7");
+
+        System.out.println(count1+" "+count2+" "+count3+" "+count4+" "+count5+" "+count6+" "+count7);
+
+        resetGraph();
+        addSerie(new XYChart.Series<>(), mirrorShelf);
+    }
+
+    private void resetGraph() {
+        if (barChart.getData().size() > 0) {
+            barChart.getData().remove(0);
+        }
+    }
+
+    private void addSerie(XYChart.Series<String, Number> boxSerie, boolean mirrorShelf) {
+        if (mirrorShelf == false) {
+            System.out.println("No MIRROR");
+            boxSerie.getData().add(new XYChart.Data("A", count1));
+            boxSerie.getData().add(new XYChart.Data("B", count2));
+            boxSerie.getData().add(new XYChart.Data("C", count3));
+            boxSerie.getData().add(new XYChart.Data("D", count4));
+            boxSerie.getData().add(new XYChart.Data("E", count5));
+            boxSerie.getData().add(new XYChart.Data("F", count6));
+            boxSerie.getData().add(new XYChart.Data("G", count7));
+            barChart.getData().addAll(boxSerie);
+        } else {
+            System.out.println("YES MIRROR");
+            boxSerie.getData().add(new XYChart.Data("A", count7));
+            boxSerie.getData().add(new XYChart.Data("B", count6));
+            boxSerie.getData().add(new XYChart.Data("C", count5));
+            boxSerie.getData().add(new XYChart.Data("D", count4));
+            boxSerie.getData().add(new XYChart.Data("E", count3));
+            boxSerie.getData().add(new XYChart.Data("F", count2));
+            boxSerie.getData().add(new XYChart.Data("G", count1));
+            barChart.getData().addAll(boxSerie);
+        }
+        //barChart.getData().addAll(boxSerie);
+    }
+
+    /**
+     * ----    END Graph window    -----
+     */
+//######################################################################################################################
     /**
      * ----    Animation    -----
      */
@@ -599,52 +751,31 @@ public class SampleController {
         @Override
         public void run() {
             while (secretProgressBar.getProgress() <= 1 && running) {
-                if (secretProgressBar.getProgress() >= 0.1 && secretProgressBar.getProgress() <= 0.15) {
-                    myBoxImageArr[7].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.15 && secretProgressBar.getProgress() <= 0.2) {
-                    myBoxImageArr[0].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.2 && secretProgressBar.getProgress() <= 0.25) {
-                    myBoxImageArr[3].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.25 && secretProgressBar.getProgress() <= 0.3) {
-                    myBoxImageArr[1].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.3 && secretProgressBar.getProgress() <= 0.35) {
-                    myBoxImageArr[6].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.35 && secretProgressBar.getProgress() <= 0.4) {
-                    myBoxImageArr[4].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.4 && secretProgressBar.getProgress() <= 0.45) {
-                    myBoxImageArr[2].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.45 && secretProgressBar.getProgress() <= 0.5) {
-                    myBoxImageArr[5].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.5 && secretProgressBar.getProgress() <= 0.55) {
-                    myBoxImageArr[8].setVisible(true);
-                } else if (secretProgressBar.getProgress() >= 0.55 && secretProgressBar.getProgress() <= 0.6) {
-                    myBoxImageArr[7].setLayoutX(188);
-                    myBoxImageArr[7].setLayoutY(248);
-                } else if (secretProgressBar.getProgress() >= 0.6 && secretProgressBar.getProgress() <= 0.65) {
-                    myBoxImageArr[0].setLayoutX(354);
-                    myBoxImageArr[0].setLayoutY(248);
-                } else if (secretProgressBar.getProgress() >= 0.65 && secretProgressBar.getProgress() <= 0.7) {
-                    myBoxImageArr[3].setLayoutX(105);
-                    myBoxImageArr[3].setLayoutY(372);
-                } else if (secretProgressBar.getProgress() >= 0.7 && secretProgressBar.getProgress() <= 0.75) {
-                    myBoxImageArr[1].setLayoutX(263);
-                    myBoxImageArr[1].setLayoutY(372);
-                } else if (secretProgressBar.getProgress() >= 0.75 && secretProgressBar.getProgress() <= 0.8) {
-                    myBoxImageArr[6].setLayoutX(421);
-                    myBoxImageArr[6].setLayoutY(372);
-                } else if (secretProgressBar.getProgress() >= 0.8 && secretProgressBar.getProgress() <= 0.85) {
-                    myBoxImageArr[4].setLayoutX(22);
-                    myBoxImageArr[4].setLayoutY(495);
-                } else if (secretProgressBar.getProgress() >= 0.85 && secretProgressBar.getProgress() <= 0.9) {
-                    myBoxImageArr[2].setLayoutX(180);
-                    myBoxImageArr[2].setLayoutY(495);
-                } else if (secretProgressBar.getProgress() >= 0.9 && secretProgressBar.getProgress() <= 0.95) {
-                    myBoxImageArr[5].setLayoutX(338);
-                    myBoxImageArr[5].setLayoutY(495);
-                } else if (secretProgressBar.getProgress() >= 0.95 && secretProgressBar.getProgress() <= 0.99) {
-                    myBoxImageArr[8].setLayoutX(496);
-                    myBoxImageArr[8].setLayoutY(495);
+                int[] boxNr= {7, 0, 3, 1, 6, 4, 2, 5, 8};
+                int[] xCoordinates = {188, 354, 105, 263, 421, 22, 180, 338, 496};
+                int[] yCoordinates = {248, 248, 372, 372, 372, 495, 495, 495, 495};
+
+                double secondsStart= 0.10;
+                double secondsEnd= 0.15;
+                for (int i = 0; i < boxNr.length; i++) {
+                    if (secretProgressBar.getProgress() >= secondsStart && secretProgressBar.getProgress() <= secondsEnd) {
+                        myBoxImageArr[boxNr[i]].setVisible(true);
+                    }
+                    secondsStart += 0.05;
+                    secondsEnd += 0.05;
                 }
+
+                secondsStart = 0.55;
+                secondsEnd = 0.6;
+                for (int i = 0; i < boxNr.length; i++) {
+                    if (secretProgressBar.getProgress() >= secondsStart && secretProgressBar.getProgress() <= secondsEnd) {
+                        myBoxImageArr[boxNr[i]].setLayoutX(xCoordinates[i]);
+                        myBoxImageArr[boxNr[i]].setLayoutY(yCoordinates[i]);
+                    }
+                    secondsStart += 0.05;
+                    secondsEnd += 0.05;
+                }
+
                 Platform.runLater(() -> secretProgressBar.setProgress(secretProgressBar.getProgress() + 0.01));
                 synchronized (this) {
                     try {
@@ -662,80 +793,5 @@ public class SampleController {
      * ----END Animation END-----
      */
 //######################################################################################################################
-    @FXML
-    private void checksPressedShelfID(MouseEvent event) {
-        Label label = (Label) event.getSource();
-        String labelText = label.getText();
-        String labelID = ((Label) event.getSource()).getId();
-        System.out.println("Mouse click on label: " + labelText);
-        System.out.println("Clicked ID: " + labelID);
-        changePanToShelfPan(labelID);
-    }
-
-    /**
-     * ----    ShelfPanel Panel    -----
-     */
-    @FXML
-    private void changePanToShelfPan(String address) {
-        loadGraphWindow(address);
-        for (Pane allPanel : allPanels) {
-            allPanel.setVisible(false);
-        }
-        shelfPane.setVisible(true);
-        leftCornerInfoLabel.setText("StackApp Shelf- " + address.toUpperCase());
-    }
-
-    /**
-     * ----END B1 Panel END-----
-     */
-//######################################################################################################################
-    @FXML
-    void loadGraphWindow(String address) {
-        barChart.setVisible(true);
-        barChart.setTitle(address.toUpperCase());
-        System.out.println("Addres is " + address);
-        String temp = address.substring(0, 2);
-        int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
-        int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};
-        if (temp.equals("b1")) {
-            for (int i = 0; i < nrBtns.size(); i++) {
-                nrBtns.get(i).setLayoutX(xCoordinates[i]);
-            }
-        } else {
-            for (int i = 0; i < nrBtns.size(); i++) {
-                nrBtns.get(i).setLayoutX(xCoordinatesRev[i]);
-            }
-        }
-        Connect conn = new Connect();
-        //insert data from select count
-        count1 = conn.capacityOf(address+"1");
-        count2 = conn.capacityOf(address+"2");
-        count3 = conn.capacityOf(address+"3");
-        count4 = conn.capacityOf(address+"4");
-        count5 = conn.capacityOf(address+"5");
-        count6 = conn.capacityOf(address+"6");
-        count7 = conn.capacityOf(address+"7");
-
-        resetGraph();
-        addSerie(new XYChart.Series<>());
-    }
-
-    private void resetGraph() {
-        if (barChart.getData().size() > 0) {
-            barChart.getData().remove(0);
-        }
-    }
-
-    private void addSerie(XYChart.Series<String, Number> boxSerie) {
-        boxSerie.getData().add(new XYChart.Data("A", count1));
-        boxSerie.getData().add(new XYChart.Data("B", count2));
-        boxSerie.getData().add(new XYChart.Data("C", count3));
-        boxSerie.getData().add(new XYChart.Data("D", count4));
-        boxSerie.getData().add(new XYChart.Data("E", count5));
-        boxSerie.getData().add(new XYChart.Data("F", count6));
-        boxSerie.getData().add(new XYChart.Data("G", count7));
-
-        barChart.getData().addAll(boxSerie);
-    }
 }
 
