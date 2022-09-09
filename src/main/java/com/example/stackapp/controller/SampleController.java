@@ -693,7 +693,7 @@ public class SampleController {
     void loadGraphWindow(String address) {
         barChart.setVisible(true);
         barChart.setTitle(address.toUpperCase());
-
+        System.out.println("Addres is " + address);
         String temp = address.substring(0, 2);
         int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
         int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};
@@ -706,15 +706,15 @@ public class SampleController {
                 nrBtns.get(i).setLayoutX(xCoordinatesRev[i]);
             }
         }
-
+        Connect conn = new Connect();
         //insert data from select count
-        count1 = 5;
-        count2 = 9;
-        count3 = 5;
-        count4 = 2;
-        count5 = 7;
-        count6 = 7;
-        count7 = 3;
+        count1 = conn.capacityOf(address+"1");
+        count2 = conn.capacityOf(address+"2");
+        count3 = conn.capacityOf(address+"3");
+        count4 = conn.capacityOf(address+"4");
+        count5 = conn.capacityOf(address+"5");
+        count6 = conn.capacityOf(address+"6");
+        count7 = conn.capacityOf(address+"7");
 
         resetGraph();
         addSerie(new XYChart.Series<>());
