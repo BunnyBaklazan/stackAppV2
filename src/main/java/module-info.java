@@ -3,6 +3,7 @@ module com.example.stackapp {
     requires javafx.fxml;
     requires java.sql;
     requires java.prefs;
+    requires jbcrypt;
 
 
     opens com.example.stackapp to javafx.fxml;
