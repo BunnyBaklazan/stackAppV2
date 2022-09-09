@@ -168,6 +168,7 @@ public class SampleController {
 
         TextField[] testFieldsArr = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField,
                 weightField, fulfillmentField, statusField, noteField};
+
         Connect conn = new Connect();
         BoxData box = conn.searchForBox(boxId);
         System.out.println("BoxId is " + boxId);
@@ -635,6 +636,7 @@ public class SampleController {
             }
         }
 
+        //insert data from select count
         count1 = 5;
         count2 = 9;
         count3 = 5;

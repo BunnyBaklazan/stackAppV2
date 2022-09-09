@@ -22,6 +22,9 @@ public class Connect {
     private static final String SELECT_COUNT
             ="SELECT COUNT(*) FROM box WHERE shelf_id LIKE ?%";
 
+    public static final String DELETE_USER
+            ="DELETE FROM users WHERE id = ?";;
+
 
     public static Connection connect() {
         String url = "jdbc:sqlite:stackAppdbv1.db";
@@ -30,6 +33,7 @@ public class Connect {
         try {
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -42,7 +46,6 @@ public class Connect {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_USER);
 
-            //statement.setInt(1, 4);
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPassword());
@@ -74,6 +77,7 @@ public class Connect {
         try{
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_BOX);
+
         }catch (SQLException e){
             System.out.println(e);
         }
@@ -111,37 +115,43 @@ public class Connect {
             return null;
         }
     }
+
     //trying to give an objective view how much space are taken
-    public ResultSet stack_capacity(String stack){
+    public ResultSet capacityOf(String shelf){
         try{
-           // ResultSet result = null;
+            ResultSet result = null;
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_COUNT);
-            statement.setString(1, stack);
-            return statement.executeQuery();
+            statement.setString(1, shelf);
+
+            if(!result.isBeforeFirst()){
+                System.out.println("The answer is 0");
+                return null;
+            }
+
+            return result;
 
         } catch(SQLException e){
             System.out.println(e);
+            return null;
         }
-
-        return null;
     }
 
-    //max capacity 9 like shelf is 
-    public ResultSet shelf_capacity(String shelf){
-        try{
-            // ResultSet result = null;
-             Connection conn = connect();
-             PreparedStatement statement = conn.prepareStatement(SELECT_COUNT);
-             statement.setString(1, shelf);
-             return statement.executeQuery();
- 
-         } catch(SQLException e){
-             System.out.println(e);
-         }
+    public void deleteUser(int id){
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(DELETE_USER);
 
-        return null;
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
+
+
+
 
 
     public static void main(String[] args) {
