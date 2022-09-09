@@ -157,42 +157,42 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <Label fx:id="b1aa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label fx:id="b1aa" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1ba" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.rowIndex="3">
+                     <Label fx:id="b1ba" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1bb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.rowIndex="2">
+                     <Label fx:id="b1bb" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1bc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.rowIndex="1">
+                     <Label fx:id="b1bc" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1bd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BD">
+                     <Label fx:id="b1bd" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BD">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1ab" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Label fx:id="b1ab" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1ac" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label fx:id="b1ac" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b1ad" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.columnIndex="1">
+                     <Label fx:id="b1ad" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.columnIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
@@ -220,42 +220,42 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <Label fx:id="b2ad" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AD">
+                     <Label fx:id="b2ad" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AD">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2ac" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="1">
+                     <Label fx:id="b2ac" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2ab" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="2">
+                     <Label fx:id="b2ab" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2bd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1">
+                     <Label fx:id="b2bd" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2bc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label fx:id="b2bc" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2bb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Label fx:id="b2bb" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2ba" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label fx:id="b2ba" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="b2aa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="3">
+                     <Label fx:id="b2aa" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
@@ -269,7 +269,7 @@
                </Text>
             </children>
          </Pane>
-         <Pane fx:id="d1Pane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
+         <Pane fx:id="d1Pane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
             <children>
                <GridPane gridLinesVisible="true" layoutY="128.0" prefHeight="501.0" prefWidth="699.0" style="-fx-background-color: LIGHTBLUE; -fx-border-color: BLUE;">
                  <columnConstraints>
@@ -289,182 +289,182 @@
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <Label fx:id="d1ae" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AE" GridPane.rowIndex="1">
+                     <Label fx:id="d1ae" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AE" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ba" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <Label fx:id="d1ba" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BA" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1bb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <Label fx:id="d1bb" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BB" GridPane.columnIndex="1" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1bc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label fx:id="d1bc" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BC" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1bd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Label fx:id="d1bd" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BD" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ab" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="4">
+                     <Label fx:id="d1ab" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AB" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ac" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="3">
+                     <Label fx:id="d1ac" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AC" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ad" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.rowIndex="2">
+                     <Label fx:id="d1ad" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AD" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1aa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="5">
+                     <Label fx:id="d1aa" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AA" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1af" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" AF">
+                     <Label fx:id="d1af" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" AF">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ca" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CA" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <Label fx:id="d1ca" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" CA" GridPane.columnIndex="2" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1cb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CB" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <Label fx:id="d1cb" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" CB" GridPane.columnIndex="2" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1cc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CC" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <Label fx:id="d1cc" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" CC" GridPane.columnIndex="2" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1cd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CD" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <Label fx:id="d1cd" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" CD" GridPane.columnIndex="2" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ce" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <Label fx:id="d1ce" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" CE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1cf" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" CF" GridPane.columnIndex="2">
+                     <Label fx:id="d1cf" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" CF" GridPane.columnIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1be" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label fx:id="d1be" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1bf" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" BF" GridPane.columnIndex="1">
+                     <Label fx:id="d1bf" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" BF" GridPane.columnIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1da" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DA" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <Label fx:id="d1da" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" DA" GridPane.columnIndex="3" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ea" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EA" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <Label fx:id="d1ea" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" EA" GridPane.columnIndex="4" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1fa" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FA" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <Label fx:id="d1fa" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" FA" GridPane.columnIndex="5" GridPane.rowIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1fb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FB" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <Label fx:id="d1fb" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" FB" GridPane.columnIndex="5" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1fc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FC" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <Label fx:id="d1fc" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" FC" GridPane.columnIndex="5" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1fd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FD" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                     <Label fx:id="d1fd" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" FD" GridPane.columnIndex="5" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1fe" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FE" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <Label fx:id="d1fe" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" FE" GridPane.columnIndex="5" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ff" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" FF" GridPane.columnIndex="5">
+                     <Label fx:id="d1ff" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" FF" GridPane.columnIndex="5">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1db" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DB" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <Label fx:id="d1db" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" DB" GridPane.columnIndex="3" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1eb" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EB" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <Label fx:id="d1eb" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" EB" GridPane.columnIndex="4" GridPane.rowIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1dc" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DC" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <Label fx:id="d1dc" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" DC" GridPane.columnIndex="3" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ec" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EC" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <Label fx:id="d1ec" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" EC" GridPane.columnIndex="4" GridPane.rowIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1dd" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DD" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <Label fx:id="d1dd" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" DD" GridPane.columnIndex="3" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ed" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" ED" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <Label fx:id="d1ed" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" ED" GridPane.columnIndex="4" GridPane.rowIndex="2">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1de" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <Label fx:id="d1de" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" DE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ee" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <Label fx:id="d1ee" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" EE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1df" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" DF" GridPane.columnIndex="3">
+                     <Label fx:id="d1df" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" DF" GridPane.columnIndex="3">
                         <font>
                            <Font size="71.0" />
                         </font>
                      </Label>
-                     <Label fx:id="d1ef" onMouseClicked="#handleLabel" prefHeight="88.0" prefWidth="121.0" text=" EF" GridPane.columnIndex="4">
+                     <Label fx:id="d1ef" onMouseClicked="#checksPressedShelfID" prefHeight="88.0" prefWidth="121.0" text=" EF" GridPane.columnIndex="4">
                         <font>
                            <Font size="71.0" />
                         </font>
@@ -652,7 +652,7 @@
             </children>
          </Pane>
          <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false" />
-         <Pane fx:id="b1ShelfPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
+         <Pane fx:id="shelfPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
             <children>
                <BarChart fx:id="barChart" layoutY="14.0" prefHeight="508.0" prefWidth="672.0" style="-fx-background-color: #dce2e8;">
                  <xAxis>
@@ -669,41 +669,180 @@
                      <Insets />
                   </opaqueInsets>
                </BarChart>
-               <Button fx:id="btn1" layoutX="47.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="1">
+               <Button fx:id="btn1" layoutX="47.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="1">
                   <font>
                      <Font name="System Bold" size="36.0" />
                   </font>
                </Button>
-               <Button fx:id="btn2" layoutX="133.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="2">
+               <Button fx:id="btn2" layoutX="133.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="2">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button fx:id="btn3" layoutX="219.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="3">
+               <Button fx:id="btn3" layoutX="219.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="3">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button fx:id="btn4" layoutX="305.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="4">
+               <Button fx:id="btn4" layoutX="305.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="4">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button fx:id="btn5" layoutX="391.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="5">
+               <Button fx:id="btn5" layoutX="391.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="5">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button fx:id="btn6" layoutX="477.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="6">
+               <Button fx:id="btn6" layoutX="477.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="6">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button fx:id="btn7" layoutX="563.0" layoutY="485.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="7">
+               <Button fx:id="btn7" layoutX="563.0" layoutY="485.0" mnemonicParsing="false" onAction="#checksPressedSectionID" prefHeight="71.0" prefWidth="84.0" style="-fx-background-color: #f3622d;" text="7">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
+            </children>
+         </Pane>
+         <Pane fx:id="addressPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
+            <children>
+               <ImageView fx:id="box4" fitHeight="150.0" fitWidth="200.0" layoutX="110.0" layoutY="250.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-green.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box1" fitHeight="150.0" fitWidth="200.0" layoutX="110.0" layoutY="390.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-purple.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box8" fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="110.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-blue.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box7" fitHeight="150.0" fitWidth="200.0" layoutX="110.0" layoutY="110.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-black.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box9" fitHeight="150.0" fitWidth="200.0" layoutX="410.0" layoutY="110.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-brown.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box5" fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="250.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-orange.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box6" fitHeight="150.0" fitWidth="200.0" layoutX="410.0" layoutY="250.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-pink.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box2" fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="390.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-red.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="box3" fitHeight="150.0" fitWidth="200.0" layoutX="410.0" layoutY="390.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../IMG/box-yellow.png" />
+                  </image>
+               </ImageView>
+               <Text fx:id="bIdForBox1" fill="#ab11ab" layoutX="128.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox1" fill="#ab11ab" layoutX="153.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox12" fill="RED" layoutX="277.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox2" fill="RED" layoutX="302.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox3" fill="#d7d71d" layoutX="429.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox3" fill="#d7d71d" layoutX="454.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox4" fill="GREEN" layoutX="128.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox4" fill="GREEN" layoutX="153.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox5" fill="ORANGE" layoutX="277.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox5" fill="ORANGE" layoutX="302.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox6" fill="PINK" layoutX="428.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox6" fill="PINK" layoutX="453.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox7" layoutX="128.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox7" layoutX="153.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox8" fill="BLUE" layoutX="277.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox8" fill="BLUE" layoutX="302.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="bIdForBox9" fill="#8a3719" layoutX="429.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
+               <Text fx:id="CIdForBox9" fill="#8a3719" layoutX="454.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+                  <font>
+                     <Font size="21.0" />
+                  </font>
+               </Text>
             </children>
          </Pane>
       </AnchorPane>
