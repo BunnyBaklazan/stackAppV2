@@ -699,41 +699,20 @@ public class SampleController {
         secretProgressBar.setProgress(0);
         running = false;
 
-        ImageView[] myBoxImageArr = {myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox,
-                myRedBox, myYellowBox};
+        List<ImageView> myBoxImageArr = List.of(myBlackBox, myBlueBox, myOrangeBox,
+                myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox);
+        int[] xCoordinates = {22, 354, 263, 421, 188, 496, 105, 338, 180};
+        int[] yCoordinates = {495, 248, 372, 372, 248, 495, 372, 495, 495};
+
         for (ImageView imageView : myBoxImageArr) {
             imageView.setVisible(true);
         }
 
-        myPinkBox.setLayoutX(188);
-        myPinkBox.setLayoutY(248);
-        myPinkBox.setRotate(0);
-        myBlueBox.setLayoutX(354);
-        myBlueBox.setLayoutY(248);
-        myBlueBox.setRotate(0);
-
-        myPurpleBox.setLayoutX(105);
-        myPurpleBox.setLayoutY(372);
-        myPurpleBox.setRotate(0);
-        myOrangeBox.setLayoutX(263);
-        myOrangeBox.setLayoutY(372);
-        myOrangeBox.setRotate(0);
-        myBrownBox.setLayoutX(421);
-        myBrownBox.setLayoutY(372);
-        myBrownBox.setRotate(0);
-
-        myBlackBox.setLayoutX(22);
-        myBlackBox.setLayoutY(495);
-        myBlackBox.setRotate(0);
-        myYellowBox.setLayoutX(180);
-        myYellowBox.setLayoutY(495);
-        myYellowBox.setRotate(0);
-        myRedBox.setLayoutX(338);
-        myRedBox.setLayoutY(495);
-        myRedBox.setRotate(0);
-        myGreenBox.setLayoutX(496);
-        myGreenBox.setLayoutY(495);
-        myGreenBox.setRotate(0);
+        for (int i = 0; i < myBoxImageArr.size(); i++) {
+            myBoxImageArr.get(i).setLayoutX(xCoordinates[i]);
+            myBoxImageArr.get(i).setLayoutY(yCoordinates[i]);
+            myBoxImageArr.get(i).setRotate(0);
+        }
     }
 
     public class LoadingScreen implements Runnable {
