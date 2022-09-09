@@ -130,6 +130,22 @@ public class AdminController {
                 tf_username.getText());
 
         conn.insertUser(user);
+
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        tf_password.setText("");
+        tf_username.setText("");
+
+      /*      PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, tf_first_name.getText());
+            statement.setString(2, tf_last_name.getText());
+            statement.setString(3, encryptPass(tf_password.getText()));
+            statement.setString(4, tf_username.getText());
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }*/
+
         showUsersTable(); // show table after insertion
     }
 
