@@ -1,6 +1,7 @@
 package com.example.stackapp.controller;
 
 import com.example.stackapp.Main;
+import connect.net.sqlite.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,51 +46,51 @@ public class LoginController {
     public void login() {
         String username = tf_username.getText();
         String password = pf_password.getText();
-
+        Connect conn = new Connect();
+        ResultSet result = null;
 
         System.out.println("USER ENTERED VARIABLED " + username + " " + password);
-        /// CONNECT TO DABASE, RECEIVE INFO
+
         if (!isValidCredentials(username, password)) {
             System.out.println("Username or password is missing");
             l_errorText.setVisible(true);
             return;
         }
         l_errorText.setVisible(false);
-        // connect to DB
-        Connection conn;
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;
-        try {
-            // db parameters
-            String url = "jdbc:sqlite:stackAppdbv1.db";
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
-            preparedStatement = conn.prepareStatement("SELECT password FROM users WHERE USERNAME = ?");
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
 
-            if (!resultSet.isBeforeFirst()) {
+        try {
+            result = conn.checkLogin(username);
+
+            if (!result.isBeforeFirst()) {
                 System.out.println("User is not found!");
                 l_errorText.setText("User is not found!");
                 l_errorText.setVisible(true);
+
             } else {
-                while (resultSet.next()) {
-                    String retrievedPassword = resultSet.getString("password");
+                while (result.next()) {
+                    String retrievedPassword = result.getString("password");
                     //throw new RuntimeException(e);
-                    if (BCrypt.checkpw(password, retrievedPassword)) { // database update is needed otherwise it won't let you in :(
+
+                    // database update is needed otherwise it won't let you in :(
+                    if (BCrypt.checkpw(password, retrievedPassword)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
+
                         if(username.equals("asd")) {
                             userPreferences.put("role", "admin");
                             window.changePage(ADMIN_DASHBOARD);
+
                         } else {
                             userPreferences.put("role", "worker");
                             window.changePage(SAMPLE_PAGE);
+
                         }
+
                     } else {
                         System.out.println("Passwords did not match!");
                         l_errorText.setText("Passwords did not match!");
                         l_errorText.setVisible(true);
+
                     }
                 }
             }
