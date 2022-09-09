@@ -1,22 +1,22 @@
 package com.example.stackapp.controller;
 
-import java.sql.*;
-import java.util.prefs.Preferences;
 import com.example.stackapp.Main;
-import com.example.stackapp.model.User;
 import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import org.w3c.dom.events.MouseEvent;
 
-import java.util.Arrays;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.prefs.Preferences;
 
 import static connect.net.sqlite.Connect.connect;
 
@@ -87,24 +87,16 @@ public class AdminController {
     //     }
 
     @FXML
-    private void delete() throws SQLException {
+    private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-        String query = "DELETE FROM users WHERE id = ?";
-        Connection conn = connect();
-        PreparedStatement preparedStatement;
-        try {
-            preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.executeUpdate();
+        Connect conn = new Connect();
+        conn.deleteUser(user.getId());
 
-            tf_first_name.setText("");
-            tf_last_name.setText("");
-            tf_password.setText("");
-            tf_username.setText("");
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        tf_password.setText("");
+        tf_username.setText("");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         //put execution of query here
         showUsersTable();
     }
@@ -119,6 +111,7 @@ public class AdminController {
                 + " WHERE username='" + tf_username.getText()+"' ";
         PreparedStatement preparedStatement;
         ResultSet resultSet;
+
         try {
             preparedStatement = conn.prepareStatement(query);
            // preparedStatement.setInt(1, user.getId());
