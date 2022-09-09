@@ -129,7 +129,6 @@ public class AdminController {
 
     @FXML
     private void insert() throws SQLException {
-
         try{
             Connection conn = connect();
             String query = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
@@ -137,7 +136,7 @@ public class AdminController {
             statement.setString(1, tf_first_name.getText());
             statement.setString(2, tf_last_name.getText());
             statement.setString(3, encryptPass(tf_password.getText()));
-            statement.setString(4, tf_first_name.getText() + tf_last_name.getText());
+            statement.setString(4, tf_username.getText());
             statement.executeUpdate();
         } catch(SQLException e) {
             System.out.println(e.getMessage());
@@ -191,5 +190,12 @@ public class AdminController {
         tc_username.setCellValueFactory(new PropertyValueFactory<UserData, String>("userName"));
 
         table_users.setItems(list);
+    }
+
+    @FXML
+    void setUsername() {
+        String name= tf_first_name.getText().toLowerCase();
+        String surname= tf_last_name.getText().toLowerCase();
+        tf_username.setText(name.toLowerCase()+"."+surname.toLowerCase());
     }
 }
