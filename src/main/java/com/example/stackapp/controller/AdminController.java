@@ -130,6 +130,12 @@ public class AdminController {
                 tf_username.getText());
 
         Connect.insertUser(user);
+
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        tf_password.setText("");
+        tf_username.setText("");
+        
         showUsersTable(); // show table after insertion
     }
 
