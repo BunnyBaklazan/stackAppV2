@@ -141,6 +141,11 @@ public class AdminController {
 
         conn.insertUser(user);
 
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        tf_password.setText("");
+        tf_username.setText("");
+
       /*      PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, tf_first_name.getText());
             statement.setString(2, tf_last_name.getText());
