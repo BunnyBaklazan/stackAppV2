@@ -469,7 +469,7 @@
                     </font>
                 </Text>
             </Pane>
-            <Pane fx:id="searchBoxPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
+            <Pane fx:id="searchBoxPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
                 <TextField fx:id="dateEndField" editable="false" layoutX="439.0" layoutY="240.0" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #dce2e8;">
                     <font>
                         <Font size="24.0" />
@@ -642,7 +642,7 @@
             </Pane>
 
 
-            <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
+            <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
 
                 <Label layoutX="180.0" layoutY="510.0" prefHeight="20.0" prefWidth="84.0" text="USERNAME">
                     <font>
@@ -674,22 +674,22 @@
                     </columns>
                 </TableView>
                 <VBox layoutX="271.0" layoutY="393.0" prefHeight="200.0" prefWidth="142.0" spacing="10.0">
-                    <TextField fx:id="tf_first_name">
+                    <TextField fx:id="tf_first_name" onMouseClicked="#checkIfErrorIsOn">
                         <font>
                             <Font size="14.0" />
                         </font>
                     </TextField>
-                    <TextField fx:id="tf_last_name">
+                    <TextField fx:id="tf_last_name" onMouseClicked="#checkIfErrorIsOn">
                         <font>
                             <Font size="14.0" />
                         </font>
                     </TextField>
-                    <PasswordField fx:id="pass_field" onKeyPressed="#setUsername">
+                    <PasswordField fx:id="pass_field" onKeyPressed="#setUsername" onMouseClicked="#checkIfErrorIsOn">
                         <font>
                             <Font size="14.0" />
                         </font>
                     </PasswordField>
-                    <TextField fx:id="tf_username">
+                    <TextField fx:id="tf_username" onMouseClicked="#checkIfErrorIsOn">
                         <font>
                             <Font size="14.0" />
                         </font>
@@ -710,6 +710,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
+            <Label fx:id="label_error" layoutX="271.0" layoutY="350.0" prefHeight="27.0" prefWidth="155.0" textFill="#d71d1d" />
 
 
 
