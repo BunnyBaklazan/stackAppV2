@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #dce2e8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #dce2e8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AppController">
    <children>
       <Pane prefHeight="700.0" prefWidth="254.0">
          <children>
@@ -46,20 +46,20 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="button_login" layoutX="490.0" layoutY="511.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="50.0" prefWidth="120.0" text="Login">
-         <font>
-            <Font name="Cambria Bold" size="18.0" />
-         </font>
-      </Button>
-      <PasswordField fx:id="pf_password" layoutX="460.0" layoutY="418.0" prefHeight="45.0" prefWidth="180.0">
-         <font>
-            <Font size="24.0" />
-         </font></PasswordField>
       <TextField fx:id="tf_username" layoutX="460.0" layoutY="328.0" pickOnBounds="false" prefHeight="45.0" prefWidth="180.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </TextField>
+      <PasswordField fx:id="pf_password" layoutX="460.0" layoutY="418.0" prefHeight="45.0" prefWidth="180.0">
+         <font>
+            <Font size="24.0" />
+         </font></PasswordField>
+      <Button fx:id="button_login" layoutX="490.0" layoutY="511.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="50.0" prefWidth="120.0" text="Login">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Button>
       <TextField fx:id="errorTxtField" alignment="TOP_CENTER" editable="false" layoutX="201.0" layoutY="466.0" prefHeight="26.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" stylesheets="@../colors.css" text="Username or password is missing!" visible="false">
          <font>
             <Font size="24.0" />
