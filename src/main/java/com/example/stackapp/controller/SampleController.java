@@ -19,7 +19,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class SampleController {
     LoadingScreen loadingScreen;
@@ -232,8 +231,6 @@ public class SampleController {
             statusField.setText(box.getStatus() != null ? box.getStatus() : EMPTY_STRING);
             noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : EMPTY_STRING);
 
-            //blackpink in the area
-            //please stop with blackpink!
 
         }
 
@@ -348,10 +345,34 @@ public class SampleController {
     }
 
     @FXML
-    private void saveBoxtoDB() {
+    private void saveBox() {
         TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
                 fulfillmentField, statusField, noteField};
-        //need to add connection to DB to save edits
+
+        if (shelfIDField.getText().isEmpty() || clientIDField.getText().isEmpty()
+            || boxIDField.getText().isEmpty()) {
+
+            notificationTxt.setStyle("-fx-fill: red;");
+            notificationTxt.setText("Error, adding Box to the database. Please fill ShelfID and ClientID");
+
+        } else {
+            Connect.insertBox( new BoxData(
+                    Long.parseLong(boxIDField.getText()),
+                    Long.parseLong(clientIDField.getText()),
+                    dateFromField.getText() != null ? dateFromField.getText() : EMPTY_STRING,
+                    dateEndField.getText() != null ? dateEndField.getText() : EMPTY_STRING,
+                    fulfillmentField.getText() != null ? fulfillmentField.getText() : EMPTY_STRING,
+                    statusField.getText() != null ? statusField.getText() : EMPTY_STRING,
+                    noteField.getText() != null ? noteField.getText() : EMPTY_STRING,
+                    weightField.getText() != null ? weightField.getText() : EMPTY_STRING,
+                    shelfIDField.getText()
+            ));
+            notificationTxt.setStyle("-fx-fill: #2c6432;");
+            notificationTxt.setText("The box has been successfully saved in the database");
+        }
+
+
+        /*//need to add connection to DB to save edits
         String[] testTxtsArr = new String[textFields.length];
         for (int i = 0; i < textFields.length; i++) {
             if (shelfIDField.getText().equals("") || clientIDField.getText().equals("") ||
@@ -365,12 +386,12 @@ public class SampleController {
                 notificationTxt.setStyle("-fx-fill: #2c6432;");
                 notificationTxt.setText("The box has been successfully saved in the database");
             }
-        }
+        }*/
 
         editBtn.setVisible(true);
         saveBtn.setVisible(false);
 
-        System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
+        //System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
         saveBtn.setDisable(true);
         editBtn.setDisable(false);
 

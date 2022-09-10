@@ -98,13 +98,16 @@ public class Connect {
     }
 
     public void updateBox(BoxData box) {
+
         //insert
 
     }
 
     //create new box in the db
     public static void insertBox(BoxData box) {
+
         try {
+
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_BOX);
 
@@ -125,7 +128,6 @@ public class Connect {
     }
 
     public static BoxData searchForBox(long boxId) {
-
         try {
             ResultSet result;
             Connection conn = connect();
