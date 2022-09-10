@@ -40,7 +40,10 @@ public class SampleController {
     //------------------------
 
     @FXML
-    private TextField tf_first_name, tf_last_name, tf_password, tf_username;
+    private TextField tf_first_name, tf_last_name, tf_username;
+
+    @FXML
+    private PasswordField pass_field;
 
     @FXML
     private TableView<UserData> table_users;
@@ -50,6 +53,9 @@ public class SampleController {
 
     @FXML
     private TableColumn<UserData, String> tc_first_name, tc_last_name, tc_password, tc_username;
+
+    @FXML
+    private Label label_error;
 
     //-------------------------
 
@@ -795,40 +801,52 @@ public class SampleController {
     @FXML
     private void handleMouseAction() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-        tf_first_name.setText(user.getFirstName());
-        tf_last_name.setText(user.getLastName());
-        tf_password.setText(user.getPassword());
-        tf_username.setText(user.getUserName());
+        if (user != null) {
+            tf_first_name.setText(user.getFirstName());
+            tf_last_name.setText(user.getLastName());
+            pass_field.setText(user.getPassword());
+            tf_username.setText(user.getUserName());
+        }
+    }
+
+    private boolean isValidUserData() {
+        String firstName = tf_first_name.getText().trim();
+        String lastName = tf_last_name.getText().trim();
+        String password = pass_field.getText().trim();
+        String username = tf_username.getText().trim();
+        if (firstName.equals("") || lastName.equals("") || password.equals("") || username.equals("")) {
+            return  false;
+        }
+        return true;
+    }
+
+    private void setEmptyStrings() {
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        pass_field.setText("");
+        tf_username.setText("");
     }
 
     @FXML
     private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-
-        //Connect conn = new Connect();
         Connect.deleteUser(user.getId());
-
-        tf_first_name.setText("");
-        tf_last_name.setText("");
-        tf_password.setText("");
-        tf_username.setText("");
-
-        //put execution of query here
+        setEmptyStrings();
         showUsersTable();
     }
 
     @FXML
     private void update() {
-
         Connect.updateUserTable(
                 new UserData(
                         tf_first_name.getText(),
                         tf_last_name.getText(),
-                        tf_password.getText(),
+                        pass_field.getText(),
                         tc_id.getText()
                 )
         );
 
+        setEmptyStrings();
         showUsersTable();
     }
 
@@ -838,23 +856,24 @@ public class SampleController {
 
     @FXML
     private void insert() {
-        //Connect conn = new Connect();
-
         UserData user = new UserData(
                 tf_first_name.getText(),
                 tf_last_name.getText(),
-                encryptPass(tf_password.getText()),
+                encryptPass(pass_field.getText()),
                 tf_username.getText());
 
-        Connect.insertUser(user);
-
-        tf_first_name.setText("");
-        tf_last_name.setText("");
-        tf_password.setText("");
-        tf_username.setText("");
-
-        showUsersTable(); // show table after insertion
+        if(!isValidUserData()) {
+            System.out.println("Invalid Credentials");
+            label_error.setText("Error! Enter all text fields!");
+        } else {
+            System.out.println("Inserting user");
+            label_error.setText("");
+            Connect.insertUser(user);
+            setEmptyStrings();
+            showUsersTable(); // show table after insertion
+        }
     }
+
 
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();

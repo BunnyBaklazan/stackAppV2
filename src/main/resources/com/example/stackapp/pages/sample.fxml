@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -653,7 +654,10 @@
                     </Button>
                 </children>
             </Pane>
+
+
             <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
+
                 <Label layoutX="180.0" layoutY="510.0" prefHeight="20.0" prefWidth="84.0" text="USERNAME">
                     <font>
                         <Font size="16.0" />
@@ -692,16 +696,16 @@
                                 <Font size="14.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="tf_last_name">
+                        <TextField fx:id="tf_last_name"  onMouseClicked="#setUsername">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="tf_password" onMouseClicked="#setUsername">
+                        <PasswordField fx:id="pass_field">
                             <font>
                                 <Font size="14.0" />
                             </font>
-                        </TextField>
+                        </PasswordField>
                         <TextField fx:id="tf_username">
                             <font>
                                 <Font size="14.0" />
