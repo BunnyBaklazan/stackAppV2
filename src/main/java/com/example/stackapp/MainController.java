@@ -30,13 +30,13 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadingScreen= new LoadingScreen(progressBar, txt);
+        loadingScreen = new LoadingScreen(progressBar, txt);
         startProgress();
     }
 
     @FXML
     void startProgress() {
-        Thread thread= new Thread(loadingScreen);
+        Thread thread = new Thread(loadingScreen);
         thread.setDaemon(true);
         thread.start();
     }
@@ -53,36 +53,36 @@ public class MainController implements Initializable {
         ProgressIndicator progressBar;
         Text txt;
 
-        public LoadingScreen(ProgressIndicator progressIndicator, Text txt){
-            this.progressBar= progressIndicator;
-            this.txt= txt;
+        public LoadingScreen(ProgressIndicator progressIndicator, Text txt) {
+            this.progressBar = progressIndicator;
+            this.txt = txt;
         }
 
         @Override
         public void run() {
             while (progressBar.getProgress() <= 1) {
-                if(progressBar.getProgress()>= 0.1 && progressBar.getProgress()<= 0.2) {
+                if (progressBar.getProgress() >= 0.1 && progressBar.getProgress() <= 0.2) {
                     txt.setText(secretTextArr[0]);
                     txt.setFill(Color.GREEN);
-                } else if(progressBar.getProgress()>= 0.2 && progressBar.getProgress()<= 0.3){
+                } else if (progressBar.getProgress() >= 0.2 && progressBar.getProgress() <= 0.3) {
                     txt.setText(secretTextArr[1]);
                     txt.setFill(Color.YELLOW);
-                } else if(progressBar.getProgress()>= 0.3 && progressBar.getProgress()<= 0.5){
+                } else if (progressBar.getProgress() >= 0.3 && progressBar.getProgress() <= 0.5) {
                     txt.setText(secretTextArr[2]);
                     txt.setFill(Color.PINK);
-                } else if(progressBar.getProgress()>= 0.5 && progressBar.getProgress()<= 0.6){
+                } else if (progressBar.getProgress() >= 0.5 && progressBar.getProgress() <= 0.6) {
                     txt.setText(secretTextArr[3]);
                     txt.setFill(Color.WHITE);
-                } else if(progressBar.getProgress()>= 0.6 && progressBar.getProgress()<= 0.7){
+                } else if (progressBar.getProgress() >= 0.6 && progressBar.getProgress() <= 0.7) {
                     txt.setText(secretTextArr[4]);
                     txt.setFill(Color.BROWN);
-                } else if(progressBar.getProgress()>= 0.7 && progressBar.getProgress()<= 0.8){
+                } else if (progressBar.getProgress() >= 0.7 && progressBar.getProgress() <= 0.8) {
                     txt.setText(secretTextArr[5]);
                     txt.setFill(Color.PURPLE);
-                } else if(progressBar.getProgress()>= 0.8 && progressBar.getProgress()<= 0.9){
+                } else if (progressBar.getProgress() >= 0.8 && progressBar.getProgress() <= 0.9) {
                     txt.setText(secretTextArr[6]);
                     txt.setFill(Color.BLUE);
-                } else if(progressBar.getProgress()>= 0.9 && progressBar.getProgress()<= 0.99){
+                } else if (progressBar.getProgress() >= 0.9 && progressBar.getProgress() <= 0.99) {
                     txt.setText(secretTextArr[0]);
                     txt.setFill(Color.VIOLET);
                 }
@@ -103,7 +103,7 @@ public class MainController implements Initializable {
     }
 
     public void openLoginPage() throws IOException {
-        if(progressBar.getProgress()>= 0.99) {
+        if (progressBar.getProgress() >= 0.99) {
             window.changePage(LOGIN_PAGE);
         }
     }
