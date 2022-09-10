@@ -104,14 +104,13 @@ public class SampleController {
 
     private int count1, count2, count3, count4, count5, count6, count7;
 
-    List<Pane> allPanels;
-    List<ImageView> allBoxIMG;
-    List<TextField> textFieldsForConnection;
-    List<Button> nrBtns;
-    List<ImageView> boxes;
-    List<Text> boxIDs;
-    List<Text> clientIDs;
-
+    private List<Pane> allPanels;
+    private List<ImageView> allBoxIMG;
+    private List<TextField> textFieldsForConnection;
+    private List<Button> nrBtns;
+    private List<ImageView> boxes;
+    private List<Text> boxIDs;
+    private List<Text> clientIDs;
     @FXML
     public void initialize() {
         boxes = List.of(box1, box2, box3, box4, box5, box6, box7, box8, box9);
@@ -637,10 +636,8 @@ public class SampleController {
             }
         }
         Connect conn = new Connect();
-/*
         // This shortcut doesnt work!!!
-        int[] counts = {count1, count2, count3, count4, count5, count6, count7};
-
+        /*int[] counts = {count1, count2, count3, count4, count5, count6, count7};
         for (int i = 0; i < counts.length; i++) {
             counts[i] = conn.capacityOf(address + (i+1));
             System.out.println(address + (i+1));
