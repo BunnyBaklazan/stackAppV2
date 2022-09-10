@@ -157,7 +157,7 @@ public class SampleController {
 
         // ADMIN PAGE
         String role = userPreferences.get("role", null);
-        if (role.equals("admin")) {
+        if (role.equals("asd")) { // need to change to "admin"
             System.out.println("You are in the admin dashboard");
             addWorkerBtn.setVisible(true);
             showUsersTable();
@@ -216,7 +216,7 @@ public class SampleController {
         requestBtn.setDisable(true);
         editBtn.setDisable(true);
         saveBtn.setDisable(true);
-        getBoxById(Integer.parseInt(boxID));
+        getBoxById(Long.parseLong(boxID));
 
     }
 
