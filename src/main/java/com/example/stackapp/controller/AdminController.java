@@ -7,15 +7,11 @@ import connect.net.sqlite.Connect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.prefs.Preferences;
 
 public class AdminController {
@@ -32,7 +28,7 @@ public class AdminController {
     private TextField tf_last_name;
 
     @FXML
-    private TextField tf_password;
+    private PasswordField pass_field;
 
     @FXML
     private TextField tf_username;
@@ -65,53 +61,57 @@ public class AdminController {
     private TableColumn<UserData, String> tc_username;
 
     @FXML
+    private Label label_error;
+
+    @FXML
     private void handleMouseAction() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-        tf_first_name.setText(user.getFirstName());
-        tf_last_name.setText(user.getLastName());
-        tf_password.setText(user.getPassword());
-        tf_username.setText(user.getUserName());
+        if (user != null) {
+            tf_first_name.setText(user.getFirstName());
+            tf_last_name.setText(user.getLastName());
+            pass_field.setText(user.getPassword());
+            tf_username.setText(user.getUserName());
+        }
     }
 
-    //private void executeQuery(String query) { // for refactoring
-    //    Connection conn = getConnection();
-    //    PreparedStatement ps;
-    //    try {
-    //        ps = conn.prepareStatement(query);
-    //        ps.executeUpdate();
-    //    } catch(Exception e) {
-    //        e.printStackTrace();
-    //    }
-    //     }
+    private boolean isValidUserData() {
+        String firstName = tf_first_name.getText().trim();
+        String lastName = tf_last_name.getText().trim();
+        String password = pass_field.getText().trim();
+        String username = tf_username.getText().trim();
+        if (firstName.equals("") || lastName.equals("") || password.equals("") || username.equals("")) {
+            return  false;
+        }
+        return true;
+    }
+
+    private void setEmptyStrings() {
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        pass_field.setText("");
+        tf_username.setText("");
+    }
 
     @FXML
     private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-
-        //Connect conn = new Connect();
         Connect.deleteUser(user.getId());
-
-        tf_first_name.setText("");
-        tf_last_name.setText("");
-        tf_password.setText("");
-        tf_username.setText("");
-
-        //put execution of query here
+        setEmptyStrings();
         showUsersTable();
     }
 
     @FXML
     private void update() {
-
         Connect.updateUserTable(
                 new UserData(
                         tf_first_name.getText(),
                         tf_last_name.getText(),
-                        tf_password.getText(),
+                        pass_field.getText(),
                         tc_id.getText()
                 )
         );
 
+        setEmptyStrings();
         showUsersTable();
     }
 
@@ -121,22 +121,22 @@ public class AdminController {
 
     @FXML
     private void insert() {
-        //Connect conn = new Connect();
-
         UserData user = new UserData(
                 tf_first_name.getText(),
                 tf_last_name.getText(),
-                encryptPass(tf_password.getText()),
+                encryptPass(pass_field.getText()),
                 tf_username.getText());
 
-        Connect.insertUser(user);
-
-        tf_first_name.setText("");
-        tf_last_name.setText("");
-        tf_password.setText("");
-        tf_username.setText("");
-
-        showUsersTable(); // show table after insertion
+        if(!isValidUserData()) {
+            System.out.println("Invalid Credentials");
+            label_error.setText("Error! Enter all text fields!");
+        } else {
+            System.out.println("Inserting user");
+            label_error.setText("");
+            Connect.insertUser(user);
+            setEmptyStrings();
+            showUsersTable(); // show table after insertion
+        }
     }
 
     @FXML

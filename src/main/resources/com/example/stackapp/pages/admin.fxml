@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,92 +12,79 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.stackapp.controller.AdminController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AdminController">
     <top>
         <Pane prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #99a1a8;" BorderPane.alignment="CENTER">
             <Label layoutX="14.0" layoutY="11.0" text="StackApp Choose Destination">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
-            <Label layoutX="842.0" layoutY="14.0"/>
+            <Label layoutX="842.0" layoutY="14.0" />
         </Pane>
     </top>
     <left>
         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" BorderPane.alignment="CENTER">
             <VBox layoutY="27.0" prefHeight="494.0" prefWidth="200.0">
                 <children>
-                    <Button fx:id="b1" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD #AAB2BD;" text="B1">
+                    <Button fx:id="b1" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD #AAB2BD;" text="B1">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="b2" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="B2">
+                    <Button fx:id="b2" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="B2">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d1" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D1">
+                    <Button fx:id="d1" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D1">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d2" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D2">
+                    <Button fx:id="d2" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D2">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d3" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D3">
+                    <Button fx:id="d3" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D3">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d4" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D4">
+                    <Button fx:id="d4" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D4">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d5" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D5">
+                    <Button fx:id="d5" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D5">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d6" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D6">
+                    <Button fx:id="d6" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D6">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d7" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D7">
+                    <Button fx:id="d7" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D7">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="d8" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="D8">
+                    <Button fx:id="d8" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="D8">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="showSearchBox_Btn" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="SEARCH">
+                    <Button fx:id="showSearchBox_Btn" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="SEARCH">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
-                    <Button fx:id="addWorkerBtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0"
-                            style="-fx-background-color: #AAB2BD;" text="ADD WORKER" visible="false">
+                    <Button fx:id="addWorkerBtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #AAB2BD;" text="ADD WORKER" visible="false">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </Button>
                 </children>
@@ -107,76 +95,73 @@
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <Label layoutX="180.0" layoutY="510.0" prefHeight="20.0" prefWidth="84.0" text="USERNAME">
                 <font>
-                    <Font size="16.0"/>
+                    <Font size="16.0" />
                 </font>
             </Label>
             <Label layoutX="180.0" layoutY="475.0" prefHeight="20.0" prefWidth="88.0" text="PASSWORD">
                 <font>
-                    <Font size="16.0"/>
+                    <Font size="16.0" />
                 </font>
             </Label>
             <Label layoutX="180.0" layoutY="435.0" text="LAST NAME">
                 <font>
-                    <Font size="16.0"/>
+                    <Font size="16.0" />
                 </font>
             </Label>
             <Label layoutX="180.0" layoutY="399.0" text="FIRST NAME">
                 <font>
-                    <Font size="16.0"/>
+                    <Font size="16.0" />
                 </font>
             </Label>
             <Pane>
             </Pane>
-            <TableView fx:id="table_users" layoutX="35.0" layoutY="41.0" onMouseClicked="#handleMouseAction"
-                       prefHeight="298.0" prefWidth="613.0">
+            <TableView fx:id="table_users" layoutX="35.0" layoutY="41.0" onMouseClicked="#handleMouseAction" prefHeight="298.0" prefWidth="613.0">
                 <columns>
-                    <TableColumn fx:id="tc_id" prefWidth="88.0" text="ID"/>
-                    <TableColumn fx:id="tc_first_name" prefWidth="134.0" text="FIRST NAME"/>
-                    <TableColumn fx:id="tc_last_name" prefWidth="120.0" text="LAST NAME"/>
-                    <TableColumn fx:id="tc_password" prefWidth="155.0" text="PASSWORD"/>
-                    <TableColumn fx:id="tc_username" prefWidth="115.0" text="USERNAME"/>
+                    <TableColumn fx:id="tc_id" prefWidth="88.0" text="ID" />
+                    <TableColumn fx:id="tc_first_name" prefWidth="134.0" text="FIRST NAME" />
+                    <TableColumn fx:id="tc_last_name" prefWidth="120.0" text="LAST NAME" />
+                    <TableColumn fx:id="tc_password" prefWidth="155.0" text="PASSWORD" />
+                    <TableColumn fx:id="tc_username" prefWidth="115.0" text="USERNAME" />
                 </columns>
             </TableView>
             <VBox layoutX="271.0" layoutY="393.0" prefHeight="200.0" prefWidth="142.0" spacing="10.0">
                 <children>
                     <TextField fx:id="tf_first_name">
                         <font>
-                            <Font size="14.0"/>
+                            <Font size="14.0" />
                         </font>
                     </TextField>
-                    <TextField fx:id="tf_last_name">
+                    <TextField fx:id="tf_last_name" onMouseClicked="#setUsername">
                         <font>
-                            <Font size="14.0"/>
+                            <Font size="14.0" />
                         </font>
                     </TextField>
-                    <TextField fx:id="tf_password" onMouseClicked="#setUsername">
-                        <font>
-                            <Font size="14.0"/>
-                        </font>
-                    </TextField>
+               <PasswordField fx:id="pass_field">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </PasswordField>
                     <TextField fx:id="tf_username">
                         <font>
-                            <Font size="14.0"/>
+                            <Font size="14.0" />
                         </font>
                     </TextField>
+               <Label fx:id="label_error" prefHeight="32.0" prefWidth="142.0" textFill="#ff0f0f" />
                 </children>
             </VBox>
-            <Button fx:id="btn_insert" layoutX="467.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#insert"
-                    prefHeight="30.0" prefWidth="64.0" text="Insert">
+            <Button fx:id="btn_insert" layoutX="467.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#insert" prefHeight="30.0" prefWidth="64.0" text="Insert">
                 <font>
-                    <Font size="14.0"/>
+                    <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="btn_update" layoutX="467.0" layoutY="449.0" mnemonicParsing="false" onAction="#update"
-                    onMouseClicked="#update" prefHeight="30.0" prefWidth="64.0" text="Update">
+            <Button fx:id="btn_update" layoutX="467.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#update" prefHeight="30.0" prefWidth="64.0" text="Update">
                 <font>
-                    <Font size="14.0"/>
+                    <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="btn_delete" layoutX="467.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#delete"
-                    prefHeight="30.0" prefWidth="64.0" text="Delete">
+            <Button fx:id="btn_delete" layoutX="467.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="30.0" prefWidth="64.0" text="Delete">
                 <font>
-                    <Font size="14.0"/>
+                    <Font size="14.0" />
                 </font>
             </Button>
         </AnchorPane>
