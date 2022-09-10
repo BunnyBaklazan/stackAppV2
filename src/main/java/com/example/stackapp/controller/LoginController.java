@@ -3,7 +3,6 @@ package com.example.stackapp.controller;
 import com.example.stackapp.Main;
 import connect.net.sqlite.Connect;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,11 +15,8 @@ import java.util.prefs.Preferences;
 public class LoginController {
     private static final String MAIN_PAGE = "main.fxml";
     private static final String SAMPLE_PAGE = "pages/sample.fxml";
-    private static final String ADMIN_DASHBOARD = "pages/admin.fxml";
     private static final Preferences userPreferences = Preferences.userRoot();
     private static final Main window = new Main();
-    @FXML
-    private Button button_login;
 
     @FXML
     private TextField tf_username;
@@ -33,10 +29,6 @@ public class LoginController {
 
     public void backToMainPage() throws IOException {
         window.changePage(MAIN_PAGE);
-    }
-
-    public void refactorBACK() throws IOException {
-        window.changePage(SAMPLE_PAGE);
     }
 
     public static boolean isValidCredentials(String username, String password) {
@@ -75,14 +67,13 @@ public class LoginController {
                         //if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
-                        if (username.equals("asd.asd")) {
+                        if (username.equals("admin")) {
                             userPreferences.put("role", "admin");
-                            window.changePage(ADMIN_DASHBOARD);
+                            window.changePage(SAMPLE_PAGE);
 
                         } else {
                             userPreferences.put("role", "worker");
                             window.changePage(SAMPLE_PAGE);
-
                         }
 
                     } else {

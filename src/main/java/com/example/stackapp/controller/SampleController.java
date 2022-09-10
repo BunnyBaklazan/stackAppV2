@@ -3,9 +3,11 @@ package com.example.stackapp.controller;
 import static com.example.stackapp.model.SampleUtils.calcPeriod;
 import static java.lang.String.valueOf;
 import com.example.stackapp.model.BoxData;
-import com.example.stackapp.model.User;
+import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -13,15 +15,18 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import java.util.Arrays;
+import org.mindrot.jbcrypt.BCrypt;
+import java.sql.ResultSet;
 import java.util.List;
-import java.util.Locale;
+import java.util.prefs.Preferences;
 
 public class SampleController {
+    protected final static Preferences userPreferences = Preferences.userRoot();
     LoadingScreen loadingScreen;
 
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
@@ -29,10 +34,31 @@ public class SampleController {
     private volatile boolean running = true;
 
     public long boxId;
-    private final String ADMIN = "admin";
-    private User user = new User("asd", "admin");
-
     public static final String EMPTY_STRING = "";
+
+
+    //------------------------
+
+    @FXML
+    private TextField tf_first_name, tf_last_name, tf_username;
+
+    @FXML
+    private PasswordField pass_field;
+
+    @FXML
+    private TableView<UserData> table_users;
+
+    @FXML
+    private TableColumn<UserData, Integer> tc_id;
+
+    @FXML
+    private TableColumn<UserData, String> tc_first_name, tc_last_name, tc_password, tc_username;
+
+    @FXML
+    private Label label_error;
+
+    //-------------------------
+
 
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
@@ -115,10 +141,10 @@ public class SampleController {
         loadingScreen = new SampleController.LoadingScreen(secretProgressBar, myRedBox);
         startAnimationProgress();
 
-        addWorkerBtn.setDisable(true);
-        if (user.getRole().equals(ADMIN)) {
+        //addWorkerBtn.setDisable(true);
+        /*if (user.getRole().equals(ADMIN)) {
             addWorkerBtn.setDisable(false);
-        }
+        }*/
 
         // CHART SETTINGS
         yAxis.setAutoRanging(false);
@@ -126,6 +152,17 @@ public class SampleController {
         yAxis.setUpperBound(10.0);
         yAxis.setTickUnit(1.0);
         barChart.setAnimated(false);
+
+        // ADMIN PAGE
+        String role = userPreferences.get("role", null);
+        if (role.equals("admin")) {
+            System.out.println("You are in the admin dashboard");
+            addWorkerBtn.setVisible(true);
+            showUsersTable();
+        } else {
+            addWorkerBtn.setVisible(false);
+            // show content from sample controller
+        }
     }
 //######################################################################################################################
 
@@ -140,11 +177,6 @@ public class SampleController {
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
         restartAnimation();
-    }
-
-    @FXML
-    private void checkBtn() {
-        System.out.println("Btn pressed");
     }
     /**    ----END Default Panel END-----    */
 //######################################################################################################################
@@ -232,8 +264,6 @@ public class SampleController {
             statusField.setText(box.getStatus() != null ? box.getStatus() : EMPTY_STRING);
             noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : EMPTY_STRING);
 
-            //blackpink in the area
-            //please stop with blackpink!
 
         }
 
@@ -348,10 +378,34 @@ public class SampleController {
     }
 
     @FXML
-    private void saveBoxtoDB() {
+    private void saveBox() {
         TextField[] textFields = {shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
                 fulfillmentField, statusField, noteField};
-        //need to add connection to DB to save edits
+
+        if (shelfIDField.getText().isEmpty() || clientIDField.getText().isEmpty()
+            || boxIDField.getText().isEmpty()) {
+
+            notificationTxt.setStyle("-fx-fill: red;");
+            notificationTxt.setText("Error, adding Box to the database. Please fill ShelfID and ClientID");
+
+        } else {
+            Connect.insertBox( new BoxData(
+                    Long.parseLong(boxIDField.getText()),
+                    Long.parseLong(clientIDField.getText()),
+                    dateFromField.getText() != null ? dateFromField.getText() : EMPTY_STRING,
+                    dateEndField.getText() != null ? dateEndField.getText() : EMPTY_STRING,
+                    fulfillmentField.getText() != null ? fulfillmentField.getText() : EMPTY_STRING,
+                    statusField.getText() != null ? statusField.getText() : EMPTY_STRING,
+                    noteField.getText() != null ? noteField.getText() : EMPTY_STRING,
+                    weightField.getText() != null ? weightField.getText() : EMPTY_STRING,
+                    shelfIDField.getText()
+            ));
+            notificationTxt.setStyle("-fx-fill: #2c6432;");
+            notificationTxt.setText("The box has been successfully saved in the database");
+        }
+
+
+        /*//need to add connection to DB to save edits
         String[] testTxtsArr = new String[textFields.length];
         for (int i = 0; i < textFields.length; i++) {
             if (shelfIDField.getText().equals("") || clientIDField.getText().equals("") ||
@@ -365,12 +419,12 @@ public class SampleController {
                 notificationTxt.setStyle("-fx-fill: #2c6432;");
                 notificationTxt.setText("The box has been successfully saved in the database");
             }
-        }
+        }*/
 
         editBtn.setVisible(true);
         saveBtn.setVisible(false);
 
-        System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
+        //System.out.println("Šī brīža array = " + Arrays.toString(testTxtsArr));
         saveBtn.setDisable(true);
         editBtn.setDisable(false);
 
@@ -740,6 +794,137 @@ public class SampleController {
 
     /**
      * ----END Animation END-----
+     */
+//######################################################################################################################
+
+    /**
+     * ----    Admin Page    -----
+     */
+
+    @FXML
+    private void handleMouseAction() {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            tf_first_name.setText(user.getFirstName());
+            tf_last_name.setText(user.getLastName());
+            pass_field.setText(user.getPassword());
+            tf_username.setText(user.getUserName());
+        }
+    }
+
+    private boolean isValidUserData() {
+        String firstName = tf_first_name.getText().trim();
+        String lastName = tf_last_name.getText().trim();
+        String password = pass_field.getText().trim();
+        String username = tf_username.getText().trim();
+        if (firstName.equals("") || lastName.equals("") || password.equals("") || username.equals("")) {
+            return  false;
+        }
+        return true;
+    }
+
+    private void setEmptyStrings() {
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        pass_field.setText("");
+        tf_username.setText("");
+    }
+
+    @FXML
+    private void delete() {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+        Connect.deleteUser(user.getId());
+        setEmptyStrings();
+        showUsersTable();
+    }
+
+    @FXML
+    private void update() {
+        Connect.updateUserTable(
+                new UserData(
+                        tf_first_name.getText(),
+                        tf_last_name.getText(),
+                        pass_field.getText(),
+                        tc_id.getText()
+                )
+        );
+
+        setEmptyStrings();
+        showUsersTable();
+    }
+
+    private String encryptPass(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    @FXML
+    private void insert() {
+        UserData user = new UserData(
+                tf_first_name.getText(),
+                tf_last_name.getText(),
+                encryptPass(pass_field.getText()),
+                tf_username.getText());
+
+        if(!isValidUserData()) {
+            System.out.println("Invalid Credentials");
+            label_error.setText("Error! Enter all text fields!");
+        } else {
+            System.out.println("Inserting user");
+            label_error.setText("");
+            Connect.insertUser(user);
+            setEmptyStrings();
+            showUsersTable(); // show table after insertion
+        }
+    }
+
+
+    public ObservableList<UserData> getUsersData() {
+        ObservableList<UserData> usersList = FXCollections.observableArrayList();
+
+        //Connect conn = new Connect();
+        ResultSet result = Connect.showAllUsers();
+
+        try {
+            while (result.next()) {
+                UserData user = new UserData(
+                        result.getInt("id"),
+                        result.getString("first_name"),
+                        result.getString("last_name"),
+                        result.getString("password"),
+                        result.getString("username")
+                );
+
+                usersList.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usersList;
+    }
+
+    public void showUsersTable() {
+        ObservableList<UserData> list = getUsersData();
+
+        tc_id.setCellValueFactory(new PropertyValueFactory<UserData, Integer>("id"));
+        tc_first_name.setCellValueFactory(new PropertyValueFactory<UserData, String>("firstName"));
+        tc_last_name.setCellValueFactory(new PropertyValueFactory<UserData, String>("lastName"));
+        tc_password.setCellValueFactory(new PropertyValueFactory<UserData, String>("password"));
+        tc_username.setCellValueFactory(new PropertyValueFactory<UserData, String>("userName"));
+
+        table_users.setItems(list);
+    }
+
+    @FXML
+    void setUsername() {
+        String name = tf_first_name.getText().toLowerCase();
+        String surname = tf_last_name.getText().toLowerCase();
+        tf_username.setText(name.toLowerCase() + "." + surname.toLowerCase());
+    }
+
+    /**
+     * ----    END Admin Page    -----
      */
 //######################################################################################################################
 }
