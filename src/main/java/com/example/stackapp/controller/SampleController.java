@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.prefs.Preferences;
 
@@ -117,13 +118,26 @@ public class SampleController {
     @FXML
     public void initialize() {
         boxes = List.of(box1, box2, box3, box4, box5, box6, box7, box8, box9);
-        boxIDs = List.of(bIdForBox1, bIdForBox2, bIdForBox3, bIdForBox4, bIdForBox5, bIdForBox6, bIdForBox7, bIdForBox8, bIdForBox9);
-        clientIDs = List.of(cIdForBox1, cIdForBox2, cIdForBox3, cIdForBox4, cIdForBox5, cIdForBox6, cIdForBox7, cIdForBox8, cIdForBox9);
+
+        boxIDs = List.of(bIdForBox1, bIdForBox2, bIdForBox3, bIdForBox4,
+                bIdForBox5, bIdForBox6, bIdForBox7, bIdForBox8, bIdForBox9);
+
+        clientIDs = List.of(cIdForBox1, cIdForBox2, cIdForBox3, cIdForBox4,
+                cIdForBox5, cIdForBox6, cIdForBox7, cIdForBox8, cIdForBox9);
+
         nrBtns = List.of(btn1, btn2, btn3, btn4, btn5, btn6, btn7);
-        allBoxIMG = List.of(myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox);
-        textFields = List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField);
-        boxTextFields = List.of(shelfIDField, clientIDField, periodField, dateFromField, dateEndField, weightField, fulfillmentField, statusField, noteField);
-        allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, shelfPane, addressPane);
+
+        allBoxIMG = List.of(myBlackBox, myBlueBox, myOrangeBox, myBrownBox,
+                myPinkBox, myGreenBox, myPurpleBox, myRedBox, myYellowBox);
+
+        textFields = List.of(boxIDField, shelfIDField, clientIDField, periodField, dateFromField,
+                dateEndField, weightField, fulfillmentField, statusField, noteField);
+
+        boxTextFields = List.of(shelfIDField, clientIDField, periodField, dateFromField,
+                dateEndField, weightField, fulfillmentField, statusField, noteField);
+
+        allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane,
+                b1Pane, b2Pane, d1Pane, shelfPane, addressPane);
 
         for (ImageView imageView : allBoxIMG) {
             imageView.setVisible(false);
@@ -214,7 +228,7 @@ public class SampleController {
     }
 
     @FXML
-    private void changePanToSearchBoxPan(String boxID) {
+    private void changePanToSearchBoxPan(String boxID) throws SQLException {
         changePanToSearchBoxPan();
         searchField.setText(boxID);
         getBoxById(Long.parseLong(boxID));
@@ -234,7 +248,7 @@ public class SampleController {
         }
     }
 
-    private void getBoxById(long boxId) {
+    private void getBoxById(long boxId) throws SQLException {
         BoxData box = Connect.searchForBox(boxId);
         System.out.println("BoxId is " + boxId);
 
@@ -247,25 +261,28 @@ public class SampleController {
             noteField.setStyle("-fx-text-fill: red; -fx-background-color:  #dce2e8;");
 
         } else {
+
             noteField.setText("");
             noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
             boxIDField.setText(valueOf(box.getId()));
             shelfIDField.setText(box.getShelfId());
             clientIDField.setText(valueOf(box.getClientId()));
-            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != null
-                    ? calcPeriod(box.getDateFrom(), box.getDateEnd())
-                    : EMPTY_STRING);
             dateFromField.setText(box.getDateFrom() != null ? box.getDateFrom() : EMPTY_STRING);
             dateEndField.setText(box.getDateEnd() != null ? box.getDateEnd() : EMPTY_STRING);
             weightField.setText(box.getWeight() != null ? box.getWeight() : EMPTY_STRING);
             fulfillmentField.setText(box.getFulfillment() != null ? box.getFulfillment() : EMPTY_STRING);
             statusField.setText(box.getStatus() != null ? box.getStatus() : EMPTY_STRING);
             noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : EMPTY_STRING);
+
+            //troublesome part of code begins:
+            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != EMPTY_STRING
+                    ? calcPeriod(box.getDateFrom(), box.getDateEnd())
+                    : null);
         }
     }
 
     @FXML
-    private void getBoxIdByUserInput() {
+    private void getBoxIdByUserInput() throws SQLException {
         for (TextField boxTextField : boxTextFields) {
             boxTextField.setEditable(false);
             boxTextField.setText("");
@@ -279,6 +296,7 @@ public class SampleController {
         editBtn.setVisible(true);
         editBtn.setDisable(false);
         getBoxById(boxId);
+
         for (int i = 0; i < boxTextFields.size(); i++) {
             if (shelfIDField.getText().equals("") || clientIDField.getText().equals("")) {
                 requestBtn.setDisable(true);
@@ -336,13 +354,21 @@ public class SampleController {
 
     @FXML
     private void saveRequestPalToDB() {
-        if (palRequestField.getText().equals("")) {
+        if (palRequestField.getText().isEmpty()) {
             notificationTxt.setText("Add PAL[R]:nr!");
             notificationTxt.setStyle("-fx-fill: red;");
+
         } else {
+
+            Connect.updateShelfId(
+                    "PALR" + palRequestField.getText(),
+                    Long.parseLong(boxIDField.getText())
+            );
+
             palRequestField.setVisible(false);
             palRequestLabel.setVisible(false);
             enterPalNrRequestLabel.setVisible(false);
+
             acceptRequestBtn.setVisible(false);
             shortcutForReqAndDes(true);
 
@@ -350,6 +376,7 @@ public class SampleController {
             notificationTxt.setText(
                     "The box has been successfully saved in the database at 'PAL[R]:" +
                             palRequestField.getText() + "'");
+
         }
     }
 
@@ -367,7 +394,14 @@ public class SampleController {
         if (palDestroyField.getText().equals("")) {
             notificationTxt.setText("Add PAL[X]:nr!");
             notificationTxt.setStyle("-fx-fill: red;");
+
         } else {
+
+            Connect.updateShelfId(
+                    "PALX" + palDestroyField.getText(),
+                    Long.parseLong(boxIDField.getText())
+            );
+
             palDestroyField.setVisible(false);
             palDestroyLabel.setVisible(false);
             enterPalNrDestroyLabel.setVisible(false);
@@ -561,7 +595,7 @@ public class SampleController {
      * ----    Section Panel(Where is all 9Boxes)    -----
      */
     @FXML
-    private void checksPressedBoxID(MouseEvent event) {
+    private void checksPressedBoxID(MouseEvent event) throws SQLException {
         String boxID = "";
 
         //need to connect pressed box with text on it- BoxID and path it changePanToSearchBoxPan(boxID);

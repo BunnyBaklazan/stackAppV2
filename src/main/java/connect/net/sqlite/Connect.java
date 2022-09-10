@@ -12,12 +12,15 @@ public class Connect {
             = "SELECT * FROM box WHERE b_id = ?";
 
     private static final String INSERT_BOX
-            = "INSERT INTO box (b_id, client_id, date_from, date_end," +
+            = "INSERT or REPLACE INTO box (b_id, client_id, date_from, date_end," +
             " fulfillment, info_note, weight, shelf_id, status) " +
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_COUNT
             = "SELECT COUNT(*) FROM box WHERE shelf_id LIKE '";
+
+    private static final String UPDATE_SHELF
+            = "UPDATE box SET shelf_id = ? WHERE b_id = ?";
 
 
     private static final String INSERT_USER
@@ -52,37 +55,6 @@ public class Connect {
         return conn;
     }
 
-    public static void insertUser(UserData user) {
-
-        try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(INSERT_USER);
-
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getUserName());
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public static ResultSet showAllUsers() {
-        try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_USER);
-            return statement.executeQuery();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-
-        }
-
-    }
 
     public static String giveUsername() {
         try {
@@ -127,11 +99,29 @@ public class Connect {
         }
     }
 
-    public static BoxData searchForBox(long boxId) {
+    public static void updateShelfId(String shelfId, long boxId) {
+
         try {
-            ResultSet result;
+
             Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_BOX);
+            PreparedStatement statement = conn.prepareStatement(UPDATE_SHELF);
+            statement.setString(1, shelfId);
+            statement.setLong(2, boxId);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static BoxData searchForBox(long boxId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        try {
+
+            ResultSet result;
+            conn = connect();
+            statement = conn.prepareStatement(SELECT_BOX);
             statement.setLong(1, boxId);
             result = statement.executeQuery();
 
@@ -155,6 +145,11 @@ public class Connect {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+
+        } finally {
+
+            if (statement != null) { statement.close(); }
+            if (conn != null ) { conn.close(); }
         }
     }
 
@@ -213,6 +208,38 @@ public class Connect {
             PreparedStatement statement = conn.prepareStatement(LOGIN_CHECK);
             statement.setString(1, username);
 
+            return statement.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+
+        }
+
+    }
+
+    public static void insertUser(UserData user) {
+
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(INSERT_USER);
+
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getUserName());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static ResultSet showAllUsers() {
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement(SELECT_USER);
             return statement.executeQuery();
 
         } catch (SQLException e) {
