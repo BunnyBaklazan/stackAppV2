@@ -4,8 +4,11 @@ import static com.example.stackapp.model.SampleUtils.calcPeriod;
 import static java.lang.String.valueOf;
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.User;
+import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -13,14 +16,19 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import java.util.Arrays;
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.sql.ResultSet;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class SampleController {
+    protected final static Preferences userPreferences = Preferences.userRoot();
     LoadingScreen loadingScreen;
 
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
@@ -28,10 +36,28 @@ public class SampleController {
     private volatile boolean running = true;
 
     public long boxId;
-    private final String ADMIN = "admin";
-    private User user = new User("asd", "admin");
+    /*private final String ADMIN = "admin";
+    private User user = new User("asd", "admin");*/
 
     public static final String EMPTY_STRING = "";
+
+
+    //------------------------
+
+    @FXML
+    private TextField tf_first_name, tf_last_name, tf_password, tf_username;
+
+    @FXML
+    private TableView<UserData> table_users;
+
+    @FXML
+    private TableColumn<UserData, Integer> tc_id;
+
+    @FXML
+    private TableColumn<UserData, String> tc_first_name, tc_last_name, tc_password, tc_username;
+
+    //-------------------------
+
 
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
@@ -114,10 +140,10 @@ public class SampleController {
         loadingScreen = new SampleController.LoadingScreen(secretProgressBar, myRedBox);
         startAnimationProgress();
 
-        addWorkerBtn.setDisable(true);
-        if (user.getRole().equals(ADMIN)) {
+        //addWorkerBtn.setDisable(true);
+        /*if (user.getRole().equals(ADMIN)) {
             addWorkerBtn.setDisable(false);
-        }
+        }*/
 
         // CHART SETTINGS
         yAxis.setAutoRanging(false);
@@ -125,6 +151,17 @@ public class SampleController {
         yAxis.setUpperBound(10.0);
         yAxis.setTickUnit(1.0);
         barChart.setAnimated(false);
+
+        // ADMIN PAGE
+        String role = userPreferences.get("role", null);
+        if (role.equals("admin")) {
+            System.out.println("You are in the admin dashboard");
+            addWorkerBtn.setVisible(true);
+            showUsersTable();
+        } else {
+            addWorkerBtn.setVisible(false);
+            // show content from sample controller
+        }
     }
 //######################################################################################################################
 
@@ -761,6 +798,124 @@ public class SampleController {
 
     /**
      * ----END Animation END-----
+     */
+//######################################################################################################################
+
+    /**
+     * ----    Admin Page    -----
+     */
+
+    @FXML
+    private void handleMouseAction() {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+        tf_first_name.setText(user.getFirstName());
+        tf_last_name.setText(user.getLastName());
+        tf_password.setText(user.getPassword());
+        tf_username.setText(user.getUserName());
+    }
+
+    @FXML
+    private void delete() {
+        UserData user = table_users.getSelectionModel().getSelectedItem();
+
+        //Connect conn = new Connect();
+        Connect.deleteUser(user.getId());
+
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        tf_password.setText("");
+        tf_username.setText("");
+
+        //put execution of query here
+        showUsersTable();
+    }
+
+    @FXML
+    private void update() {
+
+        Connect.updateUserTable(
+                new UserData(
+                        tf_first_name.getText(),
+                        tf_last_name.getText(),
+                        tf_password.getText(),
+                        tc_id.getText()
+                )
+        );
+
+        showUsersTable();
+    }
+
+    private String encryptPass(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    @FXML
+    private void insert() {
+        //Connect conn = new Connect();
+
+        UserData user = new UserData(
+                tf_first_name.getText(),
+                tf_last_name.getText(),
+                encryptPass(tf_password.getText()),
+                tf_username.getText());
+
+        Connect.insertUser(user);
+
+        tf_first_name.setText("");
+        tf_last_name.setText("");
+        tf_password.setText("");
+        tf_username.setText("");
+
+        showUsersTable(); // show table after insertion
+    }
+
+    public ObservableList<UserData> getUsersData() {
+        ObservableList<UserData> usersList = FXCollections.observableArrayList();
+
+        //Connect conn = new Connect();
+        ResultSet result = Connect.showAllUsers();
+
+        try {
+            while (result.next()) {
+                UserData user = new UserData(
+                        result.getInt("id"),
+                        result.getString("first_name"),
+                        result.getString("last_name"),
+                        result.getString("password"),
+                        result.getString("username")
+                );
+
+                usersList.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usersList;
+    }
+
+    public void showUsersTable() {
+        ObservableList<UserData> list = getUsersData();
+
+        tc_id.setCellValueFactory(new PropertyValueFactory<UserData, Integer>("id"));
+        tc_first_name.setCellValueFactory(new PropertyValueFactory<UserData, String>("firstName"));
+        tc_last_name.setCellValueFactory(new PropertyValueFactory<UserData, String>("lastName"));
+        tc_password.setCellValueFactory(new PropertyValueFactory<UserData, String>("password"));
+        tc_username.setCellValueFactory(new PropertyValueFactory<UserData, String>("userName"));
+
+        table_users.setItems(list);
+    }
+
+    @FXML
+    void setUsername() {
+        String name = tf_first_name.getText().toLowerCase();
+        String surname = tf_last_name.getText().toLowerCase();
+        tf_username.setText(name.toLowerCase() + "." + surname.toLowerCase());
+    }
+
+    /**
+     * ----    END Admin Page    -----
      */
 //######################################################################################################################
 }
