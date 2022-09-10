@@ -43,8 +43,7 @@ public class SampleController {
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, shelfPane, addressPane;
     @FXML
-    private Button b1Btn, b2Btn, d1Btn, d2Btn, d3Btn, d4Btn, d5Btn, d6Btn, d7Btn, d8Btn, showSearchBox_Btn, searchBtn,
-            editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
+    private Button searchBtn, editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
     @FXML
@@ -446,37 +445,6 @@ public class SampleController {
 //######################################################################################################################
 
 
-//######################################################################################################################
-
-    //check function to change color on press
-   /* @FXML
-    private void btnPressed() {
-        //setStyle("-fx-background-color: #4e5558;");
-        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
-        for (int i = 0; i < btnArr.length; i++) {
-            btnArr[i].setStyle("-fx-background-color: #ADB9BD;");
-        }
-    }
-
-    private class MyEventHandler implements EventHandler<Event>{
-        @Override
-        public void handle(Event evt) {
-            String id = ((Button) evt.getSource()).getId();
-            //boldButtonOnClick(id);
-        }
-
-    private void addEvents() {
-        Button[] btnArr= {b1, b2, d1, d3, d4, d5, d6, d7, d8, showSearchBox_Btn, addWorkerBtn};
-        for (int i = 0; i < btnArr.length; i++) {
-            btnArr[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-        }
-    }*/
-
-    /*@FXML
-    private void btnReleased() {
-        //setStyle("-fx-background-color: #AAB2BD;");
-    }*/
-//######################################################################################################################
     /**
      * ----    Shelf Panel    -----
      */
