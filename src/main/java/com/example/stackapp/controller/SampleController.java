@@ -2,6 +2,7 @@ package com.example.stackapp.controller;
 
 import static com.example.stackapp.model.SampleUtils.calcPeriod;
 import static java.lang.String.valueOf;
+
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
@@ -21,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.prefs.Preferences;
@@ -105,6 +107,7 @@ public class SampleController {
     private List<ImageView> boxes;
     private List<Text> boxIDs;
     private List<Text> clientIDs;
+
     @FXML
     public void initialize() {
         boxes = List.of(box1, box2, box3, box4, box5, box6, box7, box8, box9);
@@ -184,6 +187,7 @@ public class SampleController {
             allPanel.setVisible(false);
         }
         searchBoxPane.setVisible(true);
+        searchField.setText("");
         leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         destroyBtn.setDisable(true);
         requestBtn.setDisable(true);
@@ -194,17 +198,20 @@ public class SampleController {
     @FXML
     private void changePanToSearchBoxPan(String boxID) {
         //find way to put all information on fields when function is started
-        
+
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
         searchBoxPane.setVisible(true);
+        searchField.setText("");
         searchField.setText(boxID);
         leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         destroyBtn.setDisable(true);
         requestBtn.setDisable(true);
         editBtn.setDisable(true);
         saveBtn.setDisable(true);
+        getBoxById(Integer.parseInt(boxID));
+
     }
 
     @FXML
@@ -367,7 +374,7 @@ public class SampleController {
         notificationTxt.setStyle("-fx-fill: #2c6432;");
         notificationTxt.setText(
                 "The box has been successfully saved in the database at 'PAL:[R]" +
-                palRequestField.getText() + "'");
+                        palRequestField.getText() + "'");
     }
 
     @FXML
@@ -376,13 +383,13 @@ public class SampleController {
                 fulfillmentField, statusField, noteField};
 
         if (shelfIDField.getText().isEmpty() || clientIDField.getText().isEmpty()
-            || boxIDField.getText().isEmpty()) {
+                || boxIDField.getText().isEmpty()) {
 
             notificationTxt.setStyle("-fx-fill: red;");
             notificationTxt.setText("Error, adding Box to the database. Please fill ShelfID and ClientID");
 
         } else {
-            Connect.insertBox( new BoxData(
+            Connect.insertBox(new BoxData(
                     Long.parseLong(boxIDField.getText()),
                     Long.parseLong(clientIDField.getText()),
                     dateFromField.getText() != null ? dateFromField.getText() : EMPTY_STRING,
@@ -519,6 +526,7 @@ public class SampleController {
      * ----END Shelf Panel END-----
      */
 //######################################################################################################################
+
     /**
      * ----    Address Panel    -----
      */
@@ -527,17 +535,18 @@ public class SampleController {
         Button button = (Button) event.getSource();
         String btnText = button.getText();
         String btnID = ((Button) event.getSource()).getId();
-        String textToShow= leftCornerInfoLabel.getText()
-                .substring(leftCornerInfoLabel.getText().length()-4) +btnID.substring(3);
+        String textToShow = leftCornerInfoLabel.getText()
+                .substring(leftCornerInfoLabel.getText().length() - 4) + btnID.substring(3);
         System.out.println("Mouse click on Button: " + btnText);
         System.out.println("Clicked Btn ID: " + btnID);
-        System.out.println("Full ID: "+textToShow);
+        System.out.println("Full ID: " + textToShow);
 
         Connect conn = new Connect();
-        int boxesAtGraph= conn.capacityOf(textToShow);
+        int boxesAtGraph = conn.capacityOf(textToShow);
 
         changePanToAddressPan(textToShow, boxesAtGraph);
     }
+
     @FXML
     void changePanToAddressPan(String leftCornerTxtPart, int boxesAtGraph) {
         for (Pane allPanel : allPanels) {
@@ -548,9 +557,8 @@ public class SampleController {
         leftCornerInfoLabel.setText("StackApp Section- " + leftCornerTxtPart);
 
         // refactor for real data from DB
-        List<String> boxIDss= List.of("13345", "56007", "12202", "23300", "21220", "1200",  "55200", "27820", "182");
-        List<String> clientIDss= List.of("5", "57", "22", "23", "2", "12",  "5", "20", "5");
-
+        List<String> boxIDss = List.of("8322", "56007", "12202", "23300", "21220", "1200", "55200", "27820", "182");
+        List<String> clientIDss = List.of("5", "57", "22", "23", "2", "12", "5", "20", "5");
 
 
         for (int i = 0; i < boxes.size(); i++) {
@@ -560,9 +568,9 @@ public class SampleController {
         }
 
         for (int i = 1; i <= boxes.size(); i++) {
-            if(boxesAtGraph== i) {
+            if (boxesAtGraph == i) {
                 for (int j = 0; j < boxes.size(); j++) {
-                    if(j<boxesAtGraph) {
+                    if (j < boxesAtGraph) {
                         boxes.get(j).setVisible(true);
                         clientIDs.get(j).setVisible(true);
                         clientIDs.get(j).setText(clientIDss.get(j)); // refactor for real data from DB
@@ -579,23 +587,24 @@ public class SampleController {
     }
     /**    ----END Address Panel END-----    */
 //######################################################################################################################
+
     /**
      * ----    Section Panel(Where is all 9Boxes)    -----
      */
     @FXML
     private void checksPressedBoxID(MouseEvent event) {
-        String boxID= "";
+        String boxID = "";
 
         //need to connect pressed box with text on it- BoxID and path it changePanToSearchBoxPan(boxID);
 
-        List<String> boxesStr= List.of("box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9");
+        List<String> boxesStr = List.of("box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9");
 
         String imgID = ((ImageView) event.getSource()).getId();
         System.out.println("Clicked Box ID: " + imgID);
 
         for (int i = 0; i < boxesStr.size(); i++) {
-            if(imgID.equals(boxesStr.get(i))) {
-                boxID= boxIDs.get(i).getText();
+            if (imgID.equals(boxesStr.get(i))) {
+                boxID = boxIDs.get(i).getText();
             }
         }
 
@@ -611,7 +620,6 @@ public class SampleController {
     @FXML
     void loadGraphWindow(String address) {
 
-
         boolean mirrorShelf;
         barChart.setVisible(true);
         barChart.setTitle(address);
@@ -619,17 +627,19 @@ public class SampleController {
         int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
         int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};
         if (temp.equals("B1")) { //for other D's need add OR(||)
-            mirrorShelf= true;
+            mirrorShelf = true;
             for (int i = 0; i < nrBtns.size(); i++) {
                 nrBtns.get(i).setLayoutX(xCoordinates[i]);
             }
         } else {
-            mirrorShelf= false;
+            mirrorShelf = false;
             for (int i = 0; i < nrBtns.size(); i++) {
                 nrBtns.get(i).setLayoutX(xCoordinatesRev[i]);
             }
         }
         Connect conn = new Connect();
+
+
         // This shortcut doesnt work!!!
         /*int[] counts = {count1, count2, count3, count4, count5, count6, count7};
         for (int i = 0; i < counts.length; i++) {
@@ -645,7 +655,7 @@ public class SampleController {
         count6 = conn.capacityOf(address + "6");
         count7 = conn.capacityOf(address + "7");
 
-        System.out.println(count1+" "+count2+" "+count3+" "+count4+" "+count5+" "+count6+" "+count7);
+        System.out.println(count1 + " " + count2 + " " + count3 + " " + count4 + " " + count5 + " " + count6 + " " + count7);
 
         resetGraph();
         addSerie(new XYChart.Series<>(), mirrorShelf);
@@ -686,6 +696,7 @@ public class SampleController {
      * ----    END Graph window    -----
      */
 //######################################################################################################################
+
     /**
      * ----    Animation    -----
      */
@@ -745,12 +756,12 @@ public class SampleController {
         @Override
         public void run() {
             while (secretProgressBar.getProgress() <= 1 && running) {
-                int[] boxNr= {7, 0, 3, 1, 6, 4, 2, 5, 8};
+                int[] boxNr = {7, 0, 3, 1, 6, 4, 2, 5, 8};
                 int[] xCoordinates = {188, 354, 105, 263, 421, 22, 180, 338, 496};
                 int[] yCoordinates = {248, 248, 372, 372, 372, 495, 495, 495, 495};
 
-                double secondsStart= 0.10;
-                double secondsEnd= 0.15;
+                double secondsStart = 0.10;
+                double secondsEnd = 0.15;
                 for (int i = 0; i < boxNr.length; i++) {
                     if (secretProgressBar.getProgress() >= secondsStart && secretProgressBar.getProgress() <= secondsEnd) {
                         myBoxImageArr[boxNr[i]].setVisible(true);
