@@ -38,9 +38,9 @@ public class Main extends Application {
         Parent parent = FXMLLoader.load(requireNonNull(getClass().getResource(pageName)));
         window.getScene().setRoot(parent);
 
-        String css= this.getClass().getResource("colors.css").toExternalForm();
+        String css = this.getClass().getResource("colors.css").toExternalForm();
         window.getScene().getStylesheets().add(css);
     }
 
 }
- /// JAVA
+/// JAVA

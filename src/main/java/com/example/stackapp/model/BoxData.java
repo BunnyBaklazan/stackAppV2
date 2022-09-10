@@ -36,47 +36,83 @@ public class BoxData {
 
     }
 
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
-    public void setId(long boxId) { this.id = boxId; }
-
-
-    public long getClientId() { return clientId; }
-
-    public void setClientId(long clientId) { this.clientId = clientId; }
-
-
-    public String getDateFrom() { return dateFrom; }
-
-    public void setDateFrom(String dateFrom) { this.dateFrom = dateFrom; }
+    public void setId(long boxId) {
+        this.id = boxId;
+    }
 
 
-    public String getDateEnd() { return dateEnd; }
+    public long getClientId() {
+        return clientId;
+    }
 
-    public void setDateEnd(String dateEnd) { this.dateEnd = dateEnd; }
-
-
-    public String getWeight() { return weight; }
-
-    public void setWeight(String weight) { this.weight = weight; }
-
-
-    public String getShelfId() { return shelfId; }
-
-    public void setShelfId(String shelfId) { this.shelfId = shelfId; }
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
+    }
 
 
-    public String getInfoNote() { return infoNote; }
+    public String getDateFrom() {
+        return dateFrom;
+    }
 
-    public void setInfoNote(String infoNote) { this.infoNote = infoNote; }
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
 
 
-    public String getFulfillment() { return fulfillment; }
+    public String getDateEnd() {
+        return dateEnd;
+    }
 
-    public void setFulfillment(String fulfillment) { this.fulfillment = fulfillment; }
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
+    }
 
 
-    public String getStatus() { return status; }
+    public String getWeight() {
+        return weight;
+    }
 
-    public void setStatus(String status) { this.status = status; }
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+
+    public String getShelfId() {
+        return shelfId;
+    }
+
+    public void setShelfId(String shelfId) {
+        this.shelfId = shelfId;
+    }
+
+
+    public String getInfoNote() {
+        return infoNote;
+    }
+
+    public void setInfoNote(String infoNote) {
+        this.infoNote = infoNote;
+    }
+
+
+    public String getFulfillment() {
+        return fulfillment;
+    }
+
+    public void setFulfillment(String fulfillment) {
+        this.fulfillment = fulfillment;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

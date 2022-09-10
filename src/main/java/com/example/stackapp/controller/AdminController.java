@@ -104,12 +104,12 @@ public class AdminController {
     private void update() {
 
         Connect.updateUserTable(
-               new UserData(
-                   tf_first_name.getText(),
-                   tf_last_name.getText(),
-                   tf_password.getText(),
-                   tc_id.getText()
-               )
+                new UserData(
+                        tf_first_name.getText(),
+                        tf_last_name.getText(),
+                        tf_password.getText(),
+                        tc_id.getText()
+                )
         );
 
         showUsersTable();
@@ -120,7 +120,7 @@ public class AdminController {
     }
 
     @FXML
-    private void insert()  {
+    private void insert() {
         //Connect conn = new Connect();
 
         UserData user = new UserData(
@@ -135,7 +135,7 @@ public class AdminController {
         tf_last_name.setText("");
         tf_password.setText("");
         tf_username.setText("");
-        
+
         showUsersTable(); // show table after insertion
     }
 
@@ -157,8 +157,8 @@ public class AdminController {
         //Connect conn = new Connect();
         ResultSet result = Connect.showAllUsers();
 
-        try{
-            while(result.next()) {
+        try {
+            while (result.next()) {
                 UserData user = new UserData(
                         result.getInt("id"),
                         result.getString("first_name"),
@@ -170,7 +170,7 @@ public class AdminController {
                 usersList.add(user);
             }
 
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -193,6 +193,6 @@ public class AdminController {
     void setUsername() {
         String name = tf_first_name.getText().toLowerCase();
         String surname = tf_last_name.getText().toLowerCase();
-        tf_username.setText(name.toLowerCase()+"."+surname.toLowerCase());
+        tf_username.setText(name.toLowerCase() + "." + surname.toLowerCase());
     }
 }

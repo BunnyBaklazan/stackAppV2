@@ -12,7 +12,7 @@ public class Connect {
             = "SELECT * FROM box WHERE b_id = ?";
 
     private static final String INSERT_BOX
-            ="INSERT INTO box (b_id, client_id, date_from, date_end," +
+            = "INSERT INTO box (b_id, client_id, date_from, date_end," +
             " fulfillment, info_note, weight, shelf_id, status) " +
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -35,8 +35,8 @@ public class Connect {
             + "password = ? "
             + "WHERE id = ?";
 
-    public static  final String LOGIN_CHECK
-            ="SELECT password FROM users WHERE USERNAME = ?";
+    public static final String LOGIN_CHECK
+            = "SELECT password FROM users WHERE USERNAME = ?";
 
 
     private static Connection connect() {
@@ -45,8 +45,6 @@ public class Connect {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -66,18 +64,19 @@ public class Connect {
             statement.setString(4, user.getUserName());
             statement.executeUpdate();
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
     }
+
     public static ResultSet showAllUsers() {
-        try{
+        try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_USER);
             return statement.executeQuery();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
 
@@ -85,27 +84,27 @@ public class Connect {
 
     }
 
-    public static String giveUsername(){
-        try{
+    public static String giveUsername() {
+        try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_USER);
             ResultSet result = statement.executeQuery();
             return result.getString("username");
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
     }
 
-    public void updateBox(BoxData box){
+    public void updateBox(BoxData box) {
         //insert
 
     }
 
     //create new box in the db
     public static void insertBox(BoxData box) {
-        try{
+        try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(INSERT_BOX);
 
@@ -120,21 +119,21 @@ public class Connect {
             statement.setString(9, box.getStatus());
             statement.executeUpdate();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
     public static BoxData searchForBox(long boxId) {
 
-        try{
+        try {
             ResultSet result;
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(SELECT_BOX);
             statement.setLong(1, boxId);
             result = statement.executeQuery();
 
-            if(!result.isBeforeFirst()){
+            if (!result.isBeforeFirst()) {
                 System.out.println("Answer from connect! Bro we don't have it");
                 return null;
             }
@@ -151,7 +150,7 @@ public class Connect {
                     result.getString("shelf_id")
             );
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -159,19 +158,19 @@ public class Connect {
 
     //trying to give an objective view how much space are taken
     public int capacityOf(String shelf) {
-        try{
+        try {
             ResultSet result = null;
             Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_COUNT+shelf+"%"+"'");
+            PreparedStatement statement = conn.prepareStatement(SELECT_COUNT + shelf + "%" + "'");
             result = statement.executeQuery();
 
-            if(!result.isBeforeFirst()){
+            if (!result.isBeforeFirst()) {
                 return 0;
             }
 
             return result.getInt(1);
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
             return 0;
         }
@@ -185,12 +184,12 @@ public class Connect {
             statement.setInt(1, id);
             statement.executeUpdate();
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void updateUserTable(UserData user){
+    public static void updateUserTable(UserData user) {
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(UPDATE_USER);
@@ -201,12 +200,12 @@ public class Connect {
             statement.setString(4, valueOf(user.getId()));
             statement.executeUpdate();
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static ResultSet checkLogin(String username){
+    public static ResultSet checkLogin(String username) {
         try {
             Connection conn = connect();
             PreparedStatement statement = conn.prepareStatement(LOGIN_CHECK);
@@ -214,14 +213,13 @@ public class Connect {
 
             return statement.executeQuery();
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
 
         }
 
     }
-
 
 
     public static void main(String[] args) {

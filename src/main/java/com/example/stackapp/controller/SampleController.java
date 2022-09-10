@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class SampleController {
 
@@ -167,10 +168,13 @@ public class SampleController {
 
     @FXML
     private void changePanToSearchBoxPan(String boxID) {
+        //find way to put all information on fields when function is started
+        
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
         searchBoxPane.setVisible(true);
+        searchField.setText(boxID);
         leftCornerInfoLabel.setText("StackApp SEARCH BOX");
         destroyBtn.setDisable(true);
         requestBtn.setDisable(true);
@@ -450,22 +454,18 @@ public class SampleController {
      */
     @FXML
     private void checksPressedShelfID(MouseEvent event) {
-        Label label = (Label) event.getSource();
-        String labelText = label.getText();
-        String labelID = ((Label) event.getSource()).getId();
-        System.out.println("Mouse click on label: " + labelText);
-        System.out.println("Clicked ID: " + labelID);
+        String labelID = ((Label) event.getSource()).getId().toUpperCase();
         changePanToShelfPan(labelID);
     }
 
     @FXML
     private void changePanToShelfPan(String address) {
-        loadGraphWindow(address.toUpperCase());
+        loadGraphWindow(address);
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
         shelfPane.setVisible(true);
-        leftCornerInfoLabel.setText("StackApp Shelf- " + address.toUpperCase());
+        leftCornerInfoLabel.setText("StackApp Shelf- " + address);
     }
 
     /**
@@ -483,23 +483,22 @@ public class SampleController {
         String textToShow= leftCornerInfoLabel.getText()
                 .substring(leftCornerInfoLabel.getText().length()-4) +btnID.substring(3);
         System.out.println("Mouse click on Button: " + btnText);
-        System.out.println("Clicked ID: " + btnID);
+        System.out.println("Clicked Btn ID: " + btnID);
         System.out.println("Full ID: "+textToShow);
 
         Connect conn = new Connect();
         int boxesAtGraph= conn.capacityOf(textToShow);
 
-        changePanToAddressPan(btnID, textToShow, boxesAtGraph);
+        changePanToAddressPan(textToShow, boxesAtGraph);
     }
     @FXML
-    void changePanToAddressPan(String btnID, String leftCornerTxt, int boxesAtGraph) {
+    void changePanToAddressPan(String leftCornerTxtPart, int boxesAtGraph) {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
         addressPane.setVisible(true);
 
-        System.out.println("Wee are in Section: "+btnID);
-        leftCornerInfoLabel.setText("StackApp Section- " + leftCornerTxt);
+        leftCornerInfoLabel.setText("StackApp Section- " + leftCornerTxtPart);
 
         // refactor for real data from DB
         List<String> boxIDss= List.of("13345", "56007", "12202", "23300", "21220", "1200",  "55200", "27820", "182");
@@ -538,17 +537,22 @@ public class SampleController {
      */
     @FXML
     private void checksPressedBoxID(MouseEvent event) {
+        String boxID= "";
 
         //need to connect pressed box with text on it- BoxID and path it changePanToSearchBoxPan(boxID);
 
+        List<String> boxesStr= List.of("box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9");
 
-        ImageView img = (ImageView) event.getSource();
         String imgID = ((ImageView) event.getSource()).getId();
-        String textToShow= leftCornerInfoLabel.getText().substring(leftCornerInfoLabel.getText().length()-4)+imgID.substring(3);
-        System.out.println("Clicked ID: " + imgID);
-        System.out.println("Full ID: "+textToShow);
+        System.out.println("Clicked Box ID: " + imgID);
 
-        String boxID= "";
+        for (int i = 0; i < boxesStr.size(); i++) {
+            if(imgID.equals(boxesStr.get(i))) {
+                boxID= boxIDs.get(i).getText();
+            }
+        }
+
+
         changePanToSearchBoxPan(boxID);
     }
     /**    ----END Section Panel END-----    */
@@ -564,7 +568,6 @@ public class SampleController {
         boolean mirrorShelf;
         barChart.setVisible(true);
         barChart.setTitle(address);
-        System.out.println("Addres is " + address);
         String temp = address.substring(0, 2).toUpperCase();
         int[] xCoordinates = {563, 477, 391, 305, 219, 133, 47};
         int[] xCoordinatesRev = {47, 133, 219, 305, 391, 477, 563};

@@ -16,7 +16,7 @@ public class UserData {
         this.userName = userName;
     }
 
-    public UserData(int id,  String firstName, String lastName, String password, String userName) {
+    public UserData(int id, String firstName, String lastName, String password, String userName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +31,7 @@ public class UserData {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getFirstName() {
         return firstName;
     }
