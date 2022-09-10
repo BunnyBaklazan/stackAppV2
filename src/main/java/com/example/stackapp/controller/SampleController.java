@@ -3,7 +3,6 @@ package com.example.stackapp.controller;
 import static com.example.stackapp.model.SampleUtils.calcPeriod;
 import static java.lang.String.valueOf;
 import com.example.stackapp.model.BoxData;
-import com.example.stackapp.model.User;
 import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
 import javafx.application.Platform;
@@ -22,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.prefs.Preferences;
@@ -36,9 +34,6 @@ public class SampleController {
     private volatile boolean running = true;
 
     public long boxId;
-    /*private final String ADMIN = "admin";
-    private User user = new User("asd", "admin");*/
-
     public static final String EMPTY_STRING = "";
 
 
@@ -176,11 +171,6 @@ public class SampleController {
         leftCornerInfoLabel.setText("StackApp Choose Destination");
         sampleAppPane.setVisible(true);
         restartAnimation();
-    }
-
-    @FXML
-    private void checkBtn() {
-        System.out.println("Btn pressed");
     }
     /**    ----END Default Panel END-----    */
 //######################################################################################################################
