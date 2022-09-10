@@ -823,6 +823,11 @@ public class SampleController {
     }
 
     @FXML
+    private void checkIfErrorIsOn() {
+        label_error.setText("");
+    }
+
+    @FXML
     private void insert() {
         UserData user = new UserData(
                 tf_first_name.getText(),
