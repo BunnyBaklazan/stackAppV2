@@ -67,10 +67,9 @@ public class LoginController {
                         //if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
-                        if (username.equals("admin")) {
+                        if (username.equals("asd")) { //need to change to "admin"
                             userPreferences.put("role", "admin");
                             window.changePage(SAMPLE_PAGE);
-
                         } else {
                             userPreferences.put("role", "worker");
                             window.changePage(SAMPLE_PAGE);
