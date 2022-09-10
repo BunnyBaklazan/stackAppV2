@@ -7,61 +7,63 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.stackapp.controller.LoginController">
-    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="gradient-background" stylesheets="@../colors.css">
-        <children>
-            <ImageView fitHeight="131.0" fitWidth="130.0" layoutX="34.0" layoutY="62.0" onMouseClicked="#backToMainPage"
-                       pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../IMG/box-yellow.png"/>
-                </image>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #dce2e8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.LoginController">
+   <children>
+      <Pane prefHeight="700.0" prefWidth="254.0">
+         <children>
+            <Pane prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #99a1a8;" />
+         </children>
+      </Pane>
+      <AnchorPane prefHeight="700.0" prefWidth="200.0" styleClass="gradient-background" stylesheets="@../colors.css">
+         <children>
+            <ImageView fitHeight="131.0" fitWidth="130.0" layoutX="35.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../IMG/box-yellow.png" />
+               </image>
             </ImageView>
-            <Label layoutX="31.0" layoutY="226.0" text="StackApp" textFill="#dcc30d">
-                <font>
-                    <Font name="Impact" size="36.0"/>
-                </font>
+            <Label layoutX="31.0" layoutY="203.0" text="StackApp" textFill="#dcc30d">
+               <font>
+                  <Font name="Impact" size="36.0" />
+               </font>
             </Label>
-        </children>
-    </AnchorPane>
-    <AnchorPane prefHeight="400.0" prefWidth="404.0">
-        <ImageView fitHeight="120.0" fitWidth="116.0" layoutX="143.0" layoutY="26.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <image>
-                <Image url="@../IMG/ID.png"/>
-            </image>
-        </ImageView>
-        <Label fx:id="l_errorText" layoutX="95.0" layoutY="135.0" prefHeight="22.0" prefWidth="200.0"
-               text="Username or password is missing!" textFill="#ff0000" visible="false">
-            <font>
-                <Font name="Cambria" size="12.0"/>
-            </font>
-        </Label>
-        <Label layoutX="34.0" layoutY="164.0" prefHeight="22.0" prefWidth="122.0" text="Username" textFill="#352e2e">
-            <font>
-                <Font name="Cambria Bold" size="20.0"/>
-            </font>
-        </Label>
-        <Label layoutX="34.0" layoutY="220.0" prefHeight="22.0" prefWidth="122.0" text="Password" textFill="#352e2e">
-            <font>
-                <Font name="Cambria Bold" size="20.0"/>
-            </font>
-        </Label>
-        <TextField fx:id="tf_username" layoutX="156.0" layoutY="163.0" pickOnBounds="false">
-            <font>
-                <Font name="Arial" size="14.0"/>
-            </font>
-        </TextField>
-        <PasswordField fx:id="pf_password" layoutX="156.0" layoutY="220.0" prefHeight="25.0" prefWidth="177.0"/>
-        <Button fx:id="button_login" layoutX="113.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#login"
-                prefHeight="34.0" prefWidth="177.0" text="Login">
-            <font>
-                <Font name="Cambria Bold" size="18.0"/>
-            </font>
-        </Button>
-    </AnchorPane>
-</HBox>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="177.0" fitWidth="186.0" layoutX="461.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../IMG/ID.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="461.0" layoutY="294.0" prefHeight="45.0" prefWidth="179.0" text="Username" textFill="#aba9a9">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="461.0" layoutY="383.0" prefHeight="45.0" prefWidth="179.0" text="Password" textFill="#aba9a9">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="button_login" layoutX="490.0" layoutY="511.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="50.0" prefWidth="120.0" text="Login">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="pf_password" layoutX="460.0" layoutY="418.0" prefHeight="45.0" prefWidth="180.0">
+         <font>
+            <Font size="24.0" />
+         </font></PasswordField>
+      <TextField fx:id="tf_username" layoutX="460.0" layoutY="328.0" pickOnBounds="false" prefHeight="45.0" prefWidth="180.0">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="errorTxtField" alignment="TOP_CENTER" editable="false" layoutX="201.0" layoutY="466.0" prefHeight="26.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" stylesheets="@../colors.css" text="Username or password is missing!" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+   </children>
+</Pane>

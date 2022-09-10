@@ -1,39 +1,43 @@
-#b2{
+#b2 {
     /*-fx-background-color: "blue";
     -fx-font-size: 20;*/
 }
 
-#secretTxtLabel{
+#secretTxtLabel {
     /*-fx-background-color: "blue";*/
     -fx-font-size: 30;
 }
 
-#progressBar{
+#progressBar {
     -fx-pref-height: 30px;
 }
 
-#progressBar .track{
+#progressBar .track {
     -fx-background-color: #505762;
     -fx-background-radius: 0;
 }
 
-#progressBar .bar{
+#progressBar .bar {
     -fx-background-color: linear-gradient(to left, #ffd500, #4d4a4a);
 }
 
-.gradient-background{
+.gradient-background {
     -fx-background-color: linear-gradient(from 0% 34% to 78% 100%, #51506f, #AAB2BD, #DAC432);
 }
 
-.button:hover{
+.button:hover {
     -fx-text-fill: yellow;
 }
 
-.button:pressed{
+.button:pressed {
     -fx-text-fill: blue;
 }
 
-.button:focused{
+.button:focused {
     -fx-text-fill: green;
+}
+
+#errorTxtField {
+    -fx-text-fill: red;
 }
 
