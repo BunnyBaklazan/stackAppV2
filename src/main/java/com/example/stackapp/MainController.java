@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -48,7 +49,8 @@ public class MainController implements Initializable {
     }
 
     public class LoadingScreen implements Runnable {
-        String[] secretTextArr = {"Think inside box", "We need storage", "No box is too big, no customer too small", "We have solution", "Let's sort it out!", "Shelf of power", "Boxy of creative"};
+        String[] secretTextArr = {"Think inside box", "We need storage", "No box is too big, no customer too small",
+                "We have solution", "Let's sort it out!", "Shelf of power", "Boxy of creative"};
 
         ProgressIndicator progressBar;
         Text txt;
@@ -61,30 +63,18 @@ public class MainController implements Initializable {
         @Override
         public void run() {
             while (progressBar.getProgress() <= 1) {
-                if (progressBar.getProgress() >= 0.1 && progressBar.getProgress() <= 0.2) {
-                    txt.setText(secretTextArr[0]);
-                    txt.setFill(Color.GREEN);
-                } else if (progressBar.getProgress() >= 0.2 && progressBar.getProgress() <= 0.3) {
-                    txt.setText(secretTextArr[1]);
-                    txt.setFill(Color.YELLOW);
-                } else if (progressBar.getProgress() >= 0.3 && progressBar.getProgress() <= 0.5) {
-                    txt.setText(secretTextArr[2]);
-                    txt.setFill(Color.PINK);
-                } else if (progressBar.getProgress() >= 0.5 && progressBar.getProgress() <= 0.6) {
-                    txt.setText(secretTextArr[3]);
-                    txt.setFill(Color.WHITE);
-                } else if (progressBar.getProgress() >= 0.6 && progressBar.getProgress() <= 0.7) {
-                    txt.setText(secretTextArr[4]);
-                    txt.setFill(Color.BROWN);
-                } else if (progressBar.getProgress() >= 0.7 && progressBar.getProgress() <= 0.8) {
-                    txt.setText(secretTextArr[5]);
-                    txt.setFill(Color.PURPLE);
-                } else if (progressBar.getProgress() >= 0.8 && progressBar.getProgress() <= 0.9) {
-                    txt.setText(secretTextArr[6]);
-                    txt.setFill(Color.BLUE);
-                } else if (progressBar.getProgress() >= 0.9 && progressBar.getProgress() <= 0.99) {
-                    txt.setText(secretTextArr[0]);
-                    txt.setFill(Color.VIOLET);
+                int[] sequence= {0, 1, 2, 3, 4, 5, 6, 0};
+                List<Color> colors= List.of(Color.GREEN, Color.YELLOW, Color.PINK,
+                        Color.WHITE, Color.BROWN, Color.PURPLE, Color.BLUE, Color.VIOLET);
+                double secondsStart= 0.1;
+                double secondsEnd= 0.2;
+                for (int i = 0; i < 8; i++) {
+                    if (progressBar.getProgress() >= secondsStart && progressBar.getProgress() <= secondsEnd) {
+                        txt.setText(secretTextArr[sequence[i]]);
+                        txt.setFill(colors.get(i));
+                    }
+                    secondsStart += 0.1;
+                    secondsEnd += 0.1;
                 }
                 Platform.runLater(() -> progressBar.setProgress(progressBar.getProgress() + 0.01));
                 synchronized (this) {
