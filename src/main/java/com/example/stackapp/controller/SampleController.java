@@ -22,14 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class SampleController {
-
-    public static final String EMPTY_STRING = "";
-    @FXML
-    private CategoryAxis xAxis = new CategoryAxis();
-    @FXML
-    private NumberAxis yAxis = new NumberAxis();
-    @FXML
-    private BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+    LoadingScreen loadingScreen;
 
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
@@ -39,21 +32,34 @@ public class SampleController {
     private final String ADMIN = "admin";
     private User user = new User("asd", "admin");
 
-    private int count1, count2, count3, count4, count5, count6, count7;
+    public static final String EMPTY_STRING = "";
+
+    @FXML
+    private CategoryAxis xAxis = new CategoryAxis();
+
+    @FXML
+    private NumberAxis yAxis = new NumberAxis();
+
+    @FXML
+    private BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
     @FXML
     private Pane sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, shelfPane, addressPane;
+
     @FXML
     private Button searchBtn, editBtn, requestBtn, destroyBtn, saveBtn, acceptBtn, acceptDestroyBtn, addWorkerBtn = new Button();
+
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
+
     @FXML
     private TextField shelfIDField, boxIDField, clientIDField, periodField, dateFromField, dateEndField, weightField,
             fulfillmentField, statusField, noteField, palRequestField, palDestroyField, searchField = new TextField();
     @FXML
     private Text notificationTxt;
+
     @FXML
-    private Label leftCornerInfoLabel, titleTextLabel, palLabel, enterPalNrLabel, palDestroyLabel,
+    private Label leftCornerInfoLabel, palLabel, enterPalNrLabel, palDestroyLabel,
             enterPalNrDestroyLabel;
     @FXML
     private ImageView myBlackBox, myYellowBox, myBrownBox, myBlueBox, myRedBox, myPinkBox, myGreenBox, myPurpleBox,
@@ -70,6 +76,8 @@ public class SampleController {
     @FXML
     private ImageView box1, box2, box3, box4, box5, box6, box7, box8, box9;
 
+    private int count1, count2, count3, count4, count5, count6, count7;
+
     List<Pane> allPanels;
     List<ImageView> allBoxIMG;
     List<TextField> textFieldsForConnection;
@@ -78,17 +86,8 @@ public class SampleController {
     List<Text> boxIDs;
     List<Text> clientIDs;
 
-    LoadingScreen loadingScreen; //need to move down....test test
-
-    public SampleController() {
-        System.out.println("LOADING CONSTRUCTOR");
-        System.out.println("LOADING CONSTRUCTOR " + user.getRole());
-    }
-
     @FXML
     public void initialize() {
-        //b1Btn.setStyle("-fx-text-fill: BLACK; -fx-background-color: #AAB2BD");
-
         boxes = List.of(box1, box2, box3, box4, box5, box6, box7, box8, box9);
         boxIDs = List.of(bIdForBox1, bIdForBox2, bIdForBox3, bIdForBox4, bIdForBox5, bIdForBox6, bIdForBox7, bIdForBox8, bIdForBox9);
         clientIDs = List.of(cIdForBox1, cIdForBox2, cIdForBox3, cIdForBox4, cIdForBox5, cIdForBox6, cIdForBox7, cIdForBox8, cIdForBox9);
@@ -99,6 +98,7 @@ public class SampleController {
                 dateEndField, weightField, fulfillmentField, statusField, noteField);
 
         allPanels = List.of(sampleAppPane, searchBoxPane, addWorkerPane, b1Pane, b2Pane, d1Pane, shelfPane, addressPane);
+
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
@@ -107,6 +107,7 @@ public class SampleController {
 
         allBoxIMG = List.of(myBlackBox, myBlueBox, myOrangeBox, myBrownBox, myPinkBox, myGreenBox, myPurpleBox, myRedBox,
                 myYellowBox);
+
         for (ImageView imageView : allBoxIMG) {
             imageView.setVisible(false);
         }
@@ -124,10 +125,9 @@ public class SampleController {
         yAxis.setLowerBound(0.0);
         yAxis.setUpperBound(10.0);
         yAxis.setTickUnit(1.0);
-
         barChart.setAnimated(false);
     }
-
+//######################################################################################################################
 
     /**
      * ----    Default Panel    -----
