@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.prefs.Preferences;
 
-public class LoginController {
+public class AppController {
     private static final String SAMPLE_PAGE = "pages/sample.fxml";
     private static final Preferences userPreferences = Preferences.userRoot();
     private static final Main window = new Main();
@@ -60,7 +60,7 @@ public class LoginController {
                         //if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
-                        if (username.equals("asd.asd")) { //need to change to "admin"
+                        if (username.equals("admin")) { //need to change to "admin"
                             userPreferences.put("role", "admin");
                         } else {
                             userPreferences.put("role", "worker");
