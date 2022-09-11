@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AppController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AppController">
     <top>
         <Pane prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #99a1a8;" BorderPane.alignment="CENTER">
             <Label fx:id="leftCornerInfoLabel" layoutX="14.0" layoutY="11.0" stylesheets="@../colors.css" text="StackApp Choose Destination">
@@ -32,8 +32,8 @@
                 </font>
             </Label>
             <Label layoutX="842.0" layoutY="14.0" />
-            <ImageView fx:id="cornerHomeBtn" fitHeight="48.0" fitWidth="49.0" layoutX="842.0" layoutY="6.0" onMouseClicked="#changePanToDefaultPan" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../IMG/home_icon.png" />
+            <ImageView fx:id="cornerHomeBtn" fitHeight="48.0" fitWidth="49.0" layoutX="842.0" layoutY="6.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../IMG/exit_logout.png" />
             </ImageView>
         </Pane>
     </top>

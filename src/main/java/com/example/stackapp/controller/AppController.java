@@ -3,9 +3,12 @@ package com.example.stackapp.controller;
 import static com.example.stackapp.model.SampleUtils.calcPeriod;
 import static java.lang.String.valueOf;
 
+import com.example.stackapp.Main;
+import com.example.stackapp.MainController;
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,6 +34,8 @@ import java.util.List;
 import java.util.prefs.Preferences;
 
 public class AppController {
+    private static final Main window = new Main();
+    private static final String LOGIN_PAGE = "pages/log-in.fxml";
     protected final static Preferences userPreferences = Preferences.userRoot();
     LoadingScreen loadingScreen;
 
@@ -107,6 +113,7 @@ public class AppController {
 
     private int count1, count2, count3, count4, count5, count6, count7;
 
+
     private List<ImageView> boxes;
     private List<Text> boxIDs;
     private List<Text> clientIDs;
@@ -115,6 +122,7 @@ public class AppController {
     private List<TextField> textFields;
     private List<TextField> boxTextFields;
     private List<Pane> allPanels;
+
 
     @FXML
     public void initialize() {
@@ -157,7 +165,7 @@ public class AppController {
 
         // ADMIN PAGE
         String role = userPreferences.get("role", null);
-        if (role.equals("admin")) { // need to change to "admin"
+        if (role.equals("admin")) {
             System.out.println("admin is on");
             System.out.println("You are in the admin dashboard");
             addWorkerBtn.setVisible(true);
@@ -165,7 +173,6 @@ public class AppController {
         } else {
             System.out.println("no admin");
             addWorkerBtn.setVisible(false);
-            // show content from sample controller
         }
     }
 //######################################################################################################################
@@ -190,6 +197,16 @@ public class AppController {
     /**
      * ----    Default Panel    -----
      */
+
+    @FXML
+    private void logout() {
+        try {
+            window.changePage(LOGIN_PAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void changePanToDefaultPan() {
         for (TextField textField : textFields) {
@@ -313,9 +330,11 @@ public class AppController {
 
     @FXML
     private void onBtnPress_EditBox() {
-        if (noteField.getText().equals("No such record! Try again!")) {
-            noteField.setText("");
+
+        if (noteField.getText() != null && noteField.getText().equals("No such record! Try again!")) {
+            noteField.clear();
         }
+
         for (TextField tf : boxTextFields) {
             tf.setEditable(true);
         }
@@ -329,7 +348,7 @@ public class AppController {
     }
 
     private void shortcutForReqAndDes(boolean reverse) {
-        if(!reverse) {
+        if (!reverse) {
             editBtn.setDisable(true);
             editBtn.setVisible(false);
             requestBtn.setDisable(true);
@@ -573,8 +592,8 @@ public class AppController {
 
         ResultSet result = Connect.showBox(leftCornerTxtPart);
         if (result.isBeforeFirst()) {
-            while(result.next()){
-                for (int i = 1; i <= boxes.size(); i++){
+            while (result.next()) {
+                for (int i = 1; i <= boxes.size(); i++) {
                     if (boxesAtGraph == i) {
                         for (int j = 0; j < boxes.size(); j++) {
                             if (j < boxesAtGraph) {
@@ -839,7 +858,7 @@ public class AppController {
         String password = pass_field.getText().trim();
         String username = tf_username.getText().trim();
         if (firstName.equals("") || lastName.equals("") || password.equals("") || username.equals("")) {
-            return  false;
+            return false;
         }
         return true;
     }

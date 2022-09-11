@@ -53,15 +53,11 @@ public class SignInController {
             } else {
                 while (result.next()) {
                     String retrievedPassword = result.getString("password");
-                    //throw new RuntimeException(e);
-
-                    // database update is needed otherwise it won't let you in :(
                     if (BCrypt.checkpw(password, retrievedPassword)) {
-                        //if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
 
-                        if (username.equals("admin")) { //need to change to "admin"
+                        if (username.equals("admin")) {
                             userPreferences.put("role", "admin");
                         } else {
                             userPreferences.put("role", "worker");
