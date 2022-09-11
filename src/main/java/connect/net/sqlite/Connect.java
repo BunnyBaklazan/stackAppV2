@@ -163,11 +163,11 @@ public class Connect {
             System.out.println(e.getMessage());
             return null;
 
-        } finally {
+        } /*finally {
 
             if (statement != null) { statement.close(); }
             if (conn != null ) { conn.close(); }
-        }
+        }*/
     }
 
     //trying to give an objective view how much space are taken
