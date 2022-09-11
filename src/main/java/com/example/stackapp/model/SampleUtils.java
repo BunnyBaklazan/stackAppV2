@@ -12,6 +12,6 @@ public class SampleUtils {
 
     public static String calcPeriod(String from, String end) {
         Period period = between(parse(from, formatter), parse(end, formatter));
-        return period.getYears() + "years " + period.getMonths() + "months " + period.getDays() + "days";
+        return period.getYears() + " years";
     }
 }
