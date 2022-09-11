@@ -267,15 +267,15 @@ public class SampleController {
             boxIDField.setText(valueOf(box.getId()));
             shelfIDField.setText(box.getShelfId());
             clientIDField.setText(valueOf(box.getClientId()));
-            dateFromField.setText(box.getDateFrom() != null ? box.getDateFrom() : EMPTY_STRING);
-            dateEndField.setText(box.getDateEnd() != null ? box.getDateEnd() : EMPTY_STRING);
-            weightField.setText(box.getWeight() != null ? box.getWeight() : EMPTY_STRING);
-            fulfillmentField.setText(box.getFulfillment() != null ? box.getFulfillment() : EMPTY_STRING);
-            statusField.setText(box.getStatus() != null ? box.getStatus() : EMPTY_STRING);
-            noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : EMPTY_STRING);
+            dateFromField.setText(box.getDateFrom() != null ? box.getDateFrom() : null);
+            dateEndField.setText(box.getDateEnd() != null ? box.getDateEnd() : null);
+            weightField.setText(box.getWeight() != null ? box.getWeight() : null);
+            fulfillmentField.setText(box.getFulfillment() != null ? box.getFulfillment() : null);
+            statusField.setText(box.getStatus() != null ? box.getStatus() : null);
+            noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : null);
 
             //troublesome part of code begins:
-            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != EMPTY_STRING
+            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != null
                     ? calcPeriod(box.getDateFrom(), box.getDateEnd())
                     : null);
         }
@@ -429,12 +429,12 @@ public class SampleController {
             Connect.insertBox(new BoxData(
                     Long.parseLong(boxIDField.getText()),
                     Long.parseLong(clientIDField.getText()),
-                    dateFromField.getText() != null ? dateFromField.getText() : EMPTY_STRING,
-                    dateEndField.getText() != null ? dateEndField.getText() : EMPTY_STRING,
-                    fulfillmentField.getText() != null ? fulfillmentField.getText() : EMPTY_STRING,
-                    statusField.getText() != null ? statusField.getText() : EMPTY_STRING,
-                    noteField.getText() != null ? noteField.getText() : EMPTY_STRING,
-                    weightField.getText() != null ? weightField.getText() : EMPTY_STRING,
+                    dateFromField.getText() != null ? dateFromField.getText() : null,
+                    dateEndField.getText() != null ? dateEndField.getText() : null,
+                    fulfillmentField.getText() != null ? fulfillmentField.getText() : null,
+                    statusField.getText() != null ? statusField.getText() : null,
+                    noteField.getText() != null ? noteField.getText() : null,
+                    weightField.getText() != null ? weightField.getText() : null,
                     shelfIDField.getText()
             ));
             notificationTxt.setStyle("-fx-fill: #2c6432;");
@@ -885,7 +885,6 @@ public class SampleController {
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();
 
-        //Connect conn = new Connect();
         ResultSet result = Connect.showAllUsers();
 
         try {

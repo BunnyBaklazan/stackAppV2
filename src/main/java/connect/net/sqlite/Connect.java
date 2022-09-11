@@ -126,7 +126,6 @@ public class Connect {
             result = statement.executeQuery();
 
             if (!result.isBeforeFirst()) {
-                System.out.println("Answer from connect! Bro we don't have it");
                 return null;
             }
 
@@ -252,7 +251,5 @@ public class Connect {
 
 
     public static void main(String[] args) {
-        //connect();
-        //blackpink in the area
     }
 }
