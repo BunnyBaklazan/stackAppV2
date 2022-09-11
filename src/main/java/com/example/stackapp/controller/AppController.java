@@ -838,7 +838,10 @@ public class AppController {
         String lastName = tf_last_name.getText().trim();
         String password = pass_field.getText().trim();
         String username = tf_username.getText().trim();
-        return !firstName.equals("") && !lastName.equals("") && !password.equals("") && !username.equals("");
+        if (firstName.equals("") || lastName.equals("") || password.equals("") || username.equals("")) {
+            return  false;
+        }
+        return true;
     }
 
     private void setEmptyStrings() {
@@ -858,17 +861,22 @@ public class AppController {
 
     @FXML
     private void update() {
-        Connect.updateUserTable(
-                new UserData(
-                        tf_first_name.getText(),
-                        tf_last_name.getText(),
-                        pass_field.getText(),
-                        tc_id.getText()
-                )
-        );
-
-        setEmptyStrings();
-        showUsersTable();
+        if (!isValidUserData()) {
+            System.out.println("Invalid user data");
+            label_error.setText("Error! Enter all text fields!");
+        } else {
+            UserData user;
+            System.out.println("Updating user data");
+            label_error.setText("");
+            Connect.updateUserTable(
+                    user = new UserData(table_users.getSelectionModel().getSelectedItem().getId(),
+                            tf_first_name.getText(),
+                            tf_last_name.getText(),
+                            pass_field.getText(),
+                            tf_username.getText()));
+            setEmptyStrings();
+            showUsersTable(); // show table after insertion
+        }
     }
 
     private String encryptPass(String password) {

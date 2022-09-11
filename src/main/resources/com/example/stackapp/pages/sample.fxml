@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AppController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stackapp.controller.AppController">
     <top>
         <Pane prefHeight="55.0" prefWidth="900.0" style="-fx-background-color: #99a1a8;" BorderPane.alignment="CENTER">
             <Label fx:id="leftCornerInfoLabel" layoutX="14.0" layoutY="11.0" stylesheets="@../colors.css" text="StackApp Choose Destination">
@@ -700,7 +700,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn_update" layoutX="467.0" layoutY="449.0" mnemonicParsing="false" onAction="#update" onMouseClicked="#update" prefHeight="30.0" prefWidth="64.0" text="Update">
+                <Button fx:id="btn_update" layoutX="467.0" layoutY="449.0" mnemonicParsing="false" onAction="#update" prefHeight="30.0" prefWidth="64.0" text="Update">
                     <font>
                         <Font size="14.0" />
                     </font>
