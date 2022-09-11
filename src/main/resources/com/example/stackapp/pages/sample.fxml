@@ -20,6 +20,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -642,7 +645,7 @@
             </Pane>
 
 
-            <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
+            <Pane fx:id="addWorkerPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
 
                 <Label layoutX="180.0" layoutY="510.0" prefHeight="20.0" prefWidth="84.0" text="USERNAME">
                     <font>
@@ -768,7 +771,7 @@
                     </font>
                 </Button>
             </Pane>
-            <Pane fx:id="addressPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;" visible="false">
+            <Pane fx:id="addressPane" prefHeight="645.0" prefWidth="700.0" style="-fx-background-color: #dce2e8;">
                 <ImageView fx:id="box4" fitHeight="150.0" fitWidth="200.0" layoutX="110.0" layoutY="250.0" onMouseClicked="#checksPressedBoxID" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../IMG/box-green.png" />
@@ -814,92 +817,108 @@
                         <Image url="@../IMG/box-yellow.png" />
                     </image>
                 </ImageView>
-                <Text fx:id="bIdForBox1" fill="#ab11ab" layoutX="128.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="267" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="bIdForBox1" fill="#ab11ab" layoutX="128.0" layoutY="510.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="267" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox1" fill="#ab11ab" layoutX="128.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="67" textAlignment="CENTER" wrappingWidth="84.57086181640625">
+                <Text fx:id="cIdForBox1" fill="#ab11ab" layoutX="128.0" layoutY="481.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="67" textAlignment="CENTER" wrappingWidth="84.57086181640625">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox2" fill="RED" layoutX="277.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="224" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="bIdForBox2" fill="RED" layoutX="277.0" layoutY="510.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="224" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox2" fill="RED" layoutX="278.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="85.05313110351562">
+                <Text fx:id="cIdForBox2" fill="RED" layoutX="278.0" layoutY="481.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="85.05313110351562">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox3" fill="#d7d71d" layoutX="429.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="84.4354248046875">
+                <Text fx:id="cIdForBox3" fill="#d7d71d" layoutX="429.0" layoutY="481.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="84.4354248046875">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox3" fill="#d7d71d" layoutX="428.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11121" textAlignment="CENTER" wrappingWidth="84.2723388671875">
+                <Text fx:id="bIdForBox3" fill="#d7d71d" layoutX="428.0" layoutY="510.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="11121" textAlignment="CENTER" wrappingWidth="84.2723388671875">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox4" fill="GREEN" layoutX="128.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25568" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="bIdForBox4" fill="GREEN" layoutX="128.0" layoutY="370.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="25568" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox4" fill="GREEN" layoutX="128.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="56" textAlignment="CENTER" wrappingWidth="83.8089599609375">
+                <Text fx:id="cIdForBox4" fill="GREEN" layoutX="128.0" layoutY="344.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="56" textAlignment="CENTER" wrappingWidth="83.8089599609375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox5" fill="ORANGE" layoutX="277.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="bIdForBox5" fill="ORANGE" layoutX="277.0" layoutY="370.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="12" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox5" fill="ORANGE" layoutX="277.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="120" textAlignment="CENTER" wrappingWidth="85.46640014648438">
+                <Text fx:id="cIdForBox5" fill="ORANGE" layoutX="277.0" layoutY="344.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="120" textAlignment="CENTER" wrappingWidth="85.46640014648438">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox6" fill="PINK" layoutX="428.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55540" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="bIdForBox6" fill="PINK" layoutX="428.0" layoutY="370.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="55540" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox6" fill="PINK" layoutX="429.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER" wrappingWidth="83.97491455078125">
+                <Text fx:id="cIdForBox6" fill="PINK" layoutX="429.0" layoutY="343.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER" wrappingWidth="83.97491455078125">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox7" layoutX="128.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3557" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="bIdForBox7" layoutX="128.0" layoutY="230.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="3557" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox7" layoutX="129.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER" wrappingWidth="84.51400756835938">
+                <Text fx:id="cIdForBox7" layoutX="129.0" layoutY="204.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER" wrappingWidth="84.51400756835938">
+                    <font>
+                        <Font size="21.0" />
+                    </font>
+               <stroke>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </stroke>
+                </Text>
+                <Text fx:id="bIdForBox8" fill="BLUE" layoutX="277.0" layoutY="230.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="4002" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox8" fill="BLUE" layoutX="277.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4002" textAlignment="CENTER" wrappingWidth="85.21630859375">
+                <Text fx:id="cIdForBox8" fill="BLUE" layoutX="278.0" layoutY="204.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER" wrappingWidth="84.90335083007812">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="cIdForBox8" fill="BLUE" layoutX="278.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER" wrappingWidth="84.90335083007812">
+                <Text fx:id="bIdForBox9" fill="#8a3719" layoutX="429.0" layoutY="230.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </Text>
-                <Text fx:id="bIdForBox9" fill="#8a3719" layoutX="429.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25567" textAlignment="CENTER" wrappingWidth="85.21630859375">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </Text>
-                <Text fx:id="cIdForBox9" fill="#8a3719" layoutX="427.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="84.50341796875">
+                <Text fx:id="cIdForBox9" fill="#8a3719" layoutX="427.0" layoutY="204.0" onMouseClicked="#checksPressedBoxBID" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="84.50341796875">
                     <font>
                         <Font size="21.0" />
                     </font>
