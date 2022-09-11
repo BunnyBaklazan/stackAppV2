@@ -268,15 +268,15 @@ public class AppController {
             boxIDField.setText(valueOf(box.getId()));
             shelfIDField.setText(box.getShelfId());
             clientIDField.setText(valueOf(box.getClientId()));
-            dateFromField.setText(box.getDateFrom() != null ? box.getDateFrom() : EMPTY_STRING);
-            dateEndField.setText(box.getDateEnd() != null ? box.getDateEnd() : EMPTY_STRING);
-            weightField.setText(box.getWeight() != null ? box.getWeight() : EMPTY_STRING);
-            fulfillmentField.setText(box.getFulfillment() != null ? box.getFulfillment() : EMPTY_STRING);
-            statusField.setText(box.getStatus() != null ? box.getStatus() : EMPTY_STRING);
-            noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : EMPTY_STRING);
+            dateFromField.setText(box.getDateFrom() != null ? box.getDateFrom() : null);
+            dateEndField.setText(box.getDateEnd() != null ? box.getDateEnd() : null);
+            weightField.setText(box.getWeight() != null ? box.getWeight() : null);
+            fulfillmentField.setText(box.getFulfillment() != null ? box.getFulfillment() : null);
+            statusField.setText(box.getStatus() != null ? box.getStatus() : null);
+            noteField.setText(box.getInfoNote() != null ? box.getInfoNote() : null);
 
             //troublesome part of code begins:
-            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != EMPTY_STRING
+            periodField.setText(box.getDateFrom() != null && box.getDateEnd() != null
                     ? calcPeriod(box.getDateFrom(), box.getDateEnd())
                     : null);
         }
@@ -355,7 +355,7 @@ public class AppController {
     }
 
     @FXML
-    private void saveRequestPalToDB() {
+    private void saveRequestPalToDB() throws SQLException {
         if (palRequestField.getText().isEmpty()) {
             notificationTxt.setText("Add PAL[R]:nr!");
             notificationTxt.setStyle("-fx-fill: red;");
@@ -392,7 +392,7 @@ public class AppController {
     }
 
     @FXML
-    private void saveDestroyPalToDB() {
+    private void saveDestroyPalToDB() throws SQLException {
         if (palDestroyField.getText().equals("")) {
             notificationTxt.setText("Add PAL[X]:nr!");
             notificationTxt.setStyle("-fx-fill: red;");
@@ -418,7 +418,7 @@ public class AppController {
     }
 
     @FXML
-    private void saveBox() {
+    private void saveBox() throws SQLException {
         if (shelfIDField.getText().isEmpty() || clientIDField.getText().isEmpty()
                 || boxIDField.getText().isEmpty()) {
 
@@ -426,6 +426,7 @@ public class AppController {
             notificationTxt.setText("Error, adding Box to the database. Please fill ShelfID and ClientID");
             editBtn.setVisible(false);
             saveBtn.setVisible(true);
+
         } else {
             for (TextField textField : textFields) {
                 textField.setEditable(false);
@@ -433,14 +434,15 @@ public class AppController {
             Connect.insertBox(new BoxData(
                     Long.parseLong(boxIDField.getText()),
                     Long.parseLong(clientIDField.getText()),
-                    dateFromField.getText() != null ? dateFromField.getText() : EMPTY_STRING,
-                    dateEndField.getText() != null ? dateEndField.getText() : EMPTY_STRING,
-                    fulfillmentField.getText() != null ? fulfillmentField.getText() : EMPTY_STRING,
-                    statusField.getText() != null ? statusField.getText() : EMPTY_STRING,
-                    noteField.getText() != null ? noteField.getText() : EMPTY_STRING,
-                    weightField.getText() != null ? weightField.getText() : EMPTY_STRING,
+                    dateFromField.getText() != null ? dateFromField.getText() : null,
+                    dateEndField.getText() != null ? dateEndField.getText() : null,
+                    fulfillmentField.getText() != null ? fulfillmentField.getText() : null,
+                    statusField.getText() != null ? statusField.getText() : null,
+                    noteField.getText() != null ? noteField.getText() : null,
+                    weightField.getText() != null ? weightField.getText() : null,
                     shelfIDField.getText()
             ));
+
             notificationTxt.setStyle("-fx-fill: #2c6432;");
             notificationTxt.setText("The box has been successfully saved in the database");
             editBtn.setVisible(true);
@@ -514,13 +516,13 @@ public class AppController {
      * ----    Shelf Panel    -----
      */
     @FXML
-    private void checksPressedShelfID(MouseEvent event) {
+    private void checksPressedShelfID(MouseEvent event) throws SQLException {
         String labelID = ((Label) event.getSource()).getId().toUpperCase();
         changePanToShelfPan(labelID);
     }
 
     @FXML
-    private void changePanToShelfPan(String address) {
+    private void changePanToShelfPan(String address) throws SQLException {
         loadGraphWindow(address);
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
@@ -638,7 +640,7 @@ public class AppController {
      * ----    Graph window    -----
      */
     @FXML
-    void loadGraphWindow(String address) {
+    void loadGraphWindow(String address) throws SQLException {
 
         boolean mirrorShelf;
         barChart.setVisible(true);
