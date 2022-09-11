@@ -601,21 +601,33 @@ public class AppController {
     /**
      * ----    Section Panel(Where is all 9Boxes)    -----
      */
-    @FXML
-    private void checksPressedBoxID(MouseEvent event) {
+
+    private void handleBoxID(String id) {
         String boxID = "";
-        List<String> boxesStr = List.of("box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9");
-
-        String imgID = ((ImageView) event.getSource()).getId();
-        System.out.println("Clicked Box ID: " + imgID);
-
+        List<String> boxesStr = List.of("1", "2", "3", "4", "5", "6", "7", "8", "9");
         for (int i = 0; i < boxesStr.size(); i++) {
-            if (imgID.equals(boxesStr.get(i))) {
+            if (id.equals(boxesStr.get(i))) {
                 boxID = boxIDs.get(i).getText();
             }
         }
         changePanToSearchBoxPan(boxID);
         boxId = Integer.parseInt(boxID);
+    }
+
+    @FXML
+    private void checksPressedBoxID(MouseEvent event) {
+        String imgID = ((ImageView) event.getSource()).getId();
+        imgID = imgID.substring(imgID.length() - 1);
+        System.out.println(imgID);
+        handleBoxID(imgID);
+    }
+
+    @FXML
+    private void checksPressedBoxBID(MouseEvent event) {
+        String imgID = ((Text) event.getSource()).getId();
+        imgID = imgID.substring(imgID.length() - 1);
+        System.out.println(imgID);
+        handleBoxID(imgID);
     }
     /**    ----END Section Panel END-----    */
 //######################################################################################################################
