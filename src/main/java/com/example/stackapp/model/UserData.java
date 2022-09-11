@@ -9,7 +9,6 @@ public class UserData {
     private String userName;
 
     public UserData(String firstName, String lastName, String password, String userName) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
