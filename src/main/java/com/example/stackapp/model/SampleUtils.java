@@ -8,10 +8,11 @@ import static java.time.Period.between;
 
 public class SampleUtils {
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+    private static final String SEPARATOR = ".";
 
     public static String calcPeriod(String from, String end) {
-        Period period = between(parse(from, formatter), parse(end, formatter));
-        return period.getYears() + " years";
+        int fromDate = Integer.parseInt(from.substring(from.lastIndexOf(SEPARATOR) + 1));
+        int endDate = Integer.parseInt(end.substring(from.lastIndexOf(SEPARATOR) + 1));
+        return endDate - fromDate + " years";
     }
 }

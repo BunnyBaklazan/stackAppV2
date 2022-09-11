@@ -15,6 +15,7 @@ public class SignInController {
     private static final String SAMPLE_PAGE = "pages/sample.fxml";
     private static final Preferences userPreferences = Preferences.userRoot();
     private static final Main window = new Main();
+    private final Connect connect = new Connect();
 
     @FXML
     private TextField tf_username;
@@ -30,7 +31,7 @@ public class SignInController {
     }
 
     @FXML
-    public void login() {
+    public void login() throws IOException {
         String username = tf_username.getText();
         String password = pf_password.getText();
         ResultSet result = null;
@@ -43,36 +44,20 @@ public class SignInController {
         }
         errorTxtField.setVisible(false);
 
-        try {
-            result = Connect.checkLogin(username);
+        String pass = connect.checkLogin(username);
+        if (pass != null && BCrypt.checkpw(password, pass)) {
+            System.out.println("User found and password is correct.");
+            userPreferences.put("username", username);
 
-            if (!result.isBeforeFirst()) {
-                errorTxtField.setText("User is not found!");
-                errorTxtField.setVisible(true);
-
+            if (username.equals("admin")) { //need to change to "admin"
+                userPreferences.put("role", "admin");
             } else {
-                while (result.next()) {
-                    String retrievedPassword = result.getString("password");
-                    if (BCrypt.checkpw(password, retrievedPassword)) {
-                        System.out.println("User found and password is correct.");
-                        userPreferences.put("username", username);
-
-                        if (username.equals("admin")) {
-                            userPreferences.put("role", "admin");
-                        } else {
-                            userPreferences.put("role", "worker");
-                        }
-                        window.changePage(SAMPLE_PAGE);
-                    } else {
-                        errorTxtField.setText("Passwords did not match!");
-                        errorTxtField.setVisible(true);
-                    }
-                }
+                userPreferences.put("role", "worker");
             }
-        } catch (SQLException e) {
-            System.out.println("Exception!");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            window.changePage(SAMPLE_PAGE);
+        } else {
+            errorTxtField.setText("Username or password incorrect!");
+            errorTxtField.setVisible(true);
         }
     }
 }

@@ -5,6 +5,7 @@ import static java.lang.String.valueOf;
 
 import com.example.stackapp.Main;
 import com.example.stackapp.MainController;
+import com.example.stackapp.model.BoxDTO;
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.UserData;
 import connect.net.sqlite.Connect;
@@ -42,12 +43,8 @@ public class AppController {
     private static final String BOX_ID_VALIDATOR_MESSAGE = "Box ID must only contains numbers!";
     private static final String ONLY_NUMBERS_REGEX = "[0-9]*";
     private volatile boolean running = true;
-
-    public long boxId;
-    public static final String EMPTY_STRING = "";
-
-
-    //------------------------
+    private long boxId;
+    private final Connect connect = new Connect();
 
     @FXML
     private TextField tf_first_name, tf_last_name, tf_username;
@@ -66,8 +63,6 @@ public class AppController {
 
     @FXML
     private Label label_error;
-
-    //-------------------------
 
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
@@ -210,7 +205,7 @@ public class AppController {
     @FXML
     private void changePanToDefaultPan() {
         for (TextField textField : textFields) {
-            textField.setText("");
+            textField.clear();
             textField.setEditable(false);
         }
         for (Pane allPanel : allPanels) {
@@ -228,7 +223,7 @@ public class AppController {
         acceptRequestBtn.setVisible(false);
         acceptDestroyBtn.setVisible(false);
         setAllPaletFalse();
-        searchField.setText("");
+        //searchField.clear();
         restartAnimation();
     }
 
@@ -246,7 +241,7 @@ public class AppController {
     }
 
     @FXML
-    private void changePanToSearchBoxPan(String boxID) throws SQLException {
+    private void changePanToSearchBoxPan(String boxID) {
         changePanToSearchBoxPan();
         searchField.setText(boxID);
         getBoxById(Long.parseLong(boxID));
@@ -266,8 +261,8 @@ public class AppController {
         }
     }
 
-    private void getBoxById(long boxId) throws SQLException {
-        BoxData box = Connect.searchForBox(boxId);
+    private void getBoxById(long boxId) {
+        BoxData box = connect.searchForBox(boxId);
         System.out.println("BoxId is " + boxId);
 
         if (box == null) {
@@ -280,7 +275,7 @@ public class AppController {
 
         } else {
 
-            noteField.setText("");
+            noteField.clear();
             noteField.setStyle("-fx-text-fill: BLACK; -fx-background-color:  #dce2e8");
             boxIDField.setText(valueOf(box.getId()));
             shelfIDField.setText(box.getShelfId());
@@ -300,10 +295,10 @@ public class AppController {
     }
 
     @FXML
-    private void getBoxIdByUserInput() throws SQLException {
+    private void getBoxIdByUserInput() {
         for (TextField boxTextField : boxTextFields) {
             boxTextField.setEditable(false);
-            boxTextField.setText("");
+            boxTextField.clear();
         }
 
         setAllPaletFalse();
@@ -374,14 +369,14 @@ public class AppController {
     }
 
     @FXML
-    private void saveRequestPalToDB() throws SQLException {
+    private void saveRequestPalToDB() {
         if (palRequestField.getText().isEmpty()) {
             notificationTxt.setText("Add PAL[R]:nr!");
             notificationTxt.setStyle("-fx-fill: red;");
 
         } else {
 
-            Connect.updateShelfId(
+            connect.updateShelfId(
                     "PALR" + palRequestField.getText(),
                     Long.parseLong(boxIDField.getText())
             );
@@ -397,6 +392,7 @@ public class AppController {
             notificationTxt.setText(
                     "The box has been successfully saved in the database at 'PAL[R]:" +
                             palRequestField.getText() + "'");
+            getBoxById(Long.parseLong(boxIDField.getText()));
 
         }
     }
@@ -411,14 +407,14 @@ public class AppController {
     }
 
     @FXML
-    private void saveDestroyPalToDB() throws SQLException {
+    private void saveDestroyPalToDB() {
         if (palDestroyField.getText().equals("")) {
             notificationTxt.setText("Add PAL[X]:nr!");
             notificationTxt.setStyle("-fx-fill: red;");
 
         } else {
 
-            Connect.updateShelfId(
+            connect.updateShelfId(
                     "PALX" + palDestroyField.getText(),
                     Long.parseLong(boxIDField.getText())
             );
@@ -433,11 +429,12 @@ public class AppController {
             notificationTxt.setText(
                     "The box has been successfully deleted and saved in the database at 'PAL[X]:" +
                             palDestroyField.getText() + "'");
+            getBoxById(Long.parseLong(boxIDField.getText()));
         }
     }
 
     @FXML
-    private void saveBox() throws SQLException {
+    private void saveBox() {
         if (shelfIDField.getText().isEmpty() || clientIDField.getText().isEmpty()
                 || boxIDField.getText().isEmpty()) {
 
@@ -450,7 +447,7 @@ public class AppController {
             for (TextField textField : textFields) {
                 textField.setEditable(false);
             }
-            Connect.insertBox(new BoxData(
+            connect.insertBox(new BoxData(
                     Long.parseLong(boxIDField.getText()),
                     Long.parseLong(clientIDField.getText()),
                     dateFromField.getText() != null ? dateFromField.getText() : null,
@@ -466,6 +463,7 @@ public class AppController {
             notificationTxt.setText("The box has been successfully saved in the database");
             editBtn.setVisible(true);
             saveBtn.setVisible(false);
+            getBoxById(Long.parseLong(boxIDField.getText()));
         }
     }
 
@@ -535,13 +533,13 @@ public class AppController {
      * ----    Shelf Panel    -----
      */
     @FXML
-    private void checksPressedShelfID(MouseEvent event) throws SQLException {
+    private void checksPressedShelfID(MouseEvent event) {
         String labelID = ((Label) event.getSource()).getId().toUpperCase();
         changePanToShelfPan(labelID);
     }
 
     @FXML
-    private void changePanToShelfPan(String address) throws SQLException {
+    private void changePanToShelfPan(String address) {
         loadGraphWindow(address);
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
@@ -559,7 +557,7 @@ public class AppController {
      * ----    Address Panel    -----
      */
     @FXML
-    private void checksPressedSectionID(ActionEvent event) throws SQLException {
+    private void checksPressedSectionID(ActionEvent event) {
         Button button = (Button) event.getSource();
         String btnText = button.getText();
         String btnID = ((Button) event.getSource()).getId();
@@ -569,14 +567,11 @@ public class AppController {
         System.out.println("Clicked Btn ID: " + btnID);
         System.out.println("Full ID: " + textToShow);
 
-        Connect conn = new Connect();
-        int boxesAtGraph = conn.capacityOf(textToShow);
-
-        changePanToAddressPan(textToShow, boxesAtGraph);
+        changePanToAddressPan(textToShow);
     }
 
     @FXML
-    void changePanToAddressPan(String leftCornerTxtPart, int boxesAtGraph) throws SQLException {
+    void changePanToAddressPan(String leftCornerTxtPart) {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
@@ -590,40 +585,14 @@ public class AppController {
             boxIDs.get(i).setVisible(false);
         }
 
-        ResultSet result = Connect.showBox(leftCornerTxtPart);
-        if (result.isBeforeFirst()) {
-            while (result.next()) {
-                for (int i = 1; i <= boxes.size(); i++) {
-                    if (boxesAtGraph == i) {
-                        for (int j = 0; j < boxes.size(); j++) {
-                            if (j < boxesAtGraph) {
-                                boxes.get(j).setVisible(true);
-                                clientIDs.get(j).setVisible(true);
-                                clientIDs.get(j).setText(result.getString("client_id"));
-                                boxIDs.get(j).setVisible(true);
-                                boxIDs.get(j).setText(result.getString("b_id"));
-                            }
-                        }
-                    }
-                }
-            }
+        List<BoxDTO> sectorBoxes = connect.showBox(leftCornerTxtPart);
 
-            /*for (int i = 1; i <= boxes.size(); i++) {
-                while (result.next()) {
-                    if (boxesAtGraph == i) {
-                        for (int j = 0; j < boxes.size(); j++) {
-                            if (j < boxesAtGraph) {
-                                boxes.get(j).setVisible(true);
-                                clientIDs.get(j).setVisible(true);
-                                clientIDs.get(j).setText(result.getString("client_id")); // refactor for real data from DB
-                                boxIDs.get(j).setVisible(true);
-                                boxIDs.get(j).setText(result.getString("b_id"));
-                            }
-                        }
-                    }
-                }
-            }*/
-
+        for (int i = 0; i < sectorBoxes.size(); i++) {
+            boxes.get(i).setVisible(true);
+            clientIDs.get(i).setVisible(true);
+            clientIDs.get(i).setText(String.valueOf(sectorBoxes.get(i).getClientId()));
+            boxIDs.get(i).setVisible(true);
+            boxIDs.get(i).setText(String.valueOf(sectorBoxes.get(i).getId()));
         }
     }
     /**    ----END Address Panel END-----    */
@@ -633,11 +602,8 @@ public class AppController {
      * ----    Section Panel(Where is all 9Boxes)    -----
      */
     @FXML
-    private void checksPressedBoxID(MouseEvent event) throws SQLException {
+    private void checksPressedBoxID(MouseEvent event) {
         String boxID = "";
-
-        //need to connect pressed box with text on it- BoxID and path it changePanToSearchBoxPan(boxID);
-
         List<String> boxesStr = List.of("box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9");
 
         String imgID = ((ImageView) event.getSource()).getId();
@@ -648,9 +614,8 @@ public class AppController {
                 boxID = boxIDs.get(i).getText();
             }
         }
-
-
         changePanToSearchBoxPan(boxID);
+        boxId = Integer.parseInt(boxID);
     }
     /**    ----END Section Panel END-----    */
 //######################################################################################################################
@@ -659,7 +624,7 @@ public class AppController {
      * ----    Graph window    -----
      */
     @FXML
-    void loadGraphWindow(String address) throws SQLException {
+    void loadGraphWindow(String address) {
 
         boolean mirrorShelf;
         barChart.setVisible(true);
@@ -864,16 +829,16 @@ public class AppController {
     }
 
     private void setEmptyStrings() {
-        tf_first_name.setText("");
-        tf_last_name.setText("");
-        pass_field.setText("");
-        tf_username.setText("");
+        tf_first_name.clear();
+        tf_last_name.clear();
+        pass_field.clear();
+        tf_username.clear();
     }
 
     @FXML
     private void delete() {
         UserData user = table_users.getSelectionModel().getSelectedItem();
-        Connect.deleteUser(user.getId());
+        connect.deleteUser(user.getId());
         setEmptyStrings();
         showUsersTable();
     }
@@ -887,7 +852,7 @@ public class AppController {
             UserData user;
             System.out.println("Updating user data");
             label_error.setText("");
-            Connect.updateUserTable(
+            connect.updateUserTable(
                     user = new UserData(table_users.getSelectionModel().getSelectedItem().getId(),
                             tf_first_name.getText(),
                             tf_last_name.getText(),
@@ -921,7 +886,7 @@ public class AppController {
         } else {
             System.out.println("Inserting user");
             label_error.setText("");
-            Connect.insertUser(user);
+            connect.insertUser(user);
             setEmptyStrings();
             showUsersTable(); // show table after insertion
         }
@@ -930,27 +895,11 @@ public class AppController {
 
     public ObservableList<UserData> getUsersData() {
         ObservableList<UserData> usersList = FXCollections.observableArrayList();
+        List<UserData> users = connect.showAllUsers();
 
-        //Connect conn = new Connect();
-        ResultSet result = Connect.showAllUsers();
-
-        try {
-            while (result.next()) {
-                UserData user = new UserData(
-                        result.getInt("id"),
-                        result.getString("first_name"),
-                        result.getString("last_name"),
-                        result.getString("password"),
-                        result.getString("username")
-                );
-
-                usersList.add(user);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (users.size() > 0) {
+            usersList.addAll(users);
         }
-
         return usersList;
     }
 
