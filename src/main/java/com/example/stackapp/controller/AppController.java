@@ -25,6 +25,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
@@ -537,7 +538,7 @@ public class AppController {
      * ----    Address Panel    -----
      */
     @FXML
-    private void checksPressedSectionID(ActionEvent event) {
+    private void checksPressedSectionID(ActionEvent event) throws SQLException {
         Button button = (Button) event.getSource();
         String btnText = button.getText();
         String btnID = ((Button) event.getSource()).getId();
@@ -554,18 +555,13 @@ public class AppController {
     }
 
     @FXML
-    void changePanToAddressPan(String leftCornerTxtPart, int boxesAtGraph) {
+    void changePanToAddressPan(String leftCornerTxtPart, int boxesAtGraph) throws SQLException {
         for (Pane allPanel : allPanels) {
             allPanel.setVisible(false);
         }
         addressPane.setVisible(true);
 
-        leftCornerInfoLabel.setText("StackApp Section- " + leftCornerTxtPart);
-
-        // refactor for real data from DB
-        List<String> boxIDss = List.of("8322", "56007", "12202", "23300", "21220", "1200", "55200", "27820", "182");
-        List<String> clientIDss = List.of("5", "57", "22", "23", "2", "12", "5", "20", "5");
-
+        leftCornerInfoLabel.setText("StackApp Section - " + leftCornerTxtPart);
 
         for (int i = 0; i < boxes.size(); i++) {
             boxes.get(i).setVisible(false);
@@ -573,23 +569,41 @@ public class AppController {
             boxIDs.get(i).setVisible(false);
         }
 
-        for (int i = 1; i <= boxes.size(); i++) {
-            if (boxesAtGraph == i) {
-                for (int j = 0; j < boxes.size(); j++) {
-                    if (j < boxesAtGraph) {
-                        boxes.get(j).setVisible(true);
-                        clientIDs.get(j).setVisible(true);
-                        clientIDs.get(j).setText(clientIDss.get(j)); // refactor for real data from DB
-                        boxIDs.get(j).setVisible(true);
-                        boxIDs.get(j).setText(boxIDss.get(j)); // refactor for real data from DB
+        ResultSet result = Connect.showBox(leftCornerTxtPart);
+        if (result.isBeforeFirst()) {
+            while(result.next()){
+                for (int i = 1; i <= boxes.size(); i++){
+                    if (boxesAtGraph == i) {
+                        for (int j = 0; j < boxes.size(); j++) {
+                            if (j < boxesAtGraph) {
+                                boxes.get(j).setVisible(true);
+                                clientIDs.get(j).setVisible(true);
+                                clientIDs.get(j).setText(result.getString("client_id"));
+                                boxIDs.get(j).setVisible(true);
+                                boxIDs.get(j).setText(result.getString("b_id"));
+                            }
+                        }
                     }
                 }
             }
+
+            /*for (int i = 1; i <= boxes.size(); i++) {
+                while (result.next()) {
+                    if (boxesAtGraph == i) {
+                        for (int j = 0; j < boxes.size(); j++) {
+                            if (j < boxesAtGraph) {
+                                boxes.get(j).setVisible(true);
+                                clientIDs.get(j).setVisible(true);
+                                clientIDs.get(j).setText(result.getString("client_id")); // refactor for real data from DB
+                                boxIDs.get(j).setVisible(true);
+                                boxIDs.get(j).setText(result.getString("b_id"));
+                            }
+                        }
+                    }
+                }
+            }*/
+
         }
-
-        // and also numbers with them with real boxes...
-
-
     }
     /**    ----END Address Panel END-----    */
 //######################################################################################################################

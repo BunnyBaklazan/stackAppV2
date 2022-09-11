@@ -22,6 +22,9 @@ public class Connect {
     private static final String UPDATE_SHELF
             = "UPDATE box SET shelf_id = ? WHERE b_id = ?";
 
+    private static final String SHOW_BOX
+            = "SELECT client_id, b_id FROM box WHERE shelf_id = ?";
+
 
     private static final String INSERT_USER
             = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
@@ -35,7 +38,8 @@ public class Connect {
     public static final String UPDATE_USER
             = "UPDATE users SET first_name = ? , "
             + "last_name = ? , "
-            + "password = ? "
+            + "password = ? ,"
+            + " username = ? "
             + "WHERE id = ?";
 
     public static final String LOGIN_CHECK
@@ -56,22 +60,27 @@ public class Connect {
     }
 
 
-    public static String giveUsername() {
+    public static ResultSet showBox(String shelfId) {
+        Connection conn = null;
+        PreparedStatement statement = null;
+
         try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_USER);
+            conn = connect();
+            statement = conn.prepareStatement(SHOW_BOX);
+            statement.setString(1, shelfId);
             ResultSet result = statement.executeQuery();
-            return result.getString("username");
+
+            if (!result.isBeforeFirst()) {
+                return null;
+            }
+
+            return result;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+
         }
-    }
-
-    public void updateBox(BoxData box) {
-
-        //insert
 
     }
 
@@ -146,7 +155,6 @@ public class Connect {
             return null;
 
         } finally {
-
             if (statement != null) { statement.close(); }
             if (conn != null ) { conn.close(); }
         }
@@ -193,7 +201,8 @@ public class Connect {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPassword());
-            statement.setString(4, valueOf(user.getId()));
+            statement.setString(4, user.getUserName());
+            statement.setString(5, valueOf(user.getId()));
             statement.executeUpdate();
 
         } catch (SQLException e) {
