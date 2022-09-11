@@ -60,6 +60,7 @@ public class SignInController {
                         //if (retrievedPassword.equals(password)) {
                         System.out.println("User found and password is correct.");
                         userPreferences.put("username", username);
+
                         if (username.equals("admin")) { //need to change to "admin"
                             userPreferences.put("role", "admin");
                         } else {
