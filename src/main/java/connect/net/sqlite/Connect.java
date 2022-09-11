@@ -1,274 +1,236 @@
 package connect.net.sqlite;
 
+import com.example.stackapp.model.BoxDTO;
 import com.example.stackapp.model.BoxData;
 import com.example.stackapp.model.UserData;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import static connect.net.sqlite.Sql.*;
 import static java.lang.String.valueOf;
 
 public class Connect {
 
-    static Connection conn;
-    static PreparedStatement statement;
+    private static final String URL = "jdbc:sqlite:stackAppdbv1.db";
 
-    private static final String SELECT_BOX
-            = "SELECT * FROM box WHERE b_id = ?";
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
 
-    private static final String INSERT_BOX
-            = "INSERT or REPLACE INTO box (b_id, client_id, date_from, date_end," +
-            " fulfillment, info_note, weight, shelf_id, status) " +
-            "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    private static final String SELECT_COUNT
-            = "SELECT COUNT(*) FROM box WHERE shelf_id LIKE '";
-
-    private static final String UPDATE_SHELF
-            = "UPDATE box SET shelf_id = ? WHERE b_id = ?";
-
-    private static final String SHOW_BOX
-            = "SELECT client_id, b_id FROM box WHERE shelf_id = ?";
-
-
-    private static final String INSERT_USER
-            = "INSERT INTO users (first_name, last_name, password, username) values (?, ?, ?, ?)";
-
-    private static final String SELECT_USER
-            = "SELECT * FROM users";
-
-    private static final String DELETE_USER
-            = "DELETE FROM users WHERE id = ?";
-
-    private static final String UPDATE_USER
-            = "UPDATE users SET first_name = ? , "
-            + "last_name = ? , "
-            + "password = ? ,"
-            + " username = ? "
-            + "WHERE id = ?";
-
-    private static final String LOGIN_CHECK
-            = "SELECT password FROM users WHERE USERNAME = ?";
-
-
-
-
-    private static Connection connect() {
-        String url = "jdbc:sqlite:stackAppdbv1.db";
-
+    public List<BoxDTO> showBox(String shelfId) {
+        List<BoxDTO> boxes = new ArrayList<>();
         try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return conn;
-    }
-
-
-    public static ResultSet showBox(String shelfId) {
-
-        try {
-            conn = connect();
-            statement = conn.prepareStatement(SHOW_BOX);
-            statement.setString(1, shelfId);
-            ResultSet result = statement.executeQuery();
-
-            if (!result.isBeforeFirst()) {
-                return null;
+            connectAndSetStatementFor(SHOW_BOX);
+            ps.setString(1, shelfId);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                boxes.add(new BoxDTO(
+                        rs.getInt("b_id"),
+                        rs.getInt("client_id")));
             }
-
-            return result;
-
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
-
         }
-
+        finally {
+            close();
+        }
+        return boxes;
     }
 
-    //create new box in the db
-    public static void insertBox(BoxData box) throws SQLException {
-
+    public void insertBox(BoxData box) {
         try {
-
-            conn = connect();
-            statement = conn.prepareStatement(INSERT_BOX);
-
-            statement.setString(1, valueOf(box.getId()));
-            statement.setString(2, valueOf(box.getClientId()));
-            statement.setString(3, box.getDateFrom());
-            statement.setString(4, box.getDateEnd());
-            statement.setString(5, box.getFulfillment());
-            statement.setString(6, box.getInfoNote());
-            statement.setString(7, box.getWeight());
-            statement.setString(8, box.getShelfId());
-            statement.setString(9, box.getStatus());
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            if (statement != null) { statement.close(); }
-            if (conn != null ) { conn.close(); }
-        }
-    }
-
-    public static void updateShelfId(String shelfId, long boxId) throws SQLException {
-
-        try {
-
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(UPDATE_SHELF);
-            statement.setString(1, shelfId);
-            statement.setLong(2, boxId);
-            statement.executeUpdate();
+            connectAndSetStatementFor(INSERT_BOX);
+            ps.setString(1, valueOf(box.getId()));
+            ps.setString(2, valueOf(box.getClientId()));
+            ps.setString(3, box.getDateFrom());
+            ps.setString(4, box.getDateEnd());
+            ps.setString(5, box.getFulfillment());
+            ps.setString(6, box.getInfoNote());
+            ps.setString(7, box.getWeight());
+            ps.setString(8, box.getShelfId());
+            ps.setString(9, box.getStatus());
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-
-            if (statement != null) { statement.close(); }
-            if (conn != null ) { conn.close(); }
+            close();
         }
     }
 
-    public static BoxData searchForBox(long boxId) throws SQLException {
-
+    public void updateShelfId(String shelfId, long boxId) {
         try {
+            connectAndSetStatementFor(UPDATE_SHELF);
+            ps.setString(1, shelfId);
+            ps.setLong(2, boxId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            close();
+        }
+    }
 
-            ResultSet result;
-            conn = connect();
-            statement = conn.prepareStatement(SELECT_BOX);
-            statement.setLong(1, boxId);
-            result = statement.executeQuery();
-
-            if (!result.isBeforeFirst()) {
+    public BoxData searchForBox(long boxId) {
+        try {
+            connectAndSetStatementFor(SELECT_BOX);
+            ps.setLong(1, boxId);
+            rs = ps.executeQuery();
+            if (!rs.isBeforeFirst()) {
                 return null;
             }
 
             return new BoxData(
                     boxId,
-                    result.getLong("client_id"),
-                    result.getString("date_from"),
-                    result.getString("date_end"),
-                    result.getString("fulfillment"),
-                    result.getString("status"),
-                    result.getString("info_note"),
-                    result.getString("weight"),
-                    result.getString("shelf_id")
+                    rs.getLong("client_id"),
+                    rs.getString("date_from"),
+                    rs.getString("date_end"),
+                    rs.getString("fulfillment"),
+                    rs.getString("status"),
+                    rs.getString("info_note"),
+                    rs.getString("weight"),
+                    rs.getString("shelf_id")
             );
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
-
-        } /*finally {
-
-            if (statement != null) { statement.close(); }
-            if (conn != null ) { conn.close(); }
-        }*/
+        } finally {
+            close();
+        }
     }
 
     //trying to give an objective view how much space are taken
     public int capacityOf(String shelf) {
         try {
-            ResultSet result = null;
-            statement = conn.prepareStatement(SELECT_COUNT + shelf + "%" + "'");
-            result = statement.executeQuery();
-
-            if (!result.isBeforeFirst()) {
+            connectAndSetStatementFor(SELECT_COUNT + shelf + "%" + "'");
+            rs = ps.executeQuery();
+            if (!rs.isBeforeFirst()) {
                 return 0;
             }
 
-            return result.getInt(1);
-
+            return rs.getInt(1);
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return 0;
-
+        } finally {
+            close();
         }
     }
 
-    public static void deleteUser(int id) {
+    public void deleteUser(int id) {
         try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(DELETE_USER);
-
-            statement.setInt(1, id);
-            statement.executeUpdate();
-
+            connectAndSetStatementFor(DELETE_USER);
+            ps.setInt(1, id);
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            close();
         }
     }
 
-    public static void updateUserTable(UserData user) {
+    public void updateUserTable(UserData user) {
         try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(UPDATE_USER);
-
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getUserName());
-            statement.setString(5, valueOf(user.getId()));
-            statement.executeUpdate();
-
+            connectAndSetStatementFor(UPDATE_USER);
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getUserName());
+            ps.setString(5, valueOf(user.getId()));
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            close();
         }
     }
 
-    public static ResultSet checkLogin(String username) {
+    public String checkLogin(String username) {
         try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(LOGIN_CHECK);
-            statement.setString(1, username);
-
-            return statement.executeQuery();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-
+            connectAndSetStatementFor(LOGIN_CHECK);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            return rs.getString("password");
         }
-
-    }
-
-    public static void insertUser(UserData user) {
-
-        try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(INSERT_USER);
-
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getUserName());
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
+        catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+        finally {
+            close();
+        }
+        return null;
     }
 
-    public static ResultSet showAllUsers() {
+    public void insertUser(UserData user) {
         try {
-            Connection conn = connect();
-            PreparedStatement statement = conn.prepareStatement(SELECT_USER);
-            return statement.executeQuery();
-
+            connectAndSetStatementFor(INSERT_USER);
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getUserName());
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
+        } finally {
+            close();
+        }
+    }
 
+    public List<UserData> showAllUsers() {
+        List<UserData> users = new ArrayList<>();
+        try {
+            connectAndSetStatementFor(SELECT_USER);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(new UserData(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("password"),
+                        rs.getString("username")));
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            close();
+        }
+        return users;
+    }
+
+    private void connectAndSetStatementFor(String SQL) throws SQLException {
+        conn = DriverManager.getConnection(URL);
+        ps = conn.prepareStatement(SQL);
+    }
+
+    private void close() {
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
-
-    public static void main(String[] args) {
-    }
 }
